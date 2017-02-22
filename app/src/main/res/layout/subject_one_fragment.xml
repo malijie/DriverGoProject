@@ -7,10 +7,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="130dp"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -27,12 +28,12 @@
                 android:layout_height="wrap_content"
                 android:text="顺序练习"
                 android:layout_below="@id/id_main_image_order_practice"
-                android:textSize="@dimen/font_size_24"
-                android:layout_marginTop="10dp"
+                android:textSize="@dimen/font_size_20"
                 android:drawableRight="@mipmap/ic_big_exam_flag"
                 android:textColor="@color/font_grey"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -66,23 +67,6 @@
                         android:textSize="@dimen/font_size_18"
                         android:textColor="@color/font_grey"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/zhuanxianglianxi_selector"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="专项练习"
-                        android:textSize="@dimen/font_size_18"
-                        android:textColor="@color/font_grey"/>
-                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
@@ -106,23 +90,6 @@
                         android:textSize="@dimen/font_size_18"
                         android:textColor="@color/font_grey"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/paichudeti_selector"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="排除的题"
-                        android:textSize="@dimen/font_size_18"
-                        android:textColor="@color/font_grey"/>
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -130,10 +97,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="130dp"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -144,18 +112,19 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/exam_practice_selector"
                 android:layout_centerInParent="true"/>
+
             <TextView
                 android:id="@+id/id_main_text_exam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="模拟考试"
-                android:layout_below="@id/id_main_image_exam"
-                android:textSize="@dimen/font_size_24"
-                android:layout_marginTop="10dp"
+                android:textSize="@dimen/font_size_20"
                 android:drawableRight="@mipmap/ic_big_lianxi_flag"
                 android:textColor="@color/font_grey"
-                android:layout_centerInParent="true"/>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
@@ -180,28 +149,11 @@
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/zhangjielianxi_selector"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="章节练习"
-                        android:textSize="@dimen/font_size_18"
-                        android:textColor="@color/font_grey"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
                         android:background="@drawable/qianghualianxi_selector"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="强化练习"
+                        android:text="错题练习"
                         android:textSize="@dimen/font_size_18"
                         android:textColor="@color/font_grey"/>
                 </LinearLayout>
@@ -211,23 +163,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/lianxitongji_selector"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="练习统计"
-                        android:textSize="@dimen/font_size_18"
-                        android:textColor="@color/font_grey"/>
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -254,7 +189,7 @@
         android:layout_height="100dp"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"

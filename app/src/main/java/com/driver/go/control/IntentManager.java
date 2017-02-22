@@ -11,6 +11,7 @@ public class IntentManager {
 
     public static void startActivity(Class clazz){
         Intent i = new Intent(DriverGoApplication.sContext,clazz);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         DriverGoApplication.sContext.startActivity(i);
     }
 }
