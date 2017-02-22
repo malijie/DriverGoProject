@@ -22,12 +22,7 @@ public class PracticeOrderActivity extends DriverBaseActivity{
         setContentView(R.layout.order_practise);
         initView();
         initData();
-        RetrofitHttpRequest.getInstance().getSubject1C1OrderQuestions(new SubscriberOnNextListener<List<QuestionInfo>>(){
-                    @Override
-                    public void onNext(List<QuestionInfo> questionInfos) {
-                        Log.d("MLJ","questionInfos==" + questionInfos);
-                    }
-                });
+
 
     }
 
@@ -39,5 +34,14 @@ public class PracticeOrderActivity extends DriverBaseActivity{
     @Override
     public void initData() {
 
+    }
+
+    private void getQuestionData(){
+        RetrofitHttpRequest.getInstance().getSubject1C1OrderQuestions(new SubscriberOnNextListener<List<QuestionInfo>>(){
+            @Override
+            public void onNext(List<QuestionInfo> questionInfos) {
+                Log.d("MLJ","questionInfos==" + questionInfos);
+            }
+        });
     }
 }
