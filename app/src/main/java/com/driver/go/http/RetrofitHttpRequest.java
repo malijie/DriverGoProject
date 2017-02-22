@@ -1,6 +1,9 @@
 package com.driver.go.http;
 
 
+import android.util.Log;
+
+import com.driver.go.base.DriverExamData;
 import com.driver.go.entity.HttpResultBean;
 import com.driver.go.entity.QuestionInfo;
 
@@ -32,7 +35,7 @@ public class RetrofitHttpRequest {
         sRetrofitService = retrofit.create(RetrofitService.class);
     }
 
-    public static RetrofitHttpRequest getInstatnce(){
+    public static RetrofitHttpRequest getInstance(){
         if(sRetrofitRequest == null){
             synchronized (sObject){
                 if(sRetrofitRequest == null){
@@ -43,8 +46,10 @@ public class RetrofitHttpRequest {
         return sRetrofitRequest;
     }
 
-    public void getOrderQuestions(int subject,String model,String testType,Subscriber subscriber){
-        Observable observable = sRetrofitService.getQuestions(subject,model,URLContainer.getAppKey(),testType)
+    public void getSubject1C1OrderQuestions(Subscriber subscriber){
+        Observable observable = sRetrofitService.getQuestions(
+                DriverExamData.DRIVER_SUBJECT_ONE,DriverExamData.DRIVER_MODEL_ONE,
+                DriverExamData.APP_KEY,DriverExamData.TEST_TYPE_ORDER)
                 .map(new HttpResultFunc<List<QuestionInfo>>());
         toSubscribe(observable,subscriber);
     }

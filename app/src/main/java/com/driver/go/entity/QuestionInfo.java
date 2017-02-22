@@ -1,24 +1,26 @@
 package com.driver.go.entity;
 
+
 /**
- * Created by Administrator on 2017/2/22.
+ * Created by malijie on 2017/2/6.
  */
+
 public class QuestionInfo {
-    private int id;
+    private String id;
     private String question;
     private String answer;
-    private String item1 ;
-    private String item2 ;
-    private String item3 ;
-    private String item4 ;
+    private String item1;
+    private String item2;
+    private String item3;
+    private String item4;
     private String explains;
     private String url;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

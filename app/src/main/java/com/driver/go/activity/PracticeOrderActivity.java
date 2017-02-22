@@ -3,8 +3,10 @@ package com.driver.go.activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.driver.go.base.DriverExamData;
 import com.driver.go.entity.QuestionInfo;
 import com.driver.go.http.RetrofitHttpRequest;
+import com.driver.go.http.SubscriberOnNextListener;
 
 import java.util.List;
 
@@ -20,23 +22,12 @@ public class PracticeOrderActivity extends DriverBaseActivity{
         setContentView(R.layout.order_practise);
         initView();
         initData();
-        Log.d("MLJ","HAHAHAH ");
-        RetrofitHttpRequest.getInstatnce().getOrderQuestions(1, "c1", "rand", new Subscriber<List<QuestionInfo>>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(List<QuestionInfo> o) {
-                Log.d("MLJ","o=" + o.get(0).getUrl());
-            }
-        });
+        RetrofitHttpRequest.getInstance().getSubject1C1OrderQuestions(new SubscriberOnNextListener<List<QuestionInfo>>(){
+                    @Override
+                    public void onNext(List<QuestionInfo> questionInfos) {
+                        Log.d("MLJ","questionInfos==" + questionInfos);
+                    }
+                });
 
     }
 

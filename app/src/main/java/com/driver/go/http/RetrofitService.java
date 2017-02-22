@@ -16,9 +16,7 @@ import rx.Observable;
 
 public interface RetrofitService {
     @POST("jztk/query")
-    Observable<HttpResultBean<List<QuestionInfo>>> getQuestions(
-            @Query("subject") int subject,@Query("model")
-            String model,@Query("appKey") String appKey,
-            @Query("testType") String testType);
+    Observable<HttpResultBean<List<QuestionInfo>>> getQuestions(@Query("subject") int subject, @Query("model") String model, @Query("key") String appKey, @Query("testType") String type);
+
 
 }
