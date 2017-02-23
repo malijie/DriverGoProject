@@ -67,7 +67,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         Cursor cursor = mSQLiteManager.queryOrderQuestionById(1);
         QuestionItem questionItem = new QuestionItem();
         questionItem.setQuestion(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
-        questionItem.setAnswer(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
+//        questionItem.setAnswer(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
 
         Logger.d("MLJ","questionItem=" + questionItem);
     }
