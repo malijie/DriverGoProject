@@ -54,8 +54,7 @@ public class MainActivity extends DriverBaseActivity{
     @Override
     public void initData() {
         mHttpRequest = RetrofitHttpRequest.getInstance();
-        Logger.d("MLJ","isOrderTableExist()=" + isOrderTableExist());
-        if(isOrderTableExist()){
+        if(!isOrderTableExist()){
             fetchOrderQuestionData2DB();
         }
 

@@ -38,12 +38,9 @@ public class SQLiteManager {
 
     public boolean isOrderTableHasData(){
         cursor = mDB.rawQuery(SQLContainer.getFirstOrderExamDataSQL(),null);
-
-        if(cursor.moveToNext()){
-            Logger.d("MLJ","data= " + cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
+        if(cursor.moveToFirst()){
             return true;
         }
-        Logger.d("MLJ","data= " + cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
         return false;
     }
 
@@ -67,6 +64,11 @@ public class SQLiteManager {
                 "'" + item1 + "',"+ "'" + item2 + "',"+"'" + item3 + "',"+
                 "'" + item4 + "',"+ "'" + explains + "',"+"'" + url + "')";
         mDB.execSQL(sql);
+    }
+
+    public Cursor queryOrderQuestionById(int id){
+        cursor = mDB.rawQuery(SQLContainer.getOrderExamItemByIdSQL(id),null);
+        return cursor;
     }
 
     public void closeDB(){
