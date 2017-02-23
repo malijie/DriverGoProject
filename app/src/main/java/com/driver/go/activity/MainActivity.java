@@ -1,8 +1,6 @@
 package com.driver.go.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Window;
@@ -15,6 +13,7 @@ import com.driver.go.fragments.SubjectFourFragment;
 import com.driver.go.fragments.SubjectOneFragment;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
+import com.driver.go.utils.Logger;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class MainActivity extends DriverBaseActivity{
     private RetrofitHttpRequest mHttpRequest;
     private ViewPager mViewPager;
     private TabPageIndicator mTabPageIndicator;
-    private TabAdapter mAdapter ;
+    private TabAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,7 +54,11 @@ public class MainActivity extends DriverBaseActivity{
     @Override
     public void initData() {
         mHttpRequest = RetrofitHttpRequest.getInstance();
-        fetchOrderQuestionData2DB();
+        Logger.d("MLJ","isOrderTableExist()=" + isOrderTableExist());
+        if(isOrderTableExist()){
+            fetchOrderQuestionData2DB();
+        }
+
         fetchRandomQuestionData2DB();
     }
 

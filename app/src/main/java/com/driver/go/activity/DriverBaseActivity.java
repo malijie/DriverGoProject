@@ -29,6 +29,10 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         mSQLiteManager.createTables();
     }
 
+    public boolean isOrderTableExist(){
+        return mSQLiteManager.isOrderTableHasData();
+    }
+
     public void addOrderQuestionItem(QuestionItem q){
         mSQLiteManager.insert2OrderTable(q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
@@ -36,4 +40,9 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         mSQLiteManager.insert2RandomTable(q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSQLiteManager.closeDB();
+    }
 }

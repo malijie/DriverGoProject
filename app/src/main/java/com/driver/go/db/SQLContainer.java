@@ -19,4 +19,8 @@ public class SQLContainer {
                 "item3 varchar(100),item4 varchar(100),explains varchar(400)," +
                 "url varchar(100))";
     }
+
+    public static String getFirstOrderExamDataSQL(){
+          return "SELECT * FROM " + DBConstants.ORDER_EXAM_TABLE + " WHERE id=1";
+    }
 }

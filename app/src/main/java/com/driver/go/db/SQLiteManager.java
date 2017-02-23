@@ -1,12 +1,16 @@
 package com.driver.go.db;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.driver.go.utils.Logger;
 
 /**
  * Created by malijie on 2017/2/22.
  */
 
 public class SQLiteManager {
+    private Cursor cursor;
     private static SQLiteManager sSQLiteManager = null;
     private SQLiteDatabase mDB;
 
@@ -32,6 +36,17 @@ public class SQLiteManager {
         }
     }
 
+    public boolean isOrderTableHasData(){
+        cursor = mDB.rawQuery(SQLContainer.getFirstOrderExamDataSQL(),null);
+
+        if(cursor.moveToNext()){
+            Logger.d("MLJ","data= " + cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
+            return true;
+        }
+        Logger.d("MLJ","data= " + cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
+        return false;
+    }
+
     public void insert2OrderTable(int id,String question,String answer,
                                          String item1,String item2,String item3,
                                          String item4,String explains,String url){
@@ -52,6 +67,12 @@ public class SQLiteManager {
                 "'" + item1 + "',"+ "'" + item2 + "',"+"'" + item3 + "',"+
                 "'" + item4 + "',"+ "'" + explains + "',"+"'" + url + "')";
         mDB.execSQL(sql);
+    }
+
+    public void closeDB(){
+        if(cursor != null){
+          cursor.close();
+        }
     }
 
 }
