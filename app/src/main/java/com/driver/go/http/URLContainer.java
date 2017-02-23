@@ -1,7 +1,5 @@
 package com.driver.go.http;
 
-import com.driver.go.base.DriverExamData;
-
 /**
  * Created by malijie on 2017/2/22.
  */

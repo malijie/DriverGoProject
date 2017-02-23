@@ -5,8 +5,8 @@ package com.driver.go.entity;
  * Created by malijie on 2017/2/6.
  */
 
-public class QuestionInfo {
-    private String id;
+public class QuestionItem {
+    private int id;
     private String question;
     private String answer;
     private String item1;
@@ -16,11 +16,11 @@ public class QuestionInfo {
     private String explains;
     private String url;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -86,5 +86,20 @@ public class QuestionInfo {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "QuestionItem{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", item1='" + item1 + '\'' +
+                ", item2='" + item2 + '\'' +
+                ", item3='" + item3 + '\'' +
+                ", item4='" + item4 + '\'' +
+                ", explains='" + explains + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

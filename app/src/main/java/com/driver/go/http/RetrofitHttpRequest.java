@@ -1,11 +1,8 @@
 package com.driver.go.http;
 
 
-import android.util.Log;
-
-import com.driver.go.base.DriverExamData;
-import com.driver.go.entity.HttpResultBean;
-import com.driver.go.entity.QuestionInfo;
+import com.driver.go.base.Profile;
+import com.driver.go.entity.QuestionItem;
 
 import java.util.List;
 
@@ -15,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -48,9 +44,17 @@ public class RetrofitHttpRequest {
 
     public void getC1Subject1OrderQuestions(Subscriber subscriber){
         Observable observable = sRetrofitService.getQuestions(
-                DriverExamData.DRIVER_SUBJECT_ONE,DriverExamData.DRIVER_MODEL_ONE,
-                DriverExamData.APP_KEY,DriverExamData.TEST_TYPE_ORDER)
-                .map(new HttpResultFunc<List<QuestionInfo>>());
+                Profile.DRIVER_SUBJECT_ONE, Profile.DRIVER_MODEL_ONE,
+                Profile.APP_KEY, Profile.TEST_TYPE_ORDER)
+                .map(new HttpResultFunc<List<QuestionItem>>());
+        toSubscribe(observable,subscriber);
+    }
+
+    public void getC1Subject1RandomQuestions(Subscriber subscriber){
+        Observable observable = sRetrofitService.getQuestions(
+                Profile.DRIVER_SUBJECT_ONE, Profile.DRIVER_MODEL_ONE,
+                Profile.APP_KEY, Profile.TEST_TYPE_RANDOM)
+                .map(new HttpResultFunc<List<QuestionItem>>());
         toSubscribe(observable,subscriber);
     }
 

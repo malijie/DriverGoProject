@@ -2,7 +2,7 @@ package com.driver.go.http;
 
 
 import com.driver.go.entity.HttpResultBean;
-import com.driver.go.entity.QuestionInfo;
+import com.driver.go.entity.QuestionItem;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import rx.Observable;
 
 public interface RetrofitService {
     @POST("jztk/query")
-    Observable<HttpResultBean<List<QuestionInfo>>> getQuestions(@Query("subject") int subject, @Query("model") String model, @Query("key") String appKey, @Query("testType") String type);
+    Observable<HttpResultBean<List<QuestionItem>>> getQuestions(@Query("subject") int subject, @Query("model") String model, @Query("key") String appKey, @Query("testType") String type);
 
 
 }

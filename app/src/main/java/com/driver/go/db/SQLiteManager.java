@@ -37,9 +37,20 @@ public class SQLiteManager {
                                          String item4,String explains,String url){
         String sql = "INSERT INTO " + DBConstants.ORDER_EXAM_TABLE
                 + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
-                "VALUES ("+ id + "'" + question + "'," + "'" + answer + "'," +
-                "'" + item1 + ",'"+ "'" + item2 + "',"+"'" + item3 + ",'"+
-                "'" + item4 + ",'"+ "'" + explains + "',"+"'" + url + "')";
+                "VALUES ("+ id + ",'" + question + "'," + "'" + answer + "'," +
+                "'" + item1 + "',"+ "'" + item2 + "',"+"'" + item3 + "',"+
+                "'" + item4 + "',"+ "'" + explains + "',"+"'" + url + "')";
+        mDB.execSQL(sql);
+    }
+
+    public void insert2RandomTable(int id,String question,String answer,
+                                  String item1,String item2,String item3,
+                                  String item4,String explains,String url){
+        String sql = "INSERT INTO " + DBConstants.RANDOM_EXAM_TABLE
+                + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
+                "VALUES ("+ id + ",'" + question + "'," + "'" + answer + "'," +
+                "'" + item1 + "',"+ "'" + item2 + "',"+"'" + item3 + "',"+
+                "'" + item4 + "',"+ "'" + explains + "',"+"'" + url + "')";
         mDB.execSQL(sql);
     }
 
