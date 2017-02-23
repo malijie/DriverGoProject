@@ -10,24 +10,19 @@ import com.driver.go.base.DriverGoApplication;
  */
 
 public class SQLiteHelper extends SQLiteOpenHelper {
-    private SQLiteDatabase mDB = null;
 
     public SQLiteHelper() {
-        super(DriverGoApplication.sContext, DBConstants.DB_NAME,null, DBConstants.DB_VERSION);
+        super(DriverGoApplication.sContext,DBConstants.DB_NAME,null, DBConstants.DB_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        mDB = db;
         db.execSQL(SQLContainer.getCreateOrderExamTableSQL());
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
-
-
 
 }

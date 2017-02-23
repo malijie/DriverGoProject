@@ -5,7 +5,7 @@ android {
     buildToolsVersion '25.0.0'
 
     defaultConfig {
-        applicationId "com.driver.activity"
+        applicationId "com.driver.go"
         minSdkVersion 14
         targetSdkVersion 24
         versionCode 1

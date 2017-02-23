@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.driver.go.R;
 import com.driver.go.activity.PracticeOrderActivity;
-import com.driver.go.activity.R;
 import com.driver.go.control.IntentManager;
 
 //科目一

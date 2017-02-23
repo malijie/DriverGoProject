@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.driver.go.activity.R;
+import com.driver.go.R;
+
 
 //科目四
 public class SubjectFourFragment extends Fragment

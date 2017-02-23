@@ -5,8 +5,10 @@ package com.driver.go.db;
  */
 
 public class DBConstants {
-    public static String DB_NAME = "driver";
+    public static String DB_NAME = "driver.db";
     public static int DB_VERSION = 1;
-    public static final String ORDER_TABLE = "order_exam";
+    public static final String ORDER_EXAM_TABLE = "order_exam";
+    public static final String RANDOM_EXAM_TABLE = "random_exam";
+
 
 }

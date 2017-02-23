@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Window;
 
+import com.driver.go.R;
 import com.driver.go.adapter.TabAdapter;
 import com.driver.go.fragments.MyDriverFragment;
 import com.driver.go.fragments.SubjectFourFragment;

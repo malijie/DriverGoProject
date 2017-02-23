@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.driver.go.activity.R;
+import com.driver.go.R;
+
 
 @SuppressLint("ValidFragment")
 public class MyDriverFragment extends Fragment

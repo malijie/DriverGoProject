@@ -46,7 +46,7 @@ public class RetrofitHttpRequest {
         return sRetrofitRequest;
     }
 
-    public void getSubject1C1OrderQuestions(Subscriber subscriber){
+    public void getC1Subject1OrderQuestions(Subscriber subscriber){
         Observable observable = sRetrofitService.getQuestions(
                 DriverExamData.DRIVER_SUBJECT_ONE,DriverExamData.DRIVER_MODEL_ONE,
                 DriverExamData.APP_KEY,DriverExamData.TEST_TYPE_ORDER)
