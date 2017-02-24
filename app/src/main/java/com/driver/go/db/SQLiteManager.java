@@ -71,10 +71,11 @@ public class SQLiteManager {
 
     public Cursor queryOrderQuestionById(int id) {
         String sql = SQLContainer.getOrderExamItemById(id);
-        Cursor cursor = mDB.rawQuery(sql,null);
+        cursor = mDB.rawQuery(sql,null);
         cursor.moveToNext();
         return cursor;
     }
+
 
     public void closeDB(){
         if(cursor != null){

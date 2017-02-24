@@ -10,10 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.control.IntentManager;
+import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.Logger;
-
+import com.driver.go.utils.image.ImageLoader;
 
 
 /**
@@ -26,6 +26,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private LinearLayout mLayoutExculde;
     private LinearLayout mLayoutExplaint;
     private ImageView mImageItem;
+    private ImageView mImageQuestion;
     private TextView mTextTitle;
     private TextView mTextChoiceA;
     private TextView mTextChoiceB;
@@ -35,18 +36,20 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private Button mButtonNext;
 
     private int mCurrentId = 1;
+    private QuestionItem mCurrentQuestionItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_practise);
-        initView();
         initData();
+        initView();
     }
 
     @Override
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
+        mImageQuestion = (ImageView) findViewById(R.id.id_order_practice_image_question);
         mTextNum = (TextView) findViewById(R.id.id_question_title_text_num);
         mLayoutExculde = (LinearLayout) findViewById(R.id.id_question_title_layout_exclude);
         mLayoutExplaint = (LinearLayout) findViewById(R.id.id_question_title_layout_explain);
@@ -59,21 +62,26 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mButtonPre = (Button) findViewById(R.id.id_order_practice_button_previous);
         mButtonNext = (Button) findViewById(R.id.id_order_practice_button_next);
         mButtonBack.setOnClickListener(this);
+
+        mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
+        mTextTitle.setText(mCurrentQuestionItem.getQuestion());
+        mTextChoiceA.setText(mCurrentQuestionItem.getItem1());
+        mTextChoiceB.setText(mCurrentQuestionItem.getItem2());
+        mTextChoiceC.setText(mCurrentQuestionItem.getItem3());
+        mTextChoiceD.setText(mCurrentQuestionItem.getItem4());
+        Logger.d("url=" +mCurrentQuestionItem.getUrl() );
+
+        if(!mCurrentQuestionItem.getUrl().equals("")){
+            mImageQuestion.setVisibility(View.VISIBLE);
+            ImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
+        }
+
+
     }
 
     @Override
     public void initData() {
-        Cursor cursor = mSQLiteManager.queryOrderQuestionById(1);
-        QuestionItem questionItem = new QuestionItem();
-        questionItem.setId(cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(0))));
-        questionItem.setQuestion(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
-        questionItem.setAnswer(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
-        questionItem.setItem1(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(3))));
-        questionItem.setItem2(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(4))));
-        questionItem.setItem3(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(5))));
-        questionItem.setItem4(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(6))));
-        questionItem.setExplains(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(7))));
-        questionItem.setUrl(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(8))));
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(1));
     }
 
 

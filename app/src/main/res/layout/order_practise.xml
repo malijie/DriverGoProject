@@ -29,6 +29,15 @@
             android:textSize="@dimen/font_size_20"
             android:text="机动车驾驶人违法驾驶造成重大交通是鬼构成犯罪的，研发追究什么责任？"/>
     </LinearLayout>
+    
+    <ImageView
+        android:id="@+id/id_order_practice_image_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:visibility="gone"/>
+    
     <View
         android:layout_width="match_parent"
         android:layout_margin="10dp"

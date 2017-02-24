@@ -11,4 +11,6 @@ public class Profile {
     public static final String TEST_TYPE_ORDER = "order";//顺序联系
     public static final String TEST_TYPE_RANDOM = "random";//随机练习
 
+    public static final int ORDER_TOTAL_ITEM = 1229;//顺序练习总共题目数
+
 }

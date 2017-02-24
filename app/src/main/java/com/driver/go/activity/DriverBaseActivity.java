@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
@@ -14,6 +15,7 @@ import com.driver.go.utils.Logger;
  */
 public abstract class DriverBaseActivity extends FragmentActivity {
     public SQLiteManager mSQLiteManager = null;
+    public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
 
 
     public abstract void initView();
@@ -45,6 +47,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     public void finishActivity(Activity activity){
         IntentManager.finishActivity(activity);
     }
+
 
     @Override
     protected void onDestroy() {
