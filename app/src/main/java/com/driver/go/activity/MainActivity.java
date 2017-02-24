@@ -14,6 +14,8 @@ import com.driver.go.fragments.SubjectOneFragment;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
 import com.driver.go.utils.Logger;
+import com.driver.go.utils.ToastManager;
+import com.driver.go.utils.Util;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
@@ -47,19 +49,21 @@ public class MainActivity extends DriverBaseActivity{
         fragmentList.add(new MyDriverFragment());
         mAdapter = new TabAdapter(getSupportFragmentManager(),fragmentList);
         mViewPager.setAdapter(mAdapter);
-
         mTabPageIndicator.setViewPager(mViewPager, 0);
     }
 
     @Override
     public void initData() {
         mHttpRequest = RetrofitHttpRequest.getInstance();
-        Logger.d("MLJ","isOrderTableExist()=" + isOrderTableExist());
-        if(isOrderTableExist()){
-            fetchOrderQuestionData2DB();
+        if(hasInternet()){
+            if(!isOrderTableExist()){
+                fetchOrderQuestionData2DB();
+            }
+            fetchRandomQuestionData2DB();
+        }else{
+            ToastManager.showShortMsg(Util.getResString(R.string.current_network_unavailable));
         }
 
-        fetchRandomQuestionData2DB();
     }
 
     /**

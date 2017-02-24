@@ -9,13 +9,16 @@ import com.driver.go.control.IntentManager;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.Logger;
+import com.driver.go.utils.Util;
+import com.driver.go.utils.image.ImageLoader;
 
 /**
  * Created by Administrator on 2016/11/5.
  */
 public abstract class DriverBaseActivity extends FragmentActivity {
-    public SQLiteManager mSQLiteManager = null;
     public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
+    public SQLiteManager mSQLiteManager = null;
+    public ImageLoader mImageLoader = null;
 
 
     public abstract void initView();
@@ -25,8 +28,13 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDB();
-
+        initManager();
     }
+
+    private void initManager() {
+        mImageLoader = ImageLoader.getInstance();
+    }
+
 
     private void initDB(){
         mSQLiteManager = SQLiteManager.getInstance();
@@ -46,6 +54,10 @@ public abstract class DriverBaseActivity extends FragmentActivity {
 
     public void finishActivity(Activity activity){
         IntentManager.finishActivity(activity);
+    }
+
+    public boolean hasInternet(){
+        return Util.hasInternet();
     }
 
 

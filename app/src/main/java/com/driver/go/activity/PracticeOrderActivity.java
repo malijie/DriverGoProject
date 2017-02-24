@@ -73,7 +73,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
         if(!mCurrentQuestionItem.getUrl().equals("")){
             mImageQuestion.setVisibility(View.VISIBLE);
-            ImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
+            mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
 

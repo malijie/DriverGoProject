@@ -38,12 +38,9 @@ public class SQLiteManager {
 
     public boolean isOrderTableHasData(){
         cursor = mDB.rawQuery(SQLContainer.getFirstOrderExamDataSQL(),null);
-
         if(cursor.moveToNext()){
-            Logger.d("MLJ","data= " + cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
             return true;
         }
-        Logger.d("MLJ","data= " + cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
         return false;
     }
 
