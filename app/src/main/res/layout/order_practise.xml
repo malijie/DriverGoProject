@@ -148,10 +148,34 @@
         android:layout_height="1dp"
         android:background="@color/line_normal_grey"/>
     <LinearLayout
+        android:id="@+id/id_order_practice_layout_explain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_size_16"
+            android:layout_marginLeft="20dp"
+            android:text="解释："/>
+        <TextView
+            android:id="@+id/id_order_practice_text_explain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/font_size_16"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
+        android:layout_marginTop="10dp">
         <Button
             android:id="@+id/id_order_practice_button_previous"
             android:layout_width="0dp"
