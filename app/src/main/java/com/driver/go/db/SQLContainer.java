@@ -23,4 +23,8 @@ public class SQLContainer {
     public static String getFirstOrderExamDataSQL(){
           return "SELECT * FROM " + DBConstants.ORDER_EXAM_TABLE + " WHERE id=1";
     }
+
+    public static String getOrderExamItemById(int id){
+        return  "SELECT * FROM " + DBConstants.ORDER_EXAM_TABLE + " WHERE id=" + id;
+    }
 }

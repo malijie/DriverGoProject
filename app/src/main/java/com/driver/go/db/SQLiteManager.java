@@ -69,10 +69,16 @@ public class SQLiteManager {
         mDB.execSQL(sql);
     }
 
-    public void closeDB(){
-        if(cursor != null){
-          cursor.close();
-        }
+    public Cursor queryOrderQuestionById(int id) {
+        String sql = SQLContainer.getOrderExamItemById(id);
+        Cursor cursor = mDB.rawQuery(sql,null);
+        cursor.moveToNext();
+        return cursor;
     }
 
+    public void closeDB(){
+        if(cursor != null){
+            cursor.close();
+        }
+    }
 }

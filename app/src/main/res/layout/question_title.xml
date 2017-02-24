@@ -10,6 +10,7 @@
         android:layout_weight="1"
         android:gravity="center">
         <ImageButton
+            android:id="@+id/id_question_title_button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back_selector"/>
@@ -25,6 +26,7 @@
             android:layout_height="wrap_content"
             android:background="@mipmap/imacicon_examin_jindu_black"/>
         <TextView
+            android:id="@+id/id_question_title_text_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1/1399"
@@ -51,6 +53,7 @@
             android:textSize="@dimen/font_size_16"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/id_question_title_layout_exclude"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -69,6 +72,7 @@
             android:textSize="@dimen/font_size_16"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/id_question_title_layout_explain"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
