@@ -28,8 +28,15 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private LinearLayout mLayoutExculde;
     private LinearLayout mLayoutTitleExplain;
     private LinearLayout mLayoutDetailExplain;
+    private RelativeLayout mLayoutChoiceA;
+    private RelativeLayout mLayoutChoiceB;
     private RelativeLayout mLayoutChoiceC;
     private RelativeLayout mLayoutChoiceD;
+    private ImageView mImageChoiceA;
+    private ImageView mImageChoiceB;
+    private ImageView mImageChoiceC;
+    private ImageView mImageChoiceD;
+
     private ImageView mImageItem;
     private ImageView mImageQuestion;
     private TextView mTextTitle;
@@ -60,8 +67,14 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mLayoutExculde = (LinearLayout) findViewById(R.id.id_question_title_layout_exclude);
         mLayoutTitleExplain = (LinearLayout) findViewById(R.id.id_question_title_layout_explain);
         mLayoutDetailExplain = (LinearLayout) findViewById(R.id.id_order_practice_layout_explain);
-        mLayoutChoiceC= (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_c);
-        mLayoutChoiceD= (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_d);
+        mLayoutChoiceA = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_a);
+        mLayoutChoiceB = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_b);
+        mLayoutChoiceC = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_c);
+        mLayoutChoiceD = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_d);
+        mImageChoiceA = (ImageView) findViewById(R.id.id_order_practice_image_choice_a);
+        mImageChoiceB = (ImageView) findViewById(R.id.id_order_practice_image_choice_b);
+        mImageChoiceC = (ImageView) findViewById(R.id.id_order_practice_image_choice_c);
+        mImageChoiceD = (ImageView) findViewById(R.id.id_order_practice_image_choice_d);
         mTextExplain = (TextView) findViewById(R.id.id_order_practice_text_explain);
         mImageItem = (ImageView) findViewById(R.id.id_order_practice_image_item);
         mTextTitle = (TextView) findViewById(R.id.id_order_practice_text_title);
@@ -78,6 +91,10 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mLayoutDetailExplain.setOnClickListener(this);
         mButtonPre.setOnClickListener(this);
         mButtonNext.setOnClickListener(this);
+        mLayoutChoiceA.setOnClickListener(this);
+        mLayoutChoiceB.setOnClickListener(this);
+        mLayoutChoiceC.setOnClickListener(this);
+        mLayoutChoiceD.setOnClickListener(this);
 
         mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
@@ -105,22 +122,52 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             case R.id.id_question_title_button_back:
                 finishActivity(this);
                 break;
+
             case R.id.id_question_title_layout_exclude:
 
                 break;
             case R.id.id_question_title_layout_explain:
                 showExplain();
                 break;
+
             case R.id.id_order_practice_button_previous:
                 showPreQuestion();
                 break;
+
             case R.id.id_order_practice_button_next:
                 showNextQuestion();
+                break;
+
+            case R.id.id_order_practice_layout_choice_a:
+                checkAnswer(ANSWER_A,mImageChoiceA);
+                break;
+
+            case R.id.id_order_practice_layout_choice_b:
+                checkAnswer(ANSWER_B,mImageChoiceB);
+                break;
+
+            case R.id.id_order_practice_layout_choice_c:
+                checkAnswer(ANSWER_C,mImageChoiceC);
+                break;
+
+            case R.id.id_order_practice_layout_choice_d:
+                checkAnswer(ANSWER_D,mImageChoiceD);
                 break;
         }
     }
 
+    //检查答案
+    private void checkAnswer(String answer,ImageView imageView) {
+        if(mCurrentQuestionItem.getAnswer().equals(answer)){
+            imageView.setImageResource(R.mipmap.answer_right);
+        }else{
+            imageView.setImageResource(R.mipmap.answer_wrong);
+        }
+    }
+
+    //上一题
     private void showNextQuestion() {
+        initUI();
         if(hasInternet()){
             if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
                 mCurrentId--;
@@ -135,7 +182,9 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     }
 
+    //下一题
     private void showPreQuestion(){
+        initUI();
         if(hasInternet()) {
             if(--mCurrentId< 1){
                 mCurrentId++;
@@ -149,9 +198,16 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         }
 
     }
-
+    //显示解释
     private void showExplain() {
         mLayoutDetailExplain.setVisibility(View.VISIBLE);
+    }
+
+    private void initUI(){
+        mImageChoiceA.setImageResource(R.mipmap.choice_a);
+        mImageChoiceB.setImageResource(R.mipmap.choice_b);
+        mImageChoiceC.setImageResource(R.mipmap.choice_c);
+        mImageChoiceD.setImageResource(R.mipmap.choice_d);
     }
 
     private void updateUI(QuestionItem item){

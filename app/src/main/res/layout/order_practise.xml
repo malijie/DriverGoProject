@@ -50,6 +50,7 @@
                 android:layout_height="1dp"
                 android:background="@color/line_normal_grey"/>
             <RelativeLayout
+                android:id="@+id/id_order_practice_layout_choice_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
@@ -80,10 +81,10 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/id_order_practice_layout_choice_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                >
+                android:layout_marginTop="10dp">
                 <ImageView
                     android:id="@+id/id_order_practice_image_choice_b"
                     android:layout_width="wrap_content"

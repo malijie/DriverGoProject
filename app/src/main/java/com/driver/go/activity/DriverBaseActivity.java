@@ -19,6 +19,10 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
     public SQLiteManager mSQLiteManager = null;
     public ImageLoader mImageLoader = null;
+    protected final String ANSWER_A = "1";
+    protected final String ANSWER_B = "2";
+    protected final String ANSWER_C = "3";
+    protected final String ANSWER_D = "4";
 
 
     public abstract void initView();
