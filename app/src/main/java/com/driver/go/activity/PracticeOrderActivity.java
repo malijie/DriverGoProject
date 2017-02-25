@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
@@ -27,6 +28,8 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private LinearLayout mLayoutExculde;
     private LinearLayout mLayoutTitleExplain;
     private LinearLayout mLayoutDetailExplain;
+    private RelativeLayout mLayoutChoiceC;
+    private RelativeLayout mLayoutChoiceD;
     private ImageView mImageItem;
     private ImageView mImageQuestion;
     private TextView mTextTitle;
@@ -57,6 +60,8 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mLayoutExculde = (LinearLayout) findViewById(R.id.id_question_title_layout_exclude);
         mLayoutTitleExplain = (LinearLayout) findViewById(R.id.id_question_title_layout_explain);
         mLayoutDetailExplain = (LinearLayout) findViewById(R.id.id_order_practice_layout_explain);
+        mLayoutChoiceC= (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_c);
+        mLayoutChoiceD= (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_d);
         mTextExplain = (TextView) findViewById(R.id.id_order_practice_text_explain);
         mImageItem = (ImageView) findViewById(R.id.id_order_practice_image_item);
         mTextTitle = (TextView) findViewById(R.id.id_order_practice_text_title);
@@ -116,24 +121,33 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     }
 
     private void showNextQuestion() {
-        if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
-            mCurrentId--;
-            ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
-            return;
+        if(hasInternet()){
+            if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
+                mCurrentId--;
+                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
+                return;
+            }
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            updateUI(mCurrentQuestionItem);
+        }else{
+            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
         }
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
-        updateUI(mCurrentQuestionItem);
 
     }
 
     private void showPreQuestion(){
-        if(--mCurrentId< 1){
-            mCurrentId++;
-            ToastManager.showLongMsg(getString(R.string.no_pre_order_question));
-            return;
+        if(hasInternet()) {
+            if(--mCurrentId< 1){
+                mCurrentId++;
+                ToastManager.showLongMsg(getString(R.string.no_pre_order_question));
+                return;
+            }
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            updateUI(mCurrentQuestionItem);
+        }else{
+            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
         }
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
-        updateUI(mCurrentQuestionItem);
+
     }
 
     private void showExplain() {
@@ -148,10 +162,21 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mTextChoiceC.setText(item.getItem3());
         mTextChoiceD.setText(item.getItem4());
         mTextExplain.setText(item.getExplains());
-
-        if(!TextUtils.isEmpty(mCurrentQuestionItem.getUrl())){
+        //设置题目图片
+        if(!TextUtils.isEmpty(item.getUrl())){
             mImageQuestion.setVisibility(View.VISIBLE);
             mImageLoader.showImage(item.getUrl(),mImageQuestion);
+        }
+
+        //设置题目类型
+        if(TextUtils.isEmpty(item.getItem3())){
+            mImageItem.setImageResource(R.mipmap.judge_item);
+            mLayoutChoiceC.setVisibility(View.GONE);
+            mLayoutChoiceD.setVisibility(View.GONE);
+        }else{
+            mImageItem.setImageResource(R.mipmap.single_choice);
+            mLayoutChoiceC.setVisibility(View.VISIBLE);
+            mLayoutChoiceD.setVisibility(View.VISIBLE);
         }
     }
 }
