@@ -12,9 +12,6 @@ import java.sql.Driver;
 
 public class ToastUtil {
     public static void showMsg(String msg,int during){
-        Toast toast = new Toast(DriverGoApplication.sContext);
-        toast.setText(msg);
-        toast.setDuration(during);
-        toast.show();
+        Toast.makeText(DriverGoApplication.sContext,msg,during).show();
     }
 }

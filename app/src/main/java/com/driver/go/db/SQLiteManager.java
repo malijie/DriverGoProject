@@ -38,7 +38,7 @@ public class SQLiteManager {
 
     public boolean isOrderTableHasData(){
         cursor = mDB.rawQuery(SQLContainer.getFirstOrderExamDataSQL(),null);
-        if(cursor.moveToFirst()){
+        if(cursor.moveToNext()){
             return true;
         }
         return false;
@@ -66,15 +66,17 @@ public class SQLiteManager {
         mDB.execSQL(sql);
     }
 
-    public Cursor queryOrderQuestionById(int id){
-        cursor = mDB.rawQuery(SQLContainer.getOrderExamItemByIdSQL(id),null);
+    public Cursor queryOrderQuestionById(int id) {
+        String sql = SQLContainer.getOrderExamItemById(id);
+        cursor = mDB.rawQuery(sql,null);
+        cursor.moveToNext();
         return cursor;
     }
 
+
     public void closeDB(){
         if(cursor != null){
-          cursor.close();
+            cursor.close();
         }
     }
-
 }

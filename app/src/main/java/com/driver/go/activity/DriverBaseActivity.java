@@ -4,16 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.Logger;
+import com.driver.go.utils.Util;
+import com.driver.go.utils.image.ImageLoader;
 
 /**
  * Created by Administrator on 2016/11/5.
  */
 public abstract class DriverBaseActivity extends FragmentActivity {
+    public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
     public SQLiteManager mSQLiteManager = null;
+    public ImageLoader mImageLoader = null;
 
 
     public abstract void initView();
@@ -23,8 +28,13 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDB();
-
+        initManager();
     }
+
+    private void initManager() {
+        mImageLoader = ImageLoader.getInstance();
+    }
+
 
     private void initDB(){
         mSQLiteManager = SQLiteManager.getInstance();
@@ -42,9 +52,14 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         mSQLiteManager.insert2RandomTable(q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
-    private void finishActivity(Activity activity){
-        IntentManager.finshActivity(activity);
+    public void finishActivity(Activity activity){
+        IntentManager.finishActivity(activity);
     }
+
+    public boolean hasInternet(){
+        return Util.hasInternet();
+    }
+
 
     @Override
     protected void onDestroy() {

@@ -16,7 +16,9 @@ public class IntentManager {
         DriverGoApplication.sContext.startActivity(i);
     }
 
-    public static void finshActivity(Activity activity){
-        activity.finish();
+    public static void finishActivity(Activity activity){
+        if(activity != null){
+            activity.finish();
+        }
     }
 }
