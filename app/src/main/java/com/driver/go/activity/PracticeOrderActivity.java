@@ -48,6 +48,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     private int mCurrentId = 1;
     private QuestionItem mCurrentQuestionItem;
+    private boolean mIsChoiceOneAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     }
 
     private void handleAnswerAction(String answer,ImageView imageView){
+        mIsChoiceOneAnswer = true;
         setAllAnswerUnSelect();
         if(checkAnswer(answer)){
             //选中正确答案
@@ -194,15 +196,23 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     //下一题
     private void showNextQuestion() {
-        initUI();
         if(hasInternet()){
+            initUI();
             if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
                 mCurrentId--;
                 ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
                 return;
             }
+
+            //没有进行选择
+            if(!mIsChoiceOneAnswer){
+                ToastManager.showSelectOneAnswerMsg();
+                return;
+            }
+
             mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             updateUI(mCurrentQuestionItem);
+            mIsChoiceOneAnswer = false;
         }else{
             ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
         }
