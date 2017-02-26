@@ -15,7 +15,6 @@ import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
-import com.driver.go.utils.Util;
 
 
 /**
@@ -45,7 +44,6 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private TextView mTextChoiceC;
     private TextView mTextChoiceD;
     private TextView mTextExplain;
-    private Button mButtonPre;
     private Button mButtonNext;
 
     private int mCurrentId = 1;
@@ -82,14 +80,12 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mTextChoiceB= (TextView) findViewById(R.id.id_order_practice_text_choice_b);
         mTextChoiceC= (TextView) findViewById(R.id.id_order_practice_text_choice_c);
         mTextChoiceD= (TextView) findViewById(R.id.id_order_practice_text_choice_d);
-        mButtonPre = (Button) findViewById(R.id.id_order_practice_button_previous);
         mButtonNext = (Button) findViewById(R.id.id_order_practice_button_next);
 
         mButtonBack.setOnClickListener(this);
         mLayoutExculde.setOnClickListener(this);
         mLayoutTitleExplain.setOnClickListener(this);
         mLayoutDetailExplain.setOnClickListener(this);
-        mButtonPre.setOnClickListener(this);
         mButtonNext.setOnClickListener(this);
         mLayoutChoiceA.setOnClickListener(this);
         mLayoutChoiceB.setOnClickListener(this);
@@ -130,42 +126,73 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
                 showExplain();
                 break;
 
-            case R.id.id_order_practice_button_previous:
-                showPreQuestion();
-                break;
-
             case R.id.id_order_practice_button_next:
                 showNextQuestion();
                 break;
 
             case R.id.id_order_practice_layout_choice_a:
-                checkAnswer(ANSWER_A,mImageChoiceA);
+                handleAnswerAction(ANSWER_A,mImageChoiceA);
                 break;
 
             case R.id.id_order_practice_layout_choice_b:
-                checkAnswer(ANSWER_B,mImageChoiceB);
+                handleAnswerAction(ANSWER_B,mImageChoiceB);
                 break;
 
             case R.id.id_order_practice_layout_choice_c:
-                checkAnswer(ANSWER_C,mImageChoiceC);
+                handleAnswerAction(ANSWER_C,mImageChoiceC);
                 break;
 
             case R.id.id_order_practice_layout_choice_d:
-                checkAnswer(ANSWER_D,mImageChoiceD);
+                handleAnswerAction(ANSWER_D,mImageChoiceD);
                 break;
         }
     }
 
     //检查答案
-    private void checkAnswer(String answer,ImageView imageView) {
+    private boolean checkAnswer(String answer) {
         if(mCurrentQuestionItem.getAnswer().equals(answer)){
-            imageView.setImageResource(R.mipmap.answer_right);
+            return true ;
+        }
+        return false;
+    }
+
+    private void handleAnswerAction(String answer,ImageView imageView){
+        setAllAnswerUnSelect();
+        if(checkAnswer(answer)){
+            //选中正确答案
+            showRightAnswerImage(imageView);
         }else{
-            imageView.setImageResource(R.mipmap.answer_wrong);
+            //选中错误答案，记录错题，显示正确答案，禁止再次选择
+            showWrongAnswerImage(imageView);
+            setAllAnswerUnSelect();
+            showRightAnswer(mCurrentQuestionItem.getAnswer());
         }
     }
 
-    //上一题
+    private void showRightAnswer(String answer) {
+        if(answer.equals(ANSWER_A)){
+            showRightAnswerImage(mImageChoiceA);
+            return;
+        }else if(answer.equals(ANSWER_B)){
+            showRightAnswerImage(mImageChoiceB);
+            return;
+        }else if(answer.equals(ANSWER_C)){
+            showRightAnswerImage(mImageChoiceC);
+            return;
+        }else if(answer.equals(ANSWER_D)){
+            showRightAnswerImage(mImageChoiceD);
+        }
+    }
+
+    private void showRightAnswerImage(ImageView imageView){
+        imageView.setImageResource(R.mipmap.answer_right);
+    }
+
+    private void showWrongAnswerImage(ImageView imageView){
+        imageView.setImageResource(R.mipmap.answer_wrong);
+    }
+
+    //下一题
     private void showNextQuestion() {
         initUI();
         if(hasInternet()){
@@ -182,32 +209,52 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     }
 
-    //下一题
-    private void showPreQuestion(){
-        initUI();
-        if(hasInternet()) {
-            if(--mCurrentId< 1){
-                mCurrentId++;
-                ToastManager.showLongMsg(getString(R.string.no_pre_order_question));
-                return;
-            }
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
-            updateUI(mCurrentQuestionItem);
-        }else{
-            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
-        }
+    //上一题
+//    private void showPreQuestion(){
+//        initUI();
+//        if(hasInternet()) {
+//            if(--mCurrentId< 1){
+//                mCurrentId++;
+//                ToastManager.showLongMsg(getString(R.string.no_pre_order_question));
+//                return;
+//            }
+//            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+//            updateUI(mCurrentQuestionItem);
+//        }else{
+//            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
+//        }
+//    }
 
+    private void setAllAnswerUnSelect(){
+        mLayoutChoiceA.setClickable(false);
+        mLayoutChoiceB.setClickable(false);
+        mLayoutChoiceC.setClickable(false);
+        mLayoutChoiceD.setClickable(false);
     }
+
+    private void setAllAnswerSelect(){
+        mLayoutChoiceA.setClickable(true);
+        mLayoutChoiceB.setClickable(true);
+        mLayoutChoiceC.setClickable(true);
+        mLayoutChoiceD.setClickable(true);
+    }
+
     //显示解释
     private void showExplain() {
         mLayoutDetailExplain.setVisibility(View.VISIBLE);
     }
 
+    private void hideExplain(){
+        mLayoutDetailExplain.setVisibility(View.GONE);
+    }
+
     private void initUI(){
+        hideExplain();
         mImageChoiceA.setImageResource(R.mipmap.choice_a);
         mImageChoiceB.setImageResource(R.mipmap.choice_b);
         mImageChoiceC.setImageResource(R.mipmap.choice_c);
         mImageChoiceD.setImageResource(R.mipmap.choice_d);
+        setAllAnswerSelect();
     }
 
     private void updateUI(QuestionItem item){
