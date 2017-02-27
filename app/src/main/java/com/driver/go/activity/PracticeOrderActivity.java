@@ -16,6 +16,8 @@ import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 
+import java.util.Random;
+
 
 /**
  * Created by Administrator on 2016/12/1.
@@ -24,10 +26,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     private ImageButton mButtonBack;
     private TextView mTextNum;
-    private LinearLayout mLayoutExculde;
-    private LinearLayout mLayoutTitleExplain;
     private LinearLayout mLayoutDetailExplain;
-    private LinearLayout mLayoutCollect;
     private RelativeLayout mLayoutChoiceA;
     private RelativeLayout mLayoutChoiceB;
     private RelativeLayout mLayoutChoiceC;
@@ -36,7 +35,9 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private ImageView mImageChoiceB;
     private ImageView mImageChoiceC;
     private ImageView mImageChoiceD;
-    private ImageButton mImageCollect;
+    private ImageButton mButtonCollect;
+    private ImageButton mButtonExplain;
+    private ImageButton mButtonExclude;
     private ImageView mImageItem;
     private ImageView mImageQuestion;
     private TextView mTextTitle;
@@ -64,20 +65,18 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
         mImageQuestion = (ImageView) findViewById(R.id.id_order_practice_image_question);
         mTextNum = (TextView) findViewById(R.id.id_question_title_text_num);
-        mLayoutExculde = (LinearLayout) findViewById(R.id.id_question_title_layout_exclude);
-        mLayoutTitleExplain = (LinearLayout) findViewById(R.id.id_question_title_layout_explain);
         mLayoutDetailExplain = (LinearLayout) findViewById(R.id.id_order_practice_layout_explain);
         mLayoutChoiceA = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_a);
         mLayoutChoiceB = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_b);
         mLayoutChoiceC = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_c);
         mLayoutChoiceD = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_d);
-        mLayoutCollect = (LinearLayout) findViewById(R.id.id_question_title_layout_collect);
         mImageChoiceA = (ImageView) findViewById(R.id.id_order_practice_image_choice_a);
         mImageChoiceB = (ImageView) findViewById(R.id.id_order_practice_image_choice_b);
         mImageChoiceC = (ImageView) findViewById(R.id.id_order_practice_image_choice_c);
         mImageChoiceD = (ImageView) findViewById(R.id.id_order_practice_image_choice_d);
-        mImageCollect = (ImageButton) findViewById(R.id.id_question_title_button_collect);
-
+        mButtonCollect = (ImageButton) findViewById(R.id.id_question_title_button_collect);
+        mButtonExplain = (ImageButton) findViewById(R.id.id_question_title_button_explain);
+        mButtonExclude = (ImageButton) findViewById(R.id.id_question_title_button_exclude);
         mTextExplain = (TextView) findViewById(R.id.id_order_practice_text_explain);
         mImageItem = (ImageView) findViewById(R.id.id_order_practice_image_item);
         mTextTitle = (TextView) findViewById(R.id.id_order_practice_text_title);
@@ -88,15 +87,16 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mButtonNext = (Button) findViewById(R.id.id_order_practice_button_next);
 
         mButtonBack.setOnClickListener(this);
-        mLayoutExculde.setOnClickListener(this);
-        mLayoutTitleExplain.setOnClickListener(this);
         mLayoutDetailExplain.setOnClickListener(this);
         mButtonNext.setOnClickListener(this);
         mLayoutChoiceA.setOnClickListener(this);
         mLayoutChoiceB.setOnClickListener(this);
         mLayoutChoiceC.setOnClickListener(this);
         mLayoutChoiceD.setOnClickListener(this);
-        mLayoutCollect.setOnClickListener(this);
+        mButtonExplain.setOnClickListener(this);
+        mButtonCollect.setOnClickListener(this);
+        mButtonExplain.setOnClickListener(this);
+        mButtonExclude.setOnClickListener(this);
 
         mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
@@ -109,6 +109,10 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         if(!TextUtils.isEmpty(mCurrentQuestionItem.getUrl())){
             mImageQuestion.setVisibility(View.VISIBLE);
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
+        }
+
+        if(checkCollected(mCurrentId)){
+            setCollectImageSelected(mButtonCollect);
         }
     }
 
@@ -126,10 +130,10 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
                 finishActivity(this);
                 break;
 
-            case R.id.id_question_title_layout_exclude:
-
+            case R.id.id_question_title_button_exclude:
+                handleExcludeAction();
                 break;
-            case R.id.id_question_title_layout_explain:
+            case R.id.id_question_title_button_explain:
                 showExplain();
                 break;
 
@@ -152,9 +156,28 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             case R.id.id_order_practice_layout_choice_d:
                 handleAnswerAction(ANSWER_D,mImageChoiceD);
                 break;
-            case R.id.id_question_title_layout_collect:
+            case R.id.id_question_title_button_collect:
                 handleCollectAction();
                 break;
+        }
+    }
+
+    //排除一个错误答案
+    private void handleExcludeAction() {
+        while(true){
+            int randomIndex = new Random().nextInt(4);
+            if(randomIndex != Integer.parseInt(mCurrentQuestionItem.getAnswer())){
+                if(randomIndex == 1){
+                    showWrongAnswerImage(mImageChoiceA);
+                }else if(randomIndex == 2){
+                    showWrongAnswerImage(mImageChoiceB);
+                }else if(randomIndex == 3){
+                    showWrongAnswerImage(mImageChoiceC);
+                }else if(randomIndex == 4){
+                    showWrongAnswerImage(mImageChoiceD);
+                }
+                break;
+            }
         }
     }
 
@@ -164,7 +187,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             return ;
         }else{
             ToastManager.showCollectSuccessMsg();
-            mImageCollect.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
+            mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
             saveCollectQuestion(mCurrentQuestionItem);
         }
 
@@ -286,7 +309,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     private void initUI(){
         hideExplain();
-        mImageCollect.setBackgroundResource(R.mipmap.icon_examin_shoucang);
+        mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_shoucang);
         mImageChoiceA.setImageResource(R.mipmap.choice_a);
         mImageChoiceB.setImageResource(R.mipmap.choice_b);
         mImageChoiceC.setImageResource(R.mipmap.choice_c);

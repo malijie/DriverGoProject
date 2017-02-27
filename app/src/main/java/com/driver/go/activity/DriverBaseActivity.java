@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
@@ -88,6 +91,10 @@ public abstract class DriverBaseActivity extends FragmentActivity {
             return true;
         }
         return false;
+    }
+
+    protected void setCollectImageSelected(ImageButton imageButton){
+        imageButton.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
     }
 
     @Override

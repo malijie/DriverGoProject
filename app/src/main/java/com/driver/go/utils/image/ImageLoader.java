@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 import com.driver.go.R;
 import com.driver.go.base.DriverGoApplication;
+import com.driver.go.utils.Logger;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -31,7 +32,7 @@ public class ImageLoader {
     }
 
     public void showImage(String url, ImageView imageView){
+Logger.d("url=" + url);
         mPicasso.load(url).placeholder(ERROR_RESOURCE_ID).error(LOADING_RESOURCE_ID).into(imageView);
-
     }
 }
