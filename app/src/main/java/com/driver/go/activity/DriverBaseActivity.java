@@ -1,11 +1,13 @@
 package com.driver.go.activity;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
+import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.SharePreferenceUtil;
@@ -50,10 +52,18 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     }
 
     public void addOrderQuestionItem(QuestionItem q){
-        mSQLiteManager.insert2OrderTable(q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+        mSQLiteManager.insertQuestion2Table(DBConstants.ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
     public void addRandomQuestionItem(QuestionItem q){
-        mSQLiteManager.insert2RandomTable(q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+        mSQLiteManager.insertQuestion2Table(DBConstants.RANDOM_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+    }
+
+    public void addWrongQuestionItem(QuestionItem q){
+        mSQLiteManager.insertQuestion2Table(DBConstants.WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+    }
+
+    protected void saveCollectQuestion(QuestionItem q){
+        mSQLiteManager.insertQuestion2Table(DBConstants.COLLECT_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
     public void finishActivity(Activity activity){
@@ -68,8 +78,16 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         SharePreferenceUtil.saveOrderQuestionIndex(index);
     }
 
-    protected void loadOrderQuestionIndex(){
-        SharePreferenceUtil.loadOrderQuestionIndex();
+    protected int loadOrderQuestionIndex(){
+       return SharePreferenceUtil.loadOrderQuestionIndex();
+    }
+
+    protected boolean checkCollected(int id){
+        Cursor cursor = mSQLiteManager.queryCollectQuestionById(id);
+        if(cursor.moveToFirst()){
+            return true;
+        }
+        return false;
     }
 
     @Override

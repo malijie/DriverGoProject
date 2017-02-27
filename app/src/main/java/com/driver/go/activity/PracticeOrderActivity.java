@@ -14,7 +14,6 @@ import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
-import com.driver.go.utils.SharePreferenceUtil;
 import com.driver.go.utils.ToastManager;
 
 
@@ -28,6 +27,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private LinearLayout mLayoutExculde;
     private LinearLayout mLayoutTitleExplain;
     private LinearLayout mLayoutDetailExplain;
+    private LinearLayout mLayoutCollect;
     private RelativeLayout mLayoutChoiceA;
     private RelativeLayout mLayoutChoiceB;
     private RelativeLayout mLayoutChoiceC;
@@ -36,7 +36,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private ImageView mImageChoiceB;
     private ImageView mImageChoiceC;
     private ImageView mImageChoiceD;
-
+    private ImageButton mImageCollect;
     private ImageView mImageItem;
     private ImageView mImageQuestion;
     private TextView mTextTitle;
@@ -71,10 +71,13 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mLayoutChoiceB = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_b);
         mLayoutChoiceC = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_c);
         mLayoutChoiceD = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_d);
+        mLayoutCollect = (LinearLayout) findViewById(R.id.id_question_title_layout_collect);
         mImageChoiceA = (ImageView) findViewById(R.id.id_order_practice_image_choice_a);
         mImageChoiceB = (ImageView) findViewById(R.id.id_order_practice_image_choice_b);
         mImageChoiceC = (ImageView) findViewById(R.id.id_order_practice_image_choice_c);
         mImageChoiceD = (ImageView) findViewById(R.id.id_order_practice_image_choice_d);
+        mImageCollect = (ImageButton) findViewById(R.id.id_question_title_button_collect);
+
         mTextExplain = (TextView) findViewById(R.id.id_order_practice_text_explain);
         mImageItem = (ImageView) findViewById(R.id.id_order_practice_image_item);
         mTextTitle = (TextView) findViewById(R.id.id_order_practice_text_title);
@@ -93,6 +96,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mLayoutChoiceB.setOnClickListener(this);
         mLayoutChoiceC.setOnClickListener(this);
         mLayoutChoiceD.setOnClickListener(this);
+        mLayoutCollect.setOnClickListener(this);
 
         mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
@@ -110,7 +114,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     @Override
     public void initData() {
-        mCurrentId = SharePreferenceUtil.loadOrderQuestionIndex();
+        mCurrentId = loadOrderQuestionIndex();
         mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 
@@ -148,7 +152,22 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             case R.id.id_order_practice_layout_choice_d:
                 handleAnswerAction(ANSWER_D,mImageChoiceD);
                 break;
+            case R.id.id_question_title_layout_collect:
+                handleCollectAction();
+                break;
         }
+    }
+
+    private void handleCollectAction() {
+        if(checkCollected(mCurrentQuestionItem.getId())){
+            ToastManager.showAlreadyCollectMsg();
+            return ;
+        }else{
+            ToastManager.showCollectSuccessMsg();
+            mImageCollect.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
+            saveCollectQuestion(mCurrentQuestionItem);
+        }
+
     }
 
     //检查答案
@@ -166,9 +185,13 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             //选中正确答案
             showRightAnswerImage(imageView);
         }else{
-            //选中错误答案，记录错题，显示正确答案，禁止再次选择
+            //选中错误答案
             showWrongAnswerImage(imageView);
+            //记录错题
+            addWrongQuestionItem(mCurrentQuestionItem);
+            //禁止再次选择
             setAllAnswerUnSelect();
+            //显示正确答案
             showRightAnswer(mCurrentQuestionItem.getAnswer());
         }
     }
@@ -199,7 +222,6 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     //下一题
     private void showNextQuestion() {
         if(hasInternet()){
-            initUI();
             if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
                 mCurrentId--;
                 ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
@@ -212,6 +234,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
                 return;
             }
 
+            initUI();
             mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveOrderQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
@@ -263,6 +286,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     private void initUI(){
         hideExplain();
+        mImageCollect.setBackgroundResource(R.mipmap.icon_examin_shoucang);
         mImageChoiceA.setImageResource(R.mipmap.choice_a);
         mImageChoiceB.setImageResource(R.mipmap.choice_b);
         mImageChoiceC.setImageResource(R.mipmap.choice_c);

@@ -22,4 +22,12 @@ public class ToastManager {
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.at_least_select_one_answer), Toast.LENGTH_SHORT);
     }
 
+    public static void showCollectSuccessMsg(){
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.collect_success), Toast.LENGTH_SHORT);
+    }
+
+    public static void showAlreadyCollectMsg(){
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.already_collect), Toast.LENGTH_SHORT);
+    }
+
 }

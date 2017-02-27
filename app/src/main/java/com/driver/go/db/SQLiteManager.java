@@ -3,8 +3,6 @@ package com.driver.go.db;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.driver.go.utils.Logger;
-
 /**
  * Created by malijie on 2017/2/22.
  */
@@ -33,6 +31,8 @@ public class SQLiteManager {
         if(mDB != null){
             mDB.execSQL(SQLContainer.getCreateOrderExamTableSQL());
             mDB.execSQL(SQLContainer.getCreateRandomExamTableSQL());
+            mDB.execSQL(SQLContainer.getCreateWrongQuestionTableSQL());
+            mDB.execSQL(SQLContainer.getCreateCollectQuestionTableSQL());
         }
     }
 
@@ -44,21 +44,10 @@ public class SQLiteManager {
         return false;
     }
 
-    public void insert2OrderTable(int id,String question,String answer,
-                                         String item1,String item2,String item3,
-                                         String item4,String explains,String url){
-        String sql = "INSERT INTO " + DBConstants.ORDER_EXAM_TABLE
-                + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
-                "VALUES ("+ id + ",'" + question + "'," + "'" + answer + "'," +
-                "'" + item1 + "',"+ "'" + item2 + "',"+"'" + item3 + "',"+
-                "'" + item4 + "',"+ "'" + explains + "',"+"'" + url + "')";
-        mDB.execSQL(sql);
-    }
-
-    public void insert2RandomTable(int id,String question,String answer,
-                                  String item1,String item2,String item3,
-                                  String item4,String explains,String url){
-        String sql = "INSERT INTO " + DBConstants.RANDOM_EXAM_TABLE
+    public void insertQuestion2Table(String tableName,int id,String question,String answer,
+                                     String item1,String item2,String item3,
+                                     String item4,String explains,String url){
+        String sql = "INSERT INTO " + tableName
                 + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
                 "VALUES ("+ id + ",'" + question + "'," + "'" + answer + "'," +
                 "'" + item1 + "',"+ "'" + item2 + "',"+"'" + item3 + "',"+
@@ -67,12 +56,16 @@ public class SQLiteManager {
     }
 
     public Cursor queryOrderQuestionById(int id) {
-        String sql = SQLContainer.getOrderExamItemById(id);
-        cursor = mDB.rawQuery(sql,null);
+        cursor = mDB.rawQuery(SQLContainer.getOrderExamItemById(id),null);
         cursor.moveToNext();
         return cursor;
     }
 
+    public Cursor queryCollectQuestionById(int id) {
+        cursor = mDB.rawQuery(SQLContainer.getCollectQuestionItemById(id),null);
+        cursor.moveToNext();
+        return cursor;
+    }
 
     public void closeDB(){
         if(cursor != null){
