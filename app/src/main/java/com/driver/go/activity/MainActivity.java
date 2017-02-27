@@ -13,7 +13,6 @@ import com.driver.go.fragments.SubjectFourFragment;
 import com.driver.go.fragments.SubjectOneFragment;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.viewpagerindicator.TabPageIndicator;

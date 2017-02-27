@@ -8,7 +8,7 @@ import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
-import com.driver.go.utils.Logger;
+import com.driver.go.utils.SharePreferenceUtil;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;
 
@@ -64,6 +64,13 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         return Util.hasInternet();
     }
 
+    protected void saveOrderQuestionIndex(int index){
+        SharePreferenceUtil.saveOrderQuestionIndex(index);
+    }
+
+    protected void loadOrderQuestionIndex(){
+        SharePreferenceUtil.loadOrderQuestionIndex();
+    }
 
     @Override
     protected void onDestroy() {

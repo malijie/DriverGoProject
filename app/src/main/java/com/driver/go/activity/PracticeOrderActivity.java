@@ -14,6 +14,7 @@ import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.SharePreferenceUtil;
 import com.driver.go.utils.ToastManager;
 
 
@@ -109,7 +110,8 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     @Override
     public void initData() {
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(1));
+        mCurrentId = SharePreferenceUtil.loadOrderQuestionIndex();
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 
 
@@ -211,6 +213,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             }
 
             mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            saveOrderQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
         }else{
