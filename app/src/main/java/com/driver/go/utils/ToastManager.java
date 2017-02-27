@@ -30,4 +30,8 @@ public class ToastManager {
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.already_collect), Toast.LENGTH_SHORT);
     }
 
+    public static void showAlreadyExcludeMsg(){
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.already_exclude), Toast.LENGTH_SHORT);
+    }
+
 }

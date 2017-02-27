@@ -9,6 +9,7 @@
     <string name="no_pre_order_question">已没有上一题...</string>
     <string name="collect_success">收藏成功!</string>
     <string name="already_collect">已收藏!</string>
+    <string name="already_exclude">已排除一个错误答案，请认真选择...</string>
 
 
 </resources>

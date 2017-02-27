@@ -51,6 +51,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private int mCurrentId = 1;
     private QuestionItem mCurrentQuestionItem;
     private boolean mIsChoiceOneAnswer;
+    private boolean mIsExcluded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +165,11 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     //排除一个错误答案
     private void handleExcludeAction() {
+        if(mIsExcluded){
+            ToastManager.showAlreadyExcludeMsg();
+            return;
+        }
+
         while(true){
             int randomIndex = new Random().nextInt(4);
             if(randomIndex != Integer.parseInt(mCurrentQuestionItem.getAnswer())){
@@ -176,6 +182,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
                 }else if(randomIndex == 4){
                     showWrongAnswerImage(mImageChoiceD);
                 }
+                mIsExcluded = true;
                 break;
             }
         }
@@ -262,6 +269,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             saveOrderQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
+            mIsExcluded = false;
         }else{
             ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
         }
