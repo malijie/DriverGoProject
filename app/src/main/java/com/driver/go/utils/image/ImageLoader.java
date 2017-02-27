@@ -32,7 +32,6 @@ public class ImageLoader {
     }
 
     public void showImage(String url, ImageView imageView){
-Logger.d("url=" + url);
         mPicasso.load(url).placeholder(ERROR_RESOURCE_ID).error(LOADING_RESOURCE_ID).into(imageView);
     }
 }

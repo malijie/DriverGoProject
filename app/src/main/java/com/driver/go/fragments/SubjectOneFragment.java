@@ -9,11 +9,13 @@ import android.widget.ImageButton;
 
 import com.driver.go.R;
 import com.driver.go.activity.PracticeOrderActivity;
+import com.driver.go.activity.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
 
 //科目一
 public class SubjectOneFragment extends Fragment implements View.OnClickListener{
     private ImageButton mButtonOrderPractise;
+    private ImageButton mButtonReciteQuestion;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,7 +27,9 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
 
     private void initViews(View v) {
         mButtonOrderPractise = (ImageButton) v.findViewById(R.id.id_main_image_order_practice);
+        mButtonReciteQuestion = (ImageButton) v.findViewById(R.id.id_main_image_recite_question);
         mButtonOrderPractise.setOnClickListener(this);
+        mButtonReciteQuestion.setOnClickListener(this);
     }
 
     @Override
@@ -33,6 +37,9 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
         switch (view.getId()){
             case R.id.id_main_image_order_practice:
                 IntentManager.startActivity(PracticeOrderActivity.class);
+                break;
+            case R.id.id_main_image_recite_question:
+                IntentManager.startActivity(RecitePracticeOrderActivity.class);
                 break;
         }
     }

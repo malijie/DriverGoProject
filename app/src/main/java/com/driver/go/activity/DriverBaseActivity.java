@@ -85,6 +85,14 @@ public abstract class DriverBaseActivity extends FragmentActivity {
        return SharePreferenceUtil.loadOrderQuestionIndex();
     }
 
+    protected void saveReciteQuestionIndex(int index){
+        SharePreferenceUtil.saveReciteQuestionIndex(index);
+    }
+
+    protected int loadReciteQuestionIndex(){
+        return SharePreferenceUtil.loadReciteQuestionIndex();
+    }
+
     protected boolean checkCollected(int id){
         Cursor cursor = mSQLiteManager.queryCollectQuestionById(id);
         if(cursor.moveToFirst()){

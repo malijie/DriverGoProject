@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.PracticeOrderActivity"/>
+        <activity android:name=".activity.RecitePracticeOrderActivity"/>
     </application>
 
 </manifest>

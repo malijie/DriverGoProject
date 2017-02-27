@@ -80,6 +80,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
                     <ImageButton
+                        android:id="@+id/id_main_image_recite_question"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/beitimoshi_selector"/>
