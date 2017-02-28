@@ -5,6 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="current_network_unavailable">当前网络不可用，请连接网络...</string>
     <string name="complete_all_order_question">恭喜，已完成所有顺序练习！</string>
+    <string name="complete_all_random_question">恭喜，已完成所有随机练习！</string>
     <string name="at_least_select_one_answer">请选择本题答案...</string>
     <string name="no_pre_order_question">已没有上一题...</string>
     <string name="collect_success">收藏成功!</string>

@@ -22,6 +22,10 @@ public class ToastManager {
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.at_least_select_one_answer), Toast.LENGTH_SHORT);
     }
 
+    public static void showCompelteRandomPracticeMsg(){
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.complete_all_random_question), Toast.LENGTH_SHORT);
+    }
+
     public static void showCollectSuccessMsg(){
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.collect_success), Toast.LENGTH_SHORT);
     }

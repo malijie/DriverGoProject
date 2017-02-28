@@ -61,6 +61,12 @@ public class SQLiteManager {
         return cursor;
     }
 
+    public Cursor queryRandomQuestionById(int id) {
+        cursor = mDB.rawQuery(SQLContainer.getRandomExamItemById(id),null);
+        cursor.moveToNext();
+        return cursor;
+    }
+
     public Cursor queryCollectQuestionById(int id) {
         cursor = mDB.rawQuery(SQLContainer.getCollectQuestionItemById(id),null);
         cursor.moveToNext();
@@ -72,4 +78,6 @@ public class SQLiteManager {
             cursor.close();
         }
     }
+
+
 }

@@ -14,7 +14,6 @@ import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 
 import java.util.Random;
@@ -121,7 +120,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     @Override
     public void initData() {
         mCurrentId = loadOrderQuestionIndex();
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+        mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 
 
@@ -266,7 +265,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             }
 
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveOrderQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
@@ -286,7 +285,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 //                ToastManager.showLongMsg(getString(R.string.no_pre_order_question));
 //                return;
 //            }
-//            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+//            mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
 //            updateUI(mCurrentQuestionItem);
 //        }else{
 //            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));

@@ -9,7 +9,7 @@ import com.driver.go.entity.QuestionItem;
  */
 
 public class EntityConvertManager {
-    public static QuestionItem getQuestionItemEntity(Cursor cursor){
+    public static QuestionItem getOrderQuestionItemEntity(Cursor cursor){
         QuestionItem questionItem = new QuestionItem();
         questionItem.setId(cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(0))));
         questionItem.setQuestion(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(1))));
@@ -20,6 +20,19 @@ public class EntityConvertManager {
         questionItem.setItem4(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(6))));
         questionItem.setExplains(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(7))));
         questionItem.setUrl(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(8))));
+        return questionItem;
+    }
+    public static QuestionItem getRandomQuestionItemEntity(Cursor cursor){
+        QuestionItem questionItem = new QuestionItem();
+        questionItem.setId(cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1))));
+        questionItem.setQuestion(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
+        questionItem.setAnswer(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(3))));
+        questionItem.setItem1(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(4))));
+        questionItem.setItem2(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(5))));
+        questionItem.setItem3(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(6))));
+        questionItem.setItem4(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(7))));
+        questionItem.setExplains(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(8))));
+        questionItem.setUrl(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(9))));
         return questionItem;
     }
 }

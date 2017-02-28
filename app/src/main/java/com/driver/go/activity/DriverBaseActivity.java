@@ -22,6 +22,7 @@ import com.driver.go.utils.image.ImageLoader;
  */
 public abstract class DriverBaseActivity extends FragmentActivity {
     public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
+    public static int sRandomQuestionTotalNum = Profile.RANDOM_TOTAL_ITEM;
     public SQLiteManager mSQLiteManager = null;
     public ImageLoader mImageLoader = null;
     protected final String ANSWER_A = "1";
@@ -81,8 +82,16 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         SharePreferenceUtil.saveOrderQuestionIndex(index);
     }
 
+    protected int loadRandomQuestionIndex(){
+       return SharePreferenceUtil.loadRandomQuestionIndex();
+    }
+
+    protected void saveRandomQuestionIndex(int index){
+        SharePreferenceUtil.saveRandomQuestionIndex(index);
+    }
+
     protected int loadOrderQuestionIndex(){
-       return SharePreferenceUtil.loadOrderQuestionIndex();
+        return SharePreferenceUtil.loadOrderQuestionIndex();
     }
 
     protected void saveReciteQuestionIndex(int index){

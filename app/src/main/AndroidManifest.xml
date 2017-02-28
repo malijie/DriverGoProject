@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".activity.PracticeOrderActivity"/>
         <activity android:name=".activity.RecitePracticeOrderActivity"/>
+        <activity android:name=".activity.PracticeRandomActivity"/>
+
     </application>
 
 </manifest>
