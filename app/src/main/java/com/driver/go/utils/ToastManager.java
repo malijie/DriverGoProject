@@ -34,4 +34,12 @@ public class ToastManager {
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.already_exclude), Toast.LENGTH_SHORT);
     }
 
+    public static void showCompleteReciteMsg(){
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.complete_all_recite),Toast.LENGTH_SHORT);
+    }
+
+    public static void showNoNetworkMsg(){
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.current_network_unavailable),Toast.LENGTH_SHORT);
+    }
+
 }

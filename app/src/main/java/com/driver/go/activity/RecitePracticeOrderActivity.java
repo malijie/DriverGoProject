@@ -14,6 +14,7 @@ import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 
 import java.util.Random;
@@ -50,11 +51,10 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
     private TextView mTextChoiceD;
     private TextView mTextExplain;
     private Button mButtonNext;
+    private Button mButtonPre;
 
     private int mCurrentId = 1;
     private QuestionItem mCurrentQuestionItem;
-    private boolean mIsChoiceOneAnswer;
-    private boolean mIsExcluded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
 
     @Override
     public void initView() {
+
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
         mImageQuestion = (ImageView) findViewById(R.id.id_recite_order_practice_image_question);
         mTextNum = (TextView) findViewById(R.id.id_question_title_text_num);
@@ -92,6 +93,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
         mTextChoiceC= (TextView) findViewById(R.id.id_recite_order_practice_text_choice_c);
         mTextChoiceD= (TextView) findViewById(R.id.id_recite_order_practice_text_choice_d);
         mButtonNext = (Button) findViewById(R.id.id_recite_order_practice_button_next);
+        mButtonPre = (Button) findViewById(R.id.id_recite_order_practice_button_pre);
 
         mLayoutExclude.setVisibility(View.GONE);
         mLayoutCollect.setVisibility(View.GONE);
@@ -99,14 +101,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
         mButtonBack.setOnClickListener(this);
         mLayoutDetailExplain.setOnClickListener(this);
         mButtonNext.setOnClickListener(this);
-        mLayoutChoiceA.setOnClickListener(this);
-        mLayoutChoiceB.setOnClickListener(this);
-        mLayoutChoiceC.setOnClickListener(this);
-        mLayoutChoiceD.setOnClickListener(this);
-        mButtonExplain.setOnClickListener(this);
-        mButtonCollect.setOnClickListener(this);
-        mButtonExplain.setOnClickListener(this);
-        mButtonExclude.setOnClickListener(this);
+        mButtonPre.setOnClickListener(this);
 
         mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
@@ -121,9 +116,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
-        if(checkCollected(mCurrentId)){
-            setCollectImageSelected(mButtonCollect);
-        }
+        showRightAnswer(mCurrentQuestionItem.getAnswer());
     }
 
     @Override
@@ -140,98 +133,12 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
                 finishActivity(this);
                 break;
 
-            case R.id.id_question_title_button_exclude:
-                handleExcludeAction();
-                break;
-            case R.id.id_question_title_button_explain:
-                showExplain();
-                break;
-
             case R.id.id_recite_order_practice_button_next:
                 showNextQuestion();
                 break;
-
-            case R.id.id_recite_order_practice_layout_choice_a:
-                handleAnswerAction(ANSWER_A,mImageChoiceA);
+            case R.id.id_recite_order_practice_button_pre:
+                showPreQuestion();
                 break;
-
-            case R.id.id_recite_order_practice_layout_choice_b:
-                handleAnswerAction(ANSWER_B,mImageChoiceB);
-                break;
-
-            case R.id.id_recite_order_practice_layout_choice_c:
-                handleAnswerAction(ANSWER_C,mImageChoiceC);
-                break;
-
-            case R.id.id_recite_order_practice_layout_choice_d:
-                handleAnswerAction(ANSWER_D,mImageChoiceD);
-                break;
-            case R.id.id_question_title_button_collect:
-                handleCollectAction();
-                break;
-        }
-    }
-
-    //排除一个错误答案
-    private void handleExcludeAction() {
-        if(mIsExcluded){
-            ToastManager.showAlreadyExcludeMsg();
-            return;
-        }
-
-        while(true){
-            int randomIndex = new Random().nextInt(4);
-            if(randomIndex>0 && randomIndex != Integer.parseInt(mCurrentQuestionItem.getAnswer())){
-                if(randomIndex == 1){
-                    showWrongAnswerImage(mImageChoiceA);
-                }else if(randomIndex == 2){
-                    showWrongAnswerImage(mImageChoiceB);
-                }else if(randomIndex == 3){
-                    showWrongAnswerImage(mImageChoiceC);
-                }else if(randomIndex == 4){
-                    showWrongAnswerImage(mImageChoiceD);
-                }
-                mIsExcluded = true;
-                break;
-            }
-        }
-    }
-
-    private void handleCollectAction() {
-        if(checkCollected(mCurrentQuestionItem.getId())){
-            ToastManager.showAlreadyCollectMsg();
-            return ;
-        }else{
-            ToastManager.showCollectSuccessMsg();
-            mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
-            saveCollectQuestion(mCurrentQuestionItem);
-        }
-
-    }
-
-    //检查答案
-    private boolean checkAnswer(String answer) {
-        if(mCurrentQuestionItem.getAnswer().equals(answer)){
-            return true ;
-        }
-        return false;
-    }
-
-    private void handleAnswerAction(String answer,ImageView imageView){
-        mIsChoiceOneAnswer = true;
-        setAllAnswerUnSelect();
-        if(checkAnswer(answer)){
-            //选中正确答案
-            showRightAnswerImage(imageView);
-        }else{
-            //选中错误答案
-            showWrongAnswerImage(imageView);
-            //记录错题
-            addWrongQuestionItem(mCurrentQuestionItem);
-            //禁止再次选择
-            setAllAnswerUnSelect();
-            //显示正确答案
-            showRightAnswer(mCurrentQuestionItem.getAnswer());
         }
     }
 
@@ -263,39 +170,34 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
         if(hasInternet()){
             if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
                 mCurrentId--;
-                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
+                ToastManager.showCompleteReciteMsg();
                 return;
             }
             //没有进行选择
-            if(!mIsChoiceOneAnswer){
-                ToastManager.showSelectOneAnswerMsg();
-                return;
-            }
             initUI();
             mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveReciteQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
-            mIsChoiceOneAnswer = false;
-            mIsExcluded = false;
         }else{
-            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
+            ToastManager.showNoNetworkMsg();
         }
 
     }
 
     //上一题
     private void showPreQuestion(){
-        initUI();
         if(hasInternet()) {
             if(--mCurrentId< 1){
                 mCurrentId++;
                 ToastManager.showLongMsg(getString(R.string.no_pre_order_question));
                 return;
             }
+            initUI();
             mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            saveReciteQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
         }else{
-            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
+            ToastManager.showNoNetworkMsg();
         }
     }
 
@@ -313,17 +215,8 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
         mLayoutChoiceD.setClickable(true);
     }
 
-    //显示解释
-    private void showExplain() {
-        mLayoutDetailExplain.setVisibility(View.VISIBLE);
-    }
-
-    private void hideExplain(){
-        mLayoutDetailExplain.setVisibility(View.GONE);
-    }
 
     private void initUI(){
-        hideExplain();
         mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_shoucang);
         mImageChoiceA.setImageResource(R.mipmap.choice_a);
         mImageChoiceB.setImageResource(R.mipmap.choice_b);
@@ -356,5 +249,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
             mLayoutChoiceC.setVisibility(View.VISIBLE);
             mLayoutChoiceD.setVisibility(View.VISIBLE);
         }
+
+        showRightAnswer(item.getAnswer());
     }
 }
