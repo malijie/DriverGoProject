@@ -337,6 +337,8 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         if(!TextUtils.isEmpty(item.getUrl())){
             mImageQuestion.setVisibility(View.VISIBLE);
             mImageLoader.showImage(item.getUrl(),mImageQuestion);
+        }else{
+            mImageQuestion.setVisibility(View.GONE);
         }
 
         //设置题目类型

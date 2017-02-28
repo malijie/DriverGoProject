@@ -73,6 +73,12 @@ public class SQLiteManager {
         return cursor;
     }
 
+    public Cursor queryRandomQuestionIdByIndex(int index) {
+        cursor = mDB.rawQuery(SQLContainer.getCollectRandomQuestionIdByIndex(index),null);
+        cursor.moveToNext();
+        return cursor;
+    }
+
     public void closeDB(){
         if(cursor != null){
             cursor.close();

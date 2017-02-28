@@ -110,6 +110,11 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         return false;
     }
 
+    protected int getQuesionIdByIndex(int index){
+        Cursor cursor = mSQLiteManager.queryRandomQuestionIdByIndex(index);
+        return cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1)));
+    }
+
     protected void setCollectImageSelected(ImageButton imageButton){
         imageButton.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
     }

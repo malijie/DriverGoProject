@@ -14,7 +14,6 @@ import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 
 import java.util.Random;
@@ -48,7 +47,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     private TextView mTextExplain;
     private Button mButtonNext;
 
-    private int mCurrentId = 1;
+    private int mCurrentIndex = 1;
     private QuestionItem mCurrentQuestionItem;
     private boolean mIsChoiceOneAnswer;
     private boolean mIsExcluded = false;
@@ -99,7 +98,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
         mButtonExplain.setOnClickListener(this);
         mButtonExclude.setOnClickListener(this);
 
-        mTextNum.setText(mCurrentId + "/" + sRandomQuestionTotalNum);
+        mTextNum.setText(mCurrentIndex + "/" + sRandomQuestionTotalNum);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
         mTextChoiceA.setText(mCurrentQuestionItem.getItem1());
         mTextChoiceB.setText(mCurrentQuestionItem.getItem2());
@@ -112,16 +111,16 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
-        if(checkCollected(mCurrentId)){
+        int id = getQuesionIdByIndex(mCurrentIndex);
+        if(checkCollected(id)){
             setCollectImageSelected(mButtonCollect);
         }
     }
 
     @Override
     public void initData() {
-        mCurrentId = loadRandomQuestionIndex();
-        mCurrentQuestionItem = EntityConvertManager.getRandomQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentId));
-Logger.d("mCurrentQuestionItem=" + mCurrentQuestionItem);
+        mCurrentIndex = loadRandomQuestionIndex();
+        mCurrentQuestionItem = EntityConvertManager.getRandomQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentIndex));
     }
 
 
@@ -253,8 +252,8 @@ Logger.d("mCurrentQuestionItem=" + mCurrentQuestionItem);
     //下一题
     private void showNextQuestion() {
         if(hasInternet()){
-            if(++mCurrentId> Profile.RANDOM_TOTAL_ITEM){
-                mCurrentId--;
+            if(++mCurrentIndex > Profile.RANDOM_TOTAL_ITEM){
+                mCurrentIndex--;
                 ToastManager.showCompelteRandomPracticeMsg();
                 return;
             }
@@ -266,8 +265,8 @@ Logger.d("mCurrentQuestionItem=" + mCurrentQuestionItem);
             }
 
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getRandomQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentId));
-            saveRandomQuestionIndex(mCurrentId);
+            mCurrentQuestionItem = EntityConvertManager.getRandomQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentIndex));
+            saveRandomQuestionIndex(mCurrentIndex);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
             mIsExcluded = false;
@@ -311,7 +310,7 @@ Logger.d("mCurrentQuestionItem=" + mCurrentQuestionItem);
     }
 
     private void updateUI(QuestionItem item){
-        mTextNum.setText(mCurrentId + "/" + sRandomQuestionTotalNum);
+        mTextNum.setText(mCurrentIndex + "/" + sRandomQuestionTotalNum);
         mTextTitle.setText(item.getQuestion());
         mTextChoiceA.setText(item.getItem1());
         mTextChoiceB.setText(item.getItem2());
@@ -322,6 +321,8 @@ Logger.d("mCurrentQuestionItem=" + mCurrentQuestionItem);
         if(!TextUtils.isEmpty(item.getUrl())){
             mImageQuestion.setVisibility(View.VISIBLE);
             mImageLoader.showImage(item.getUrl(),mImageQuestion);
+        }else{
+            mImageQuestion.setVisibility(View.GONE);
         }
 
         //设置题目类型
