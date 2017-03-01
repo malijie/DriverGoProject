@@ -40,19 +40,23 @@ public class SQLContainer {
           return "SELECT * FROM " + DBConstants.ORDER_EXAM_TABLE + " WHERE id=1";
     }
 
-    public static String getOrderExamItemById(int id){
+    public static String getOrderExamItemByIdSQL(int id){
         return  "SELECT * FROM " + DBConstants.ORDER_EXAM_TABLE + " WHERE id=" + id;
     }
 
-    public static String getRandomExamItemById(int id){
+    public static String getRandomExamItemByIdSQL(int id){
         return  "SELECT * FROM " + DBConstants.RANDOM_EXAM_TABLE + " WHERE _id=" + id;
     }
 
-    public static String getCollectQuestionItemById(int id){
+    public static String getCollectQuestionItemByIdSQL(int id){
         return  "SELECT * FROM " + DBConstants.COLLECT_QUESTION_TABLE + " WHERE id=" + id;
     }
 
-    public static String getCollectRandomQuestionIdByIndex(int index){
+    public static String getCollectRandomQuestionIdByIndexSQL(int index){
         return  "SELECT * FROM " + DBConstants.RANDOM_EXAM_TABLE + " WHERE _id=" + index;
+    }
+
+    public static String getDeleteTableDataSQL(String tableName){
+        return "delete from " + tableName;
     }
 }

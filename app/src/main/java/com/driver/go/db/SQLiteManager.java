@@ -56,27 +56,31 @@ public class SQLiteManager {
     }
 
     public Cursor queryOrderQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getOrderExamItemById(id),null);
+        cursor = mDB.rawQuery(SQLContainer.getOrderExamItemByIdSQL(id),null);
         cursor.moveToNext();
         return cursor;
     }
 
     public Cursor queryRandomQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getRandomExamItemById(id),null);
+        cursor = mDB.rawQuery(SQLContainer.getRandomExamItemByIdSQL(id),null);
         cursor.moveToNext();
         return cursor;
     }
 
     public Cursor queryCollectQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getCollectQuestionItemById(id),null);
+        cursor = mDB.rawQuery(SQLContainer.getCollectQuestionItemByIdSQL(id),null);
         cursor.moveToNext();
         return cursor;
     }
 
     public Cursor queryRandomQuestionIdByIndex(int index) {
-        cursor = mDB.rawQuery(SQLContainer.getCollectRandomQuestionIdByIndex(index),null);
+        cursor = mDB.rawQuery(SQLContainer.getCollectRandomQuestionIdByIndexSQL(index),null);
         cursor.moveToNext();
         return cursor;
+    }
+
+    public void deleteTableData(String tableName){
+        mDB.execSQL(SQLContainer.getDeleteTableDataSQL(tableName));
     }
 
     public void closeDB(){

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
+import com.driver.go.control.IntentManager;
+import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 
@@ -111,7 +113,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
-        int id = getQuesionIdByIndex(mCurrentIndex);
+        int id = getQuestionIdByIndex(mCurrentIndex);
         if(checkCollected(id)){
             setCollectImageSelected(mButtonCollect);
         }
@@ -253,7 +255,9 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     private void showNextQuestion() {
         if(hasInternet()){
             if(++mCurrentIndex > Profile.RANDOM_TOTAL_ITEM){
-                mCurrentIndex--;
+                saveRandomQuestionIndex(0);
+                clearTableData(DBConstants.RANDOM_EXAM_TABLE);
+                IntentManager.finishActivity(this);
                 ToastManager.showCompelteRandomPracticeMsg();
                 return;
             }
