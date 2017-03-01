@@ -255,7 +255,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     private void showNextQuestion() {
         if(hasInternet()){
             if(++mCurrentIndex > Profile.RANDOM_TOTAL_ITEM){
-                saveRandomQuestionIndex(0);
+                saveRandomQuestionIndex(0);//
                 clearTableData(DBConstants.RANDOM_EXAM_TABLE);
                 IntentManager.finishActivity(this);
                 ToastManager.showCompelteRandomPracticeMsg();
