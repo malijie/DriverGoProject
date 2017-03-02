@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
+import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 
@@ -111,7 +112,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
-        int id = getQuesionIdByIndex(mCurrentIndex);
+        int id = getQuestionIdByIndex(mCurrentIndex);
         if(checkCollected(id)){
             setCollectImageSelected(mButtonCollect);
         }
@@ -254,7 +255,10 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
         if(hasInternet()){
             if(++mCurrentIndex > Profile.RANDOM_TOTAL_ITEM){
                 mCurrentIndex--;
+                //清空数据库，重新请求随机数据插入数据类
+                saveRandomQuestionIndex(mCurrentIndex);
                 ToastManager.showCompelteRandomPracticeMsg();
+                clearTableData(DBConstants.RANDOM_EXAM_TABLE);
                 return;
             }
 
@@ -310,7 +314,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     }
 
     private void updateUI(QuestionItem item){
-        mTextNum.setText(mCurrentIndex + "/" + sRandomQuestionTotalNum);
+        mTextNum.setText(mCurrentIndex%10 + "/" + sRandomQuestionTotalNum);
         mTextTitle.setText(item.getQuestion());
         mTextChoiceA.setText(item.getItem1());
         mTextChoiceB.setText(item.getItem2());
