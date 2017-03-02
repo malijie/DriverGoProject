@@ -119,6 +119,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         imageButton.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
     }
 
+
     protected void clearTableData(String tableName){
         mSQLiteManager.clearTableData(tableName);
     }

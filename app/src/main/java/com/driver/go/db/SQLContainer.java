@@ -59,4 +59,8 @@ public class SQLContainer {
     public static String getDeleteTableSQL(String tableName){
         return "DELETE FROM " + tableName;
     }
+
+    public static String getAllWrongQuestionsSQL(){
+        return "SELECT * FROM " + DBConstants.WRONG_QUESTION_TABLE;
+    }
 }

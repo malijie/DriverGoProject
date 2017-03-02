@@ -55,6 +55,27 @@
             android:textSize="@dimen/font_size_16"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/id_question_title_layout_delete"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageButton
+            android:id="@+id/id_question_title_button_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/icon_examin_delete"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="排除"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/font_grey"
+            android:textSize="@dimen/font_size_16"/>
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/id_question_title_layout_exclude"
         android:layout_width="0dp"
         android:layout_height="match_parent"

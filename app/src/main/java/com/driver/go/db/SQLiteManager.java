@@ -83,6 +83,11 @@ public class SQLiteManager {
         mDB.execSQL(SQLContainer.getDeleteTableSQL(tableName));
     }
 
+
+    public Cursor getAllWrongQuestions(){
+       return mDB.rawQuery(SQLContainer.getAllWrongQuestionsSQL(),null);
+    }
+
     public void closeDB(){
         if(cursor != null){
             cursor.close();
