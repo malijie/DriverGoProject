@@ -184,7 +184,10 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
 
     //删除错题
     private void handleDeleteWrongQuestion() {
+        mSQLiteManager.deleteItemFromWrongQuesionById(mCurrentQuestionItem.getId());
+        showNextQuestion();
         ToastManager.showShortMsg("删除成功!");
+
     }
 
     //排除一个错误答案
@@ -252,10 +255,10 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     private void showNextQuestion() {
         if(hasInternet()){
             //没有进行选择
-            if(!mIsChoiceOneAnswer){
-                ToastManager.showSelectOneAnswerMsg();
-                return;
-            }
+//            if(!mIsChoiceOneAnswer){
+//                ToastManager.showSelectOneAnswerMsg();
+//                return;
+//            }
             if(++mCurrentIndex== mQuestions.size()){
                 mCurrentIndex--;
                 //清空数据库，重新请求随机数据插入数据类

@@ -64,4 +64,8 @@ public class SQLContainer {
     public static String getAllWrongQuestionsSQL(){
         return "SELECT * FROM " + DBConstants.WRONG_QUESTION_TABLE;
     }
+
+    public static String deleteQuestionSQL(int id){
+        return "DELETE FROM " + DBConstants.WRONG_QUESTION_TABLE + " WHERE id=" + id;
+    }
 }

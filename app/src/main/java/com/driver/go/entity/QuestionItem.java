@@ -6,6 +6,7 @@ package com.driver.go.entity;
  */
 
 public class QuestionItem {
+    private int _id;
     private int id;
     private String question;
     private String answer;
@@ -15,6 +16,14 @@ public class QuestionItem {
     private String item4;
     private String explains;
     private String url;
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
 
     public int getId() {
         return id;

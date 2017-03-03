@@ -24,6 +24,7 @@ public class EntityConvertManager {
     }
     public static QuestionItem getQuestionItemEntity(Cursor cursor){
         QuestionItem questionItem = new QuestionItem();
+        questionItem.set_id(cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(0))));
         questionItem.setId(cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1))));
         questionItem.setQuestion(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
         questionItem.setAnswer(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(3))));

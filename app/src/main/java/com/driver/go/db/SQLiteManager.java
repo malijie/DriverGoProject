@@ -93,6 +93,10 @@ public class SQLiteManager {
         return cursor.moveToFirst();
     }
 
+    public void deleteItemFromWrongQuesionById(int id){
+        mDB.execSQL(SQLContainer.deleteQuestionSQL(id));
+    }
+
     public void closeDB(){
         if(cursor != null){
             cursor.close();
