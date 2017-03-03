@@ -56,9 +56,6 @@ public class SQLContainer {
         return  "SELECT * FROM " + DBConstants.RANDOM_EXAM_TABLE + " WHERE _id=" + index;
     }
 
-    public static String getWrongQuestionIdByIndexSQL(int index){
-        return  "SELECT * FROM " + DBConstants.WRONG_QUESTION_TABLE + " WHERE _id=" + index;
-    }
 
     public static String getDeleteTableSQL(String tableName){
         return "DELETE FROM " + tableName;

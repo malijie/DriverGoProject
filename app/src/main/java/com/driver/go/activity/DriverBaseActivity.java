@@ -104,10 +104,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
 
     protected boolean checkCollected(int id){
         Cursor cursor = mSQLiteManager.queryCollectQuestionById(id);
-        if(cursor.moveToFirst()){
-            return true;
-        }
-        return false;
+        return cursor.moveToFirst();
     }
 
     protected int getQuestionIdByIndex(int index){
