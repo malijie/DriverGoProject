@@ -11,6 +11,7 @@ public class SQLiteManager {
     private Cursor cursor;
     private static SQLiteManager sSQLiteManager = null;
     private SQLiteDatabase mDB;
+    private Cursor allCollectQuestions;
 
     private SQLiteManager(){
         mDB = new SQLiteHelper().getWritableDatabase();
@@ -93,13 +94,26 @@ public class SQLiteManager {
         return cursor.moveToFirst();
     }
 
-    public void deleteItemFromWrongQuesionById(int id){
-        mDB.execSQL(SQLContainer.deleteQuestionSQL(id));
+    public void deleteItemFromWrongQuestionById(int id){
+        mDB.execSQL(SQLContainer.deleteQuestionSQL(DBConstants.WRONG_QUESTION_TABLE,id));
+    }
+
+    public Cursor getAllCollectQuestions() {
+        return mDB.rawQuery(SQLContainer.getAllCollectQuestionsSQL(),null);
     }
 
     public void closeDB(){
         if(cursor != null){
             cursor.close();
         }
+    }
+
+    public void deleteItemFromCollectQuestionById(int id) {
+        mDB.execSQL(SQLContainer.deleteQuestionSQL(DBConstants.COLLECT_QUESTION_TABLE,id));
+    }
+
+    public boolean hasCollectQuestions() {
+        cursor = mDB.rawQuery(SQLContainer.getAllCollectQuestionsSQL(),null);
+        return cursor.moveToFirst();
     }
 }

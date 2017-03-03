@@ -119,7 +119,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
     @Override
     public void initData() {
         mCurrentId = loadReciteQuestionIndex();
-        mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 
 
@@ -172,7 +172,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
             }
             //没有进行选择
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveReciteQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
         }else{
@@ -190,7 +190,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
                 return;
             }
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveReciteQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
         }else{

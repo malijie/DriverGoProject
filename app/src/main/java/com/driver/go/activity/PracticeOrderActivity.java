@@ -120,7 +120,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     @Override
     public void initData() {
         mCurrentId = loadOrderQuestionIndex();
-        mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 
 
@@ -265,7 +265,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             }
 
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveOrderQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
