@@ -12,16 +12,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
-import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.wrong;
 
 /**
  * Created by malijie on 2017/3/1.
@@ -51,10 +47,12 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     private TextView mTextChoiceD;
     private TextView mTextExplain;
     private Button mButtonNext;
+    private List<QuestionItem> mQuestions;
 
     private int mCurrentIndex = 1;
     private QuestionItem mCurrentQuestionItem;
     private boolean mIsChoiceOneAnswer;
+    private int mQuestionsCount;
     private boolean mIsExcluded = false;
 
     @Override
@@ -101,7 +99,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
         mButtonCollect.setOnClickListener(this);
         mButtonExplain.setOnClickListener(this);
 
-        mTextNum.setText(mCurrentIndex + "/" + swrongQuestionTotalNum);
+        mTextNum.setText(mCurrentIndex + "/" + mQuestionsCount);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
         mTextChoiceA.setText(mCurrentQuestionItem.getItem1());
         mTextChoiceB.setText(mCurrentQuestionItem.getItem2());
@@ -122,7 +120,18 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
 
     @Override
     public void initData() {
-        mCurrentQuestionItem = EntityConvertManager.getwrongQuestionItemEntity(mSQLiteManager.querywrongQuestionById(mCurrentIndex));
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.getWrongQuestionByIndex(mCurrentIndex));
+        initQuestionData();
+    }
+
+    private void initQuestionData() {
+        Cursor cursor = mSQLiteManager.getAllWrongQuestions();
+        mQuestions = new ArrayList<>();
+        while(cursor.moveToNext()){
+            QuestionItem item = EntityConvertManager.getOrderQuestionItemEntity(cursor);
+            mQuestions.add(item);
+        }
+        mQuestionsCount =mQuestions.size();
     }
 
 
@@ -193,8 +202,6 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
         }else{
             //选中错误答案
             showWrongAnswerImage(imageView);
-            //记录错题
-            addWrongQuestionItem(mCurrentQuestionItem);
             //禁止再次选择
             setAllAnswerUnSelect();
             //显示正确答案
@@ -228,12 +235,10 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     //下一题
     private void showNextQuestion() {
         if(hasInternet()){
-            if(++mCurrentIndex > Profile.wrong_TOTAL_ITEM){
+            if(++mCurrentIndex > mQuestions.size()){
                 mCurrentIndex--;
                 //清空数据库，重新请求随机数据插入数据类
-                savewrongQuestionIndex(mCurrentIndex);
-                ToastManager.showCompeltewrongPracticeMsg();
-                clearTableData(DBConstants.wrong_EXAM_TABLE);
+                ToastManager.showCompleteWrongQuestionMsg();
                 return;
             }
 
@@ -244,8 +249,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
             }
 
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getwrongQuestionItemEntity(mSQLiteManager.querywrongQuestionById(mCurrentIndex));
-            savewrongQuestionIndex(mCurrentIndex);
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.getWrongQuestionByIndex(mCurrentIndex));
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
             mIsExcluded = false;
@@ -254,6 +258,8 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
         }
 
     }
+
+
 
     private void setAllAnswerUnSelect(){
         mLayoutChoiceA.setClickable(false);
@@ -289,7 +295,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     }
 
     private void updateUI(QuestionItem item){
-        mTextNum.setText(mCurrentIndex%10 + "/" + swrongQuestionTotalNum);
+        mTextNum.setText(mCurrentIndex + "/" + mQuestionsCount);
         mTextTitle.setText(item.getQuestion());
         mTextChoiceA.setText(item.getItem1());
         mTextChoiceB.setText(item.getItem2());
@@ -316,47 +322,4 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
         }
     }
 }
-//    private LinearLayout mLayoutExclude;
-//    private LinearLayout mLayoutDelete;
-//    private List<QuestionItem> mQuestions;
-//    private ImageView mImageItem;
-//    private TextView mTextTitle;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.wrong_practise);
-//        initView();
-//        initData();
-//        updateUI();
-//    }
-//
-//    private void updateUI() {
-//
-//    }
-//
-//    @Override
-//    public void initView() {
-//        mLayoutExclude = (LinearLayout) findViewById(R.id.id_question_title_layout_exclude);
-//        mLayoutDelete = (LinearLayout) findViewById(R.id.id_question_title_layout_delete);
-//        mImageItem = (ImageView) findViewById(R.id.id_wrong_practice_image_item);
-//        mTextTitle = (TextView) findViewById(R.id.id_wrong_practice_text_question_title);
-//
-//        mLayoutExclude.setVisibility(View.GONE);
-//        mLayoutDelete.setVisibility(View.VISIBLE);
-//    }
-//
-//    @Override
-//    public void initData() {
-//        initQuestionData();
-//    }
-//
-//    private void initQuestionData() {
-//        Cursor cursor = mSQLiteManager.getAllWrongQuestions();
-//        mQuestions = new ArrayList<>();
-//        while(cursor.moveToNext()){
-//            QuestionItem item = EntityConvertManager.getOrderQuestionItemEntity(cursor);
-//            mQuestions.add(item);
-//        }
-//    }
 

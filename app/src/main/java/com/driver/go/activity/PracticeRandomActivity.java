@@ -121,7 +121,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     @Override
     public void initData() {
         mCurrentIndex = loadRandomQuestionIndex();
-        mCurrentQuestionItem = EntityConvertManager.getRandomQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentIndex));
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentIndex));
     }
 
 
@@ -269,7 +269,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
             }
 
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getRandomQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentIndex));
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentIndex));
             saveRandomQuestionIndex(mCurrentIndex);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;

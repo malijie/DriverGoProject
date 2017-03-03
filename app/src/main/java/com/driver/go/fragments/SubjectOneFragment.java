@@ -13,6 +13,8 @@ import com.driver.go.activity.PracticeRandomActivity;
 import com.driver.go.activity.PractiseWrongQuestionActivity;
 import com.driver.go.activity.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
+import com.driver.go.db.SQLiteManager;
+import com.driver.go.utils.ToastManager;
 
 //科目一
 public class SubjectOneFragment extends Fragment implements View.OnClickListener{
@@ -53,8 +55,16 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
                 IntentManager.startActivity(PracticeRandomActivity.class);
                 break;
             case R.id.id_main_button_wrong_question:
-                IntentManager.startActivity(PractiseWrongQuestionActivity.class);
+                if(checkHasWrongQuestions()){
+                    IntentManager.startActivity(PractiseWrongQuestionActivity.class);
+                }else {
+                    ToastManager.showNoWrongQuestionMsg();
+                }
                 break;
         }
+    }
+
+    private boolean checkHasWrongQuestions(){
+       return SQLiteManager.getInstance().hasWrongQuestions();
     }
 }

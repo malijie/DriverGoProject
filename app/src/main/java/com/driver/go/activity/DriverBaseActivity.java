@@ -124,6 +124,9 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         mSQLiteManager.clearTableData(tableName);
     }
 
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

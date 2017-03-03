@@ -12,8 +12,7 @@
     <string name="already_collect">已收藏!</string>
     <string name="already_exclude">已排除一个错误答案，请认真选择...</string>
     <string name="complete_all_recite">已完成背诵完所有题目，快去模拟考试吧</string>
-
-
-
+    <string name="complete_all_wrong_question">已完成错题浏览...</string>
+    <string name="no_wrong_question">暂时没有错题...</string>
 
 </resources>

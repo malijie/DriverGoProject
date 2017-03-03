@@ -88,6 +88,17 @@ public class SQLiteManager {
        return mDB.rawQuery(SQLContainer.getAllWrongQuestionsSQL(),null);
     }
 
+    public Cursor getWrongQuestionByIndex(int index){
+        cursor = mDB.rawQuery(SQLContainer.getWrongQuestionIdByIndexSQL(index),null);
+        cursor.moveToNext();
+        return cursor;
+    }
+
+    public boolean hasWrongQuestions(){
+        cursor = mDB.rawQuery(SQLContainer.getWrongQuestionIdByIndexSQL(1),null);
+        return cursor.moveToFirst();
+    }
+
     public void closeDB(){
         if(cursor != null){
             cursor.close();

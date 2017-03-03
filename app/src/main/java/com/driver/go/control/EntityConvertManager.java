@@ -22,7 +22,7 @@ public class EntityConvertManager {
         questionItem.setUrl(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(8))));
         return questionItem;
     }
-    public static QuestionItem getRandomQuestionItemEntity(Cursor cursor){
+    public static QuestionItem getQuestionItemEntity(Cursor cursor){
         QuestionItem questionItem = new QuestionItem();
         questionItem.setId(cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1))));
         questionItem.setQuestion(cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2))));
