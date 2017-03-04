@@ -104,10 +104,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
 
     protected boolean checkCollected(int id){
         Cursor cursor = mSQLiteManager.queryCollectQuestionById(id);
-        if(cursor.moveToFirst()){
-            return true;
-        }
-        return false;
+        return cursor.moveToFirst();
     }
 
     protected int getQuestionIdByIndex(int index){
@@ -119,9 +116,13 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         imageButton.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
     }
 
+
     protected void clearTableData(String tableName){
-        mSQLiteManager.deleteTableData(tableName);
+        mSQLiteManager.clearTableData(tableName);
     }
+
+
+
 
     @Override
     protected void onDestroy() {

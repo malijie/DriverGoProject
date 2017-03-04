@@ -60,7 +60,7 @@ public class MainActivity extends DriverBaseActivity{
             }
             fetchRandomQuestionData2DB();
         }else{
-            ToastManager.showShortMsg(Util.getResString(R.string.current_network_unavailable));
+            ToastManager.showNoNetworkMsg();
         }
 
     }
@@ -95,7 +95,8 @@ public class MainActivity extends DriverBaseActivity{
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        for(QuestionItem item:questionItems){
+                        for(int i=0;i<10;i++){
+                            QuestionItem item = questionItems.get(i);
                             addRandomQuestionItem(item);
                         }
                     }

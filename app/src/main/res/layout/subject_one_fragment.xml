@@ -149,6 +149,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
                     <ImageButton
+                        android:id="@+id/id_main_button_wrong_question"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/qianghualianxi_selector"/>
@@ -250,6 +251,7 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageButton
+                android:id="@+id/id_main_button_collect_question"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@mipmap/home_icon_wodeshoucang"/>e

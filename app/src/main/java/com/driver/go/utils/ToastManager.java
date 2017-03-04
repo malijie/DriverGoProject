@@ -46,4 +46,19 @@ public class ToastManager {
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.current_network_unavailable),Toast.LENGTH_SHORT);
     }
 
+    public static void showCompleteWrongQuestionMsg(){
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.complete_all_wrong_question),Toast.LENGTH_SHORT);
+    }
+
+    public static void showNoWrongQuestionMsg() {
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.no_wrong_question),Toast.LENGTH_SHORT);
+    }
+
+    public static void showNoCollectQuestionMsg() {
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.no_collect_question),Toast.LENGTH_SHORT);
+    }
+
+    public static void showCompleteCollectQuestionMsg() {
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.complete_all_collect_question),Toast.LENGTH_SHORT);
+    }
 }

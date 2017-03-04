@@ -12,6 +12,6 @@ public class Profile {
     public static final String TEST_TYPE_RANDOM = "random";//随机练习
 
     public static final int ORDER_TOTAL_ITEM = 1229;//顺序练习总共题目
-    public static final int RANDOM_TOTAL_ITEM = 10;//随机练习总共题目
+    public static final int RANDOM_TOTAL_ITEM = 10;//顺序练习总共题目
 
 }
