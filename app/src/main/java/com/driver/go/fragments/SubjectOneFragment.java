@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 import com.driver.go.R;
 import com.driver.go.activity.CollectQuestionsActivity;
+import com.driver.go.activity.DriverTipActivity;
 import com.driver.go.activity.PracticeOrderActivity;
 import com.driver.go.activity.PracticeRandomActivity;
 import com.driver.go.activity.PractiseWrongQuestionActivity;
@@ -25,6 +26,7 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
     private ImageButton mButtonRandomQuestion;
     private ImageButton mButtonWrongQuestion;
     private ImageButton mButtonCollectQuestion;
+    private ImageButton mButtonDriverTip;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +47,8 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
         mButtonRandomQuestion = (ImageButton) v.findViewById(R.id.id_main_image_random_question);
         mButtonWrongQuestion = (ImageButton) v.findViewById(R.id.id_main_button_wrong_question);
         mButtonCollectQuestion = (ImageButton) v.findViewById(R.id.id_main_button_collect_question);
+        mButtonDriverTip = (ImageButton) v.findViewById(R.id.id_main_button_driver_tip);
+        mButtonDriverTip.setOnClickListener(this);
         mButtonRandomQuestion.setOnClickListener(this);
         mButtonOrderPractise.setOnClickListener(this);
         mButtonReciteQuestion.setOnClickListener(this);
@@ -77,6 +81,9 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
                 }else {
                     ToastManager.showNoCollectQuestionMsg();
                 }
+                break;
+            case R.id.id_main_button_driver_tip:
+                IntentManager.startActivity(DriverTipActivity.class);
                 break;
         }
     }

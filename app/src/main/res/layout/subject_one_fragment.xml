@@ -200,6 +200,7 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageButton
+                android:id="@+id/id_main_button_driver_tip"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@mipmap/home_icon_jiakaofagui"/>e
