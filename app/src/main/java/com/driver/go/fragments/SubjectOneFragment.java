@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import com.driver.go.R;
 import com.driver.go.activity.CollectQuestionsActivity;
 import com.driver.go.activity.DriverTipActivity;
+import com.driver.go.activity.ExamMainActivity;
 import com.driver.go.activity.PracticeOrderActivity;
 import com.driver.go.activity.PracticeRandomActivity;
 import com.driver.go.activity.PractiseWrongQuestionActivity;
@@ -27,6 +28,7 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
     private ImageButton mButtonWrongQuestion;
     private ImageButton mButtonCollectQuestion;
     private ImageButton mButtonDriverTip;
+    private ImageButton mButtonExam;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +50,8 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
         mButtonWrongQuestion = (ImageButton) v.findViewById(R.id.id_main_button_wrong_question);
         mButtonCollectQuestion = (ImageButton) v.findViewById(R.id.id_main_button_collect_question);
         mButtonDriverTip = (ImageButton) v.findViewById(R.id.id_main_button_driver_tip);
+        mButtonExam = (ImageButton) v.findViewById(R.id.id_main_button_exam);
+        mButtonExam.setOnClickListener(this);
         mButtonDriverTip.setOnClickListener(this);
         mButtonRandomQuestion.setOnClickListener(this);
         mButtonOrderPractise.setOnClickListener(this);
@@ -84,6 +88,9 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.id_main_button_driver_tip:
                 IntentManager.startActivity(DriverTipActivity.class);
+                break;
+            case R.id.id_main_button_exam:
+                IntentManager.startActivity(ExamMainActivity.class);
                 break;
         }
     }

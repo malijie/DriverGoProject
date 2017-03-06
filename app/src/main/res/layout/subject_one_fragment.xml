@@ -109,7 +109,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
             <ImageButton
-                android:id="@+id/id_main_image_exam"
+                android:id="@+id/id_main_button_exam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/exam_practice_selector"
