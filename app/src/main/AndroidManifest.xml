@@ -24,6 +24,7 @@
         <activity android:name=".activity.PractiseWrongQuestionActivity"/>
         <activity android:name=".activity.CollectQuestionsActivity"/>
         <activity android:name=".activity.DriverTipActivity"/>
+        <activity android:name=".activity.DriverExamSkillActivity"/>
         <activity android:name=".activity.ExamMainActivity"/>
     </application>
 

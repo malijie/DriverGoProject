@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 import com.driver.go.R;
 import com.driver.go.activity.CollectQuestionsActivity;
+import com.driver.go.activity.DriverExamSkillActivity;
 import com.driver.go.activity.DriverTipActivity;
 import com.driver.go.activity.ExamMainActivity;
 import com.driver.go.activity.PracticeOrderActivity;
@@ -28,6 +29,7 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
     private ImageButton mButtonWrongQuestion;
     private ImageButton mButtonCollectQuestion;
     private ImageButton mButtonDriverTip;
+    private ImageButton mButtonSkill;
     private ImageButton mButtonExam;
 
     @Override
@@ -51,6 +53,8 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
         mButtonCollectQuestion = (ImageButton) v.findViewById(R.id.id_main_button_collect_question);
         mButtonDriverTip = (ImageButton) v.findViewById(R.id.id_main_button_driver_tip);
         mButtonExam = (ImageButton) v.findViewById(R.id.id_main_button_exam);
+        mButtonSkill = (ImageButton) v.findViewById(R.id.id_main_button_driver_skill);
+        mButtonSkill.setOnClickListener(this);
         mButtonExam.setOnClickListener(this);
         mButtonDriverTip.setOnClickListener(this);
         mButtonRandomQuestion.setOnClickListener(this);
@@ -91,6 +95,9 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.id_main_button_exam:
                 IntentManager.startActivity(ExamMainActivity.class);
+                break;
+            case R.id.id_main_button_driver_skill:
+                IntentManager.startActivity(DriverExamSkillActivity.class);
                 break;
         }
     }

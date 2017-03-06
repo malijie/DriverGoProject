@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
         <TextView
-            android:id="@+id/id_driver_tip_text_title"
+            android:id="@+id/id_driver_skill_text_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -20,9 +20,9 @@
             android:textSize="@dimen/font_size_20"
             android:gravity="center"
             android:textColor="@color/font_black"
-            android:text="驾考新规已实施，这些变化请留意"/>
+            android:text="科目一考试技巧记忆口诀"/>
         <TextView
-            android:id="@+id/id_driver_tip_text_content"
+            android:id="@+id/id_driver_skil_text_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
