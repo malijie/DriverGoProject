@@ -254,15 +254,15 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     //下一题
     private void showNextQuestion() {
         if(hasInternet()){
-            if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
-                mCurrentId--;
-                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
-                return;
-            }
-
             //没有进行选择
             if(!mIsChoiceOneAnswer){
                 ToastManager.showSelectOneAnswerMsg();
+                return;
+            }
+
+            if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
+                mCurrentId--;
+                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
                 return;
             }
 

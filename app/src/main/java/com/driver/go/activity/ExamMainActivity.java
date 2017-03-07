@@ -141,8 +141,6 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
 
                     if(mTimeSecond <10){
                         mStrSecond = "0" + mTimeSecond;
-                        Logger.d("mStrSecond=" + mStrSecond);
-
                     }
 
                     if(mTimeSecond <0 && mTimeMinute > 0){
@@ -283,15 +281,15 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     //下一题
     private void showNextQuestion() {
         if(hasInternet()){
-            if(++mCurrentIndex > Profile.EXAM_TOTAL_ITEM){
-                mCurrentIndex--;
-                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
-                return;
-            }
-
             //没有进行选择
             if(!mIsChoiceOneAnswer){
                 ToastManager.showSelectOneAnswerMsg();
+                return;
+            }
+
+            if(++mCurrentIndex >= Profile.EXAM_TOTAL_ITEM){
+                mCurrentIndex--;
+                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
                 return;
             }
 
