@@ -6,7 +6,8 @@
     <color name="title_green">#14BDAB</color>
     <color name="white">#ffffff</color>
     <color name="font_white">#ffffff</color>
-    <color name="font_black">#3b3b3b</color>
+    <color name="font_black">#4d4c4c</color>
+    <color name="font_green">#57B720</color>
     <color name="text_black">#646464</color>
     <color name="app_green_normal">#6ECA3B</color>
     <color name="app_green_selected">#58bc20</color>
@@ -14,5 +15,6 @@
     <color name="line_normal_grey">#bababa</color>
     <color name="line_light_grey">#e2e1e1</color>
     <color name="light_grey">#e4e3e3</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

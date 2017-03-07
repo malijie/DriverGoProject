@@ -19,6 +19,7 @@ import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
 import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.widget.dialog.CustomDialog;
 
 import java.util.List;
 
@@ -338,5 +339,26 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
             mLayoutChoiceC.setVisibility(View.VISIBLE);
             mLayoutChoiceD.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        CustomDialog dialog = new CustomDialog(this, R.layout.dailg_layout,
+                R.id.id_dialog_button_confirm,
+                R.id.id_dialog_button_cancel,
+                new CustomDialog.DialogButtonListener() {
+            @Override
+            public void onConfirm() {
+                ToastManager.showShortMsg("确定");
+            }
+
+            @Override
+            public void onCancel() {
+                ToastManager.showShortMsg("取消");
+
+            }
+        });
+        dialog.show();
+
     }
 }

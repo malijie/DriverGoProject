@@ -3,6 +3,8 @@ package com.driver.go.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.driver.go.base.DriverGoApplication;
 
@@ -27,5 +29,9 @@ public class Util {
 
     public static String getResString(int resId){
         return DriverGoApplication.sContext.getResources().getString(resId);
+    }
+
+    public static View getView(int resId){
+        return LayoutInflater.from(DriverGoApplication.sContext).inflate(resId,null);
     }
 }
