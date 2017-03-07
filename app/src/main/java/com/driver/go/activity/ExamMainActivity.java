@@ -5,12 +5,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
+import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
@@ -32,8 +34,10 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     private int mTimeMinute = 44;
     private String mStrSecond = "";
     private String mStrMinute = "";
-    private int mCurrentId = 1;
+    private int mCurrentIndex = 0;
     private List<QuestionItem> mQuestions = null;
+    private boolean mIsChoiceOneAnswer = false;
+    private QuestionItem mCurrentQuestionItem;
 
     private TextView mTextTime;
     private ImageButton mButtonBack;
@@ -54,6 +58,8 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     private TextView mTextChoiceB;
     private TextView mTextChoiceC;
     private TextView mTextChoiceD;
+    private Button mButtonNext;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +90,15 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
         mTextChoiceB= (TextView) findViewById(R.id.id_exam_main_text_choice_b);
         mTextChoiceC= (TextView) findViewById(R.id.id_exam_main_text_choice_c);
         mTextChoiceD= (TextView) findViewById(R.id.id_exam_main_text_choice_d);
+        mButtonNext = (Button) findViewById(R.id.id_exam_main_button_next);
+
+        mButtonBack.setOnClickListener(this);
+        mButtonCollect.setOnClickListener(this);
+        mButtonNext.setOnClickListener(this);
+        mLayoutChoiceA.setOnClickListener(this);
+        mLayoutChoiceB.setOnClickListener(this);
+        mLayoutChoiceC.setOnClickListener(this);
+        mLayoutChoiceD.setOnClickListener(this);
 
     }
 
@@ -99,7 +114,8 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
             @Override
             public void onNext(List<QuestionItem> questionItems) {
                 mQuestions = questionItems;
-                updateUI(mQuestions.get(0));
+                mCurrentQuestionItem = mQuestions.get(0);
+                updateUI(mCurrentQuestionItem);
             }
         });
     }
@@ -176,7 +192,78 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
             case R.id.id_exam_title_button_collect:
 
                 break;
+
+            case R.id.id_exam_main_button_next:
+                showNextQuestion();
+                break;
+
+            case R.id.id_exam_main_layout_choice_a:
+                handleAnswerAction(ANSWER_A,mImageChoiceA);
+                break;
+
+            case R.id.id_exam_main_layout_choice_b:
+                handleAnswerAction(ANSWER_B,mImageChoiceB);
+
+                break;
+
+            case R.id.id_exam_main_layout_choice_c:
+                handleAnswerAction(ANSWER_C,mImageChoiceC);
+
+                break;
+            case R.id.id_exam_main_layout_choice_d:
+                handleAnswerAction(ANSWER_D,mImageChoiceD);
+
+                break;
         }
+    }
+
+    private void handleAnswerAction(String answer,ImageView imageView){
+        mIsChoiceOneAnswer = true;
+        setAllAnswerUnSelect();
+        if(checkAnswer(answer)){
+            //选中正确答案
+            showRightAnswerImage(imageView);
+        }else{
+            //选中错误答案
+            showWrongAnswerImage(imageView);
+            //记录错题
+            addWrongQuestionItem(mCurrentQuestionItem);
+            //禁止再次选择
+            setAllAnswerUnSelect();
+            //显示正确答案
+            showRightAnswer(mCurrentQuestionItem.getAnswer());
+        }
+    }
+
+    private void showRightAnswer(String answer) {
+        if(answer.equals(ANSWER_A)){
+            showRightAnswerImage(mImageChoiceA);
+            return;
+        }else if(answer.equals(ANSWER_B)){
+            showRightAnswerImage(mImageChoiceB);
+            return;
+        }else if(answer.equals(ANSWER_C)){
+            showRightAnswerImage(mImageChoiceC);
+            return;
+        }else if(answer.equals(ANSWER_D)){
+            showRightAnswerImage(mImageChoiceD);
+        }
+    }
+
+    private void showRightAnswerImage(ImageView imageView){
+        imageView.setImageResource(R.mipmap.answer_right);
+    }
+
+    private void showWrongAnswerImage(ImageView imageView){
+        imageView.setImageResource(R.mipmap.answer_wrong);
+    }
+
+    //检查答案
+    private boolean checkAnswer(String answer) {
+        if(mCurrentQuestionItem.getAnswer().equals(answer)){
+            return true ;
+        }
+        return false;
     }
 
     private void setAllAnswerUnSelect(){
@@ -193,8 +280,43 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
         mLayoutChoiceD.setClickable(true);
     }
 
+    //下一题
+    private void showNextQuestion() {
+        if(hasInternet()){
+            if(++mCurrentIndex > Profile.EXAM_TOTAL_ITEM){
+                mCurrentIndex--;
+                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
+                return;
+            }
+
+            //没有进行选择
+            if(!mIsChoiceOneAnswer){
+                ToastManager.showSelectOneAnswerMsg();
+                return;
+            }
+
+            initUI();
+            mCurrentQuestionItem = mQuestions.get(mCurrentIndex);
+            saveOrderQuestionIndex(mCurrentIndex);
+            updateUI(mCurrentQuestionItem);
+            mIsChoiceOneAnswer = false;
+        }else{
+            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
+        }
+
+    }
+
+    private void initUI(){
+        mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_shoucang);
+        mImageChoiceA.setImageResource(R.mipmap.choice_a);
+        mImageChoiceB.setImageResource(R.mipmap.choice_b);
+        mImageChoiceC.setImageResource(R.mipmap.choice_c);
+        mImageChoiceD.setImageResource(R.mipmap.choice_d);
+        setAllAnswerSelect();
+    }
+
     private void updateUI(QuestionItem item){
-        mTitleCount.setText(mCurrentId + "/" + sExamQuestionTotalNum);
+        mTitleCount.setText(mCurrentIndex+1 + "/" + sExamQuestionTotalNum);
         mTextTitle.setText(item.getQuestion());
         mTextChoiceA.setText(item.getItem1());
         mTextChoiceB.setText(item.getItem2());
