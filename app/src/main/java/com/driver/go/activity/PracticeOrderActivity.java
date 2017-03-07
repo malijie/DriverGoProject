@@ -35,16 +35,17 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     private ImageView mImageChoiceB;
     private ImageView mImageChoiceC;
     private ImageView mImageChoiceD;
+    private TextView mTextChoiceA;
+    private TextView mTextChoiceB;
+    private TextView mTextChoiceC;
+    private TextView mTextChoiceD;
     private ImageButton mButtonCollect;
     private ImageButton mButtonExplain;
     private ImageButton mButtonExclude;
     private ImageView mImageItem;
     private ImageView mImageQuestion;
     private TextView mTextTitle;
-    private TextView mTextChoiceA;
-    private TextView mTextChoiceB;
-    private TextView mTextChoiceC;
-    private TextView mTextChoiceD;
+
     private TextView mTextExplain;
     private Button mButtonNext;
 
@@ -75,16 +76,17 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         mImageChoiceB = (ImageView) findViewById(R.id.id_order_practice_image_choice_b);
         mImageChoiceC = (ImageView) findViewById(R.id.id_order_practice_image_choice_c);
         mImageChoiceD = (ImageView) findViewById(R.id.id_order_practice_image_choice_d);
+        mTextChoiceA= (TextView) findViewById(R.id.id_order_practice_text_choice_a);
+        mTextChoiceB= (TextView) findViewById(R.id.id_order_practice_text_choice_b);
+        mTextChoiceC= (TextView) findViewById(R.id.id_order_practice_text_choice_c);
+        mTextChoiceD= (TextView) findViewById(R.id.id_order_practice_text_choice_d);
         mButtonCollect = (ImageButton) findViewById(R.id.id_question_title_button_collect);
         mButtonExplain = (ImageButton) findViewById(R.id.id_question_title_button_explain);
         mButtonExclude = (ImageButton) findViewById(R.id.id_question_title_button_exclude);
         mTextExplain = (TextView) findViewById(R.id.id_order_practice_text_explain);
         mImageItem = (ImageView) findViewById(R.id.id_order_practice_image_item);
         mTextTitle = (TextView) findViewById(R.id.id_order_practice_text_title);
-        mTextChoiceA= (TextView) findViewById(R.id.id_order_practice_text_choice_a);
-        mTextChoiceB= (TextView) findViewById(R.id.id_order_practice_text_choice_b);
-        mTextChoiceC= (TextView) findViewById(R.id.id_order_practice_text_choice_c);
-        mTextChoiceD= (TextView) findViewById(R.id.id_order_practice_text_choice_d);
+
         mButtonNext = (Button) findViewById(R.id.id_order_practice_button_next);
 
         mButtonBack.setOnClickListener(this);

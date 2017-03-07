@@ -23,6 +23,7 @@ import com.driver.go.utils.image.ImageLoader;
 public abstract class DriverBaseActivity extends FragmentActivity {
     public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
     public static int sRandomQuestionTotalNum = Profile.RANDOM_TOTAL_ITEM;
+    public static final int sExamQuestionTotalNum = Profile.EXAM_TOTAL_ITEM;
     public SQLiteManager mSQLiteManager = null;
     public ImageLoader mImageLoader = null;
     protected final String ANSWER_A = "1";
