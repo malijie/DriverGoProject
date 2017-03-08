@@ -26,6 +26,7 @@
         <activity android:name=".activity.DriverTipActivity"/>
         <activity android:name=".activity.DriverExamSkillActivity"/>
         <activity android:name=".activity.ExamMainActivity"/>
+        <activity android:name=".activity.ExamWrongQuestionActivity"/>
     </application>
 
 </manifest>

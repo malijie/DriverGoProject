@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
+import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
@@ -109,6 +110,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
         mRetrofitRequest = RetrofitHttpRequest.getInstance();
         initTime();
         initQuestion();
+        clearTableData(DBConstants.EXAM_WRONG_QUESTION_TABLE);
     }
 
     private void initQuestion() {
@@ -227,7 +229,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
             //选中错误答案
             showWrongAnswerImage(imageView);
             //记录错题
-            addWrongQuestionItem(mCurrentQuestionItem);
+            addExamWrongQuestionItem(mCurrentQuestionItem);
             //禁止再次选择
             setAllAnswerUnSelect();
             //显示正确答案
@@ -291,18 +293,38 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
 
             if(++mCurrentIndex >= Profile.EXAM_TOTAL_ITEM){
                 mCurrentIndex--;
-                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
+                showCompleteExamDialog();
                 return;
             }
 
             initUI();
             mCurrentQuestionItem = mQuestions.get(mCurrentIndex);
-            saveOrderQuestionIndex(mCurrentIndex);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
         }else{
             ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
         }
+
+    }
+
+    private void showCompleteExamDialog(){
+        int wrongQuestionCount = mSQLiteManager.getExamWrongCount();
+        String title = "模拟考试得分" + (100-wrongQuestionCount) + ",是否查看错题";
+        CustomDialog dialog = new CustomDialog(this,title);
+        dialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
+            @Override
+            public void onConfirm() {
+                IntentManager.startActivity(ExamWrongQuestionActivity.class);
+                IntentManager.finishActivity(ExamMainActivity.this);
+            }
+
+            @Override
+            public void onCancel() {
+                IntentManager.finishActivity(ExamMainActivity.this);
+            }
+        });
+        dialog.show();
+
 
     }
 
@@ -345,11 +367,9 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     @Override
     public void onBackPressed() {
         final CustomDialog dialog = new CustomDialog(this,
-                Util.getResString(R.string.dialog_title_exam_exit),
-                R.layout.dailg_layout);
+                Util.getResString(R.string.dialog_title_exam_exit));
 
-        dialog.setButtonClickListener(R.id.id_dialog_button_confirm, R.id.id_dialog_button_cancel,
-                new CustomDialog.DialogButtonListener() {
+        dialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
             @Override
             public void onConfirm() {
                 IntentManager.finishActivity(ExamMainActivity.this);

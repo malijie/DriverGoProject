@@ -71,6 +71,10 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         mSQLiteManager.insertQuestion2Table(DBConstants.COLLECT_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
+    public void addExamWrongQuestionItem(QuestionItem q){
+        mSQLiteManager.insertQuestion2Table(DBConstants.EXAM_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+    }
+
     public void finishActivity(Activity activity){
         IntentManager.finishActivity(activity);
     }

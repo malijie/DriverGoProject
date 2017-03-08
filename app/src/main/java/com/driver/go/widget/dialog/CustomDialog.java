@@ -23,11 +23,12 @@ public class CustomDialog{
     private DialogButtonListener mListener;
     private View v = null;
 
-    public CustomDialog(Context context,String title,int layoutId){
-        v = Util.getView(layoutId);
+    public CustomDialog(Context context,String title){
+        v = Util.getView(R.layout.dailg_layout);
 
         mDialog = new AlertDialog.Builder(context, R.style.dialog)
                 .setView(v)
+                .setCancelable(false)
                 .create();
         TextView textTitle = (TextView) v.findViewById(R.id.id_dialog_text_title);
         textTitle.setText(title);
@@ -46,11 +47,11 @@ public class CustomDialog{
         }
     }
 
-    public void setButtonClickListener(int confirmBtnId,int cancelBtnId,DialogButtonListener listener){
+    public void setButtonClickListener(DialogButtonListener listener){
         mListener = listener;
 
-        Button confirmButton = (Button) v.findViewById(confirmBtnId);
-        Button cancelButton = (Button) v.findViewById(cancelBtnId);
+        Button confirmButton = (Button) v.findViewById(R.id.id_dialog_button_confirm);
+        Button cancelButton = (Button) v.findViewById(R.id.id_dialog_button_cancel);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override

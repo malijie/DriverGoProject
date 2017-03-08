@@ -11,7 +11,6 @@ public class SQLiteManager {
     private Cursor cursor;
     private static SQLiteManager sSQLiteManager = null;
     private SQLiteDatabase mDB;
-    private Cursor allCollectQuestions;
 
     private SQLiteManager(){
         mDB = new SQLiteHelper().getWritableDatabase();
@@ -34,6 +33,7 @@ public class SQLiteManager {
             mDB.execSQL(SQLContainer.getCreateRandomExamTableSQL());
             mDB.execSQL(SQLContainer.getCreateWrongQuestionTableSQL());
             mDB.execSQL(SQLContainer.getCreateCollectQuestionTableSQL());
+            mDB.execSQL(SQLContainer.getCreateExamWrongQuestionTableSQL());
         }
     }
 
@@ -89,13 +89,18 @@ public class SQLiteManager {
        return mDB.rawQuery(SQLContainer.getAllWrongQuestionsSQL(),null);
     }
 
+    public Cursor getAllExamWrongQuestions(){
+        return mDB.rawQuery(SQLContainer.getAllExamWrongQuestionSQL(),null);
+    }
+
     public boolean hasWrongQuestions(){
         cursor = mDB.rawQuery(SQLContainer.getAllWrongQuestionsSQL(),null);
         return cursor.moveToFirst();
     }
 
-    public void deleteItemFromWrongQuestionById(int id){
-        mDB.execSQL(SQLContainer.deleteQuestionSQL(DBConstants.WRONG_QUESTION_TABLE,id));
+
+    public void deleteQuestionById(String tableName,int id){
+        mDB.execSQL(SQLContainer.deleteQuestionSQL(tableName,id));
     }
 
     public Cursor getAllCollectQuestions() {
@@ -115,5 +120,10 @@ public class SQLiteManager {
     public boolean hasCollectQuestions() {
         cursor = mDB.rawQuery(SQLContainer.getAllCollectQuestionsSQL(),null);
         return cursor.moveToFirst();
+    }
+
+    public int getExamWrongCount() {
+        cursor = mDB.rawQuery(SQLContainer.getAllExamWrongQuestionSQL(),null);
+        return cursor.getCount();
     }
 }

@@ -12,8 +12,8 @@ public class Profile {
     public static final String TEST_TYPE_RANDOM = "random";//随机练习
 
     public static final int ORDER_TOTAL_ITEM = 1229;//顺序练习总共题目
-    public static final int RANDOM_TOTAL_ITEM = 10;//顺序练习总共题目
-    public static final int EXAM_TOTAL_ITEM = 100;//顺序练习总共题目
+    public static final int RANDOM_TOTAL_ITEM = 100;//顺序练习总共题目
+    public static final int EXAM_TOTAL_ITEM = 100;//考试题目数目
 
     public static final String DRIVER_TIP = "最近，交通运输部和公安部联合下发《关于印发机动车驾驶培训教学与考试大纲的通知》，发布了新一版的《机动车驾驶培训教学与考试大纲》。从今年10月1日起施行，2012年发布的《机动车驾驶培训教学与考试大纲》同时废止。\n" +
             "\n" +

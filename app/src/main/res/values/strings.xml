@@ -17,5 +17,6 @@
     <string name="no_wrong_question">暂时没有错题...</string>
     <string name="no_collect_question">暂时没有收藏题目...</string>
     <string name="dialog_title_exam_exit">还没完成模拟考试，你确定要退出吗？</string>
+    <string name="dialog_title_exam_complete">已完成所有题目</string>
 
 </resources>
