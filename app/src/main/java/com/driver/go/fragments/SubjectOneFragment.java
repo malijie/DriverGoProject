@@ -12,6 +12,7 @@ import com.driver.go.activity.CollectQuestionsActivity;
 import com.driver.go.activity.DriverExamSkillActivity;
 import com.driver.go.activity.DriverTipActivity;
 import com.driver.go.activity.ExamMainActivity;
+import com.driver.go.activity.ExamWrongQuestionActivity;
 import com.driver.go.activity.PracticeOrderActivity;
 import com.driver.go.activity.PracticeRandomActivity;
 import com.driver.go.activity.PractiseWrongQuestionActivity;
@@ -23,10 +24,11 @@ import com.driver.go.utils.ToastManager;
 //科目一
 public class SubjectOneFragment extends Fragment implements View.OnClickListener{
     private SQLiteManager mSQLiteManager = null;
+    private ImageButton mButtonPractiseWrongQuestion;
     private ImageButton mButtonOrderPractise;
     private ImageButton mButtonReciteQuestion;
     private ImageButton mButtonRandomQuestion;
-    private ImageButton mButtonWrongQuestion;
+    private ImageButton mButtonExamWrongQuestion;
     private ImageButton mButtonCollectQuestion;
     private ImageButton mButtonDriverTip;
     private ImageButton mButtonSkill;
@@ -49,19 +51,22 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
         mButtonOrderPractise = (ImageButton) v.findViewById(R.id.id_main_image_order_practice);
         mButtonReciteQuestion = (ImageButton) v.findViewById(R.id.id_main_image_recite_question);
         mButtonRandomQuestion = (ImageButton) v.findViewById(R.id.id_main_image_random_question);
-        mButtonWrongQuestion = (ImageButton) v.findViewById(R.id.id_main_button_wrong_question);
+        mButtonExamWrongQuestion = (ImageButton) v.findViewById(R.id.id_main_button_wrong_question);
         mButtonCollectQuestion = (ImageButton) v.findViewById(R.id.id_main_button_collect_question);
         mButtonDriverTip = (ImageButton) v.findViewById(R.id.id_main_button_driver_tip);
         mButtonExam = (ImageButton) v.findViewById(R.id.id_main_button_exam);
         mButtonSkill = (ImageButton) v.findViewById(R.id.id_main_button_driver_skill);
+        mButtonPractiseWrongQuestion = (ImageButton) v.findViewById(R.id.id_main_button_practise_wrong_question);
+
         mButtonSkill.setOnClickListener(this);
         mButtonExam.setOnClickListener(this);
         mButtonDriverTip.setOnClickListener(this);
         mButtonRandomQuestion.setOnClickListener(this);
         mButtonOrderPractise.setOnClickListener(this);
         mButtonReciteQuestion.setOnClickListener(this);
-        mButtonWrongQuestion.setOnClickListener(this);
+        mButtonExamWrongQuestion.setOnClickListener(this);
         mButtonCollectQuestion.setOnClickListener(this);
+        mButtonPractiseWrongQuestion.setOnClickListener(this);
     }
 
     @Override
@@ -78,7 +83,7 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.id_main_button_wrong_question:
                 if(checkHasWrongQuestions()){
-                    IntentManager.startActivity(PractiseWrongQuestionActivity.class);
+                    IntentManager.startActivity(ExamWrongQuestionActivity.class);
                 }else {
                     ToastManager.showNoWrongQuestionMsg();
                 }
@@ -98,6 +103,9 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.id_main_button_driver_skill:
                 IntentManager.startActivity(DriverExamSkillActivity.class);
+                break;
+            case R.id.id_main_button_practise_wrong_question:
+                IntentManager.startActivity(PractiseWrongQuestionActivity.class);
                 break;
         }
     }
