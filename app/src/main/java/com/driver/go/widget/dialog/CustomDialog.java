@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.driver.go.R;
 import com.driver.go.utils.Util;
@@ -22,11 +23,34 @@ public class CustomDialog{
     private DialogButtonListener mListener;
     private View v = null;
 
-    public CustomDialog(Context context,int layoutId,int buttonId1,int buttonId2,DialogButtonListener listener){
+    public CustomDialog(Context context,String title,int layoutId){
         v = Util.getView(layoutId);
 
-        Button confirmButton = (Button) v.findViewById(buttonId1);
-        Button cancelButton = (Button) v.findViewById(buttonId2);
+        mDialog = new AlertDialog.Builder(context, R.style.dialog)
+                .setView(v)
+                .create();
+        TextView textTitle = (TextView) v.findViewById(R.id.id_dialog_text_title);
+        textTitle.setText(title);
+
+    }
+
+    public void show(){
+        if(mDialog != null){
+            mDialog.show();
+        }
+    }
+
+    public void dissmiss(){
+        if(mDialog != null){
+            mDialog.dismiss();
+        }
+    }
+
+    public void setButtonClickListener(int confirmBtnId,int cancelBtnId,DialogButtonListener listener){
+        mListener = listener;
+
+        Button confirmButton = (Button) v.findViewById(confirmBtnId);
+        Button cancelButton = (Button) v.findViewById(cancelBtnId);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,24 +65,6 @@ public class CustomDialog{
                 mListener.onCancel();
             }
         });
-
-
-        mDialog = new AlertDialog.Builder(context, R.style.dialog)
-                .setView(v)
-                .create();
-
-        Window dialogWindow = mDialog.getWindow();
-        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.alpha = 1f; // 透明度
-        dialogWindow.setAttributes(lp);
-
-        mListener = listener;
-    }
-
-    public void show(){
-        if(mDialog != null){
-            mDialog.show();
-        }
     }
 
     public interface DialogButtonListener{

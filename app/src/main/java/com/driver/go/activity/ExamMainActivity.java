@@ -19,6 +19,7 @@ import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
 import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.utils.Util;
 import com.driver.go.widget.dialog.CustomDialog;
 
 import java.util.List;
@@ -343,22 +344,23 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
-        CustomDialog dialog = new CustomDialog(this, R.layout.dailg_layout,
-                R.id.id_dialog_button_confirm,
-                R.id.id_dialog_button_cancel,
+        final CustomDialog dialog = new CustomDialog(this,
+                Util.getResString(R.string.dialog_title_exam_exit),
+                R.layout.dailg_layout);
+
+        dialog.setButtonClickListener(R.id.id_dialog_button_confirm, R.id.id_dialog_button_cancel,
                 new CustomDialog.DialogButtonListener() {
             @Override
             public void onConfirm() {
-                ToastManager.showShortMsg("确定");
+                IntentManager.finishActivity(ExamMainActivity.this);
             }
 
             @Override
             public void onCancel() {
-                ToastManager.showShortMsg("取消");
-
+                dialog.dissmiss();
             }
         });
-        dialog.show();
 
+        dialog.show();
     }
 }
