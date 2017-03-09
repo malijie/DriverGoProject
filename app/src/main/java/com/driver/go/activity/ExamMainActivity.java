@@ -18,7 +18,6 @@ import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.widget.dialog.CustomDialog;
@@ -139,7 +138,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
                         mStrSecond = "00";
                         mStrMinute = "00";
                         mTextTime.setText(mStrMinute + ":" + mStrSecond);
-                        ToastManager.showShortMsg("结束");
+                        showTimeUpDialog();
                         return;
                     }
 
@@ -171,6 +170,30 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
             }
         }
     };
+
+    private void showTimeUpDialog() {
+        String title = Util.getResString(R.string.dialog_title_time_up) + getExamScore() + Util.getResString(R.string.dialog_title_check_wrong_questions);
+        final CustomDialog dialog = new CustomDialog(this,title);
+
+        dialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
+            @Override
+            public void onConfirm() {
+                IntentManager.finishActivity(ExamMainActivity.this);
+            }
+
+            @Override
+            public void onCancel() {
+                dialog.dissmiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private int getExamScore(){
+        return 100-mSQLiteManager.getExamWrongQuestionCount();
+    }
+
     private void initTime() {
         Message msg = Message.obtain();
         msg.what = MSG_HANDLE_TIME;
@@ -192,7 +215,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
                 IntentManager.finishActivity(this);
                 break;
             case R.id.id_exam_title_button_collect:
-
+                handleCollectAction();
                 break;
 
             case R.id.id_exam_main_button_next:
@@ -217,6 +240,21 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
 
                 break;
         }
+    }
+
+    /**
+     * 点击收藏
+     */
+    private void handleCollectAction() {
+        if(checkCollected(mCurrentQuestionItem.getId())){
+            ToastManager.showAlreadyCollectMsg();
+            return ;
+        }else{
+            ToastManager.showCollectSuccessMsg();
+            mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
+            saveCollectQuestion(mCurrentQuestionItem);
+        }
+
     }
 
     private void handleAnswerAction(String answer,ImageView imageView){
@@ -308,8 +346,8 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     }
 
     private void showCompleteExamDialog(){
-        int wrongQuestionCount = mSQLiteManager.getExamWrongCount();
-        String title = "模拟考试得分" + (100-wrongQuestionCount) + ",是否查看错题";
+        int wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount();
+        String title = "模拟考试得分" + getExamScore()  + ",是否查看错题";
         CustomDialog dialog = new CustomDialog(this,title);
         dialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
             @Override

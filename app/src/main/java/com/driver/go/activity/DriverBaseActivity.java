@@ -126,8 +126,6 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     }
 
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

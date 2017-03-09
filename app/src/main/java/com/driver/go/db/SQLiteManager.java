@@ -112,6 +112,7 @@ public class SQLiteManager {
         }
     }
 
+
     public void deleteItemFromCollectQuestionById(int id) {
         mDB.execSQL(SQLContainer.deleteQuestionSQL(DBConstants.COLLECT_QUESTION_TABLE,id));
     }
@@ -121,7 +122,7 @@ public class SQLiteManager {
         return cursor.moveToFirst();
     }
 
-    public int getExamWrongCount() {
+    public int getExamWrongQuestionCount() {
         cursor = mDB.rawQuery(SQLContainer.getAllQuestionsSQL(DBConstants.EXAM_WRONG_QUESTION_TABLE),null);
         return cursor.getCount();
     }
