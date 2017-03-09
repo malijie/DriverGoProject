@@ -112,7 +112,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     }
 
     protected int getQuestionIdByIndex(int index){
-        Cursor cursor = mSQLiteManager.queryRandomQuestionIdByIndex(index);
+        Cursor cursor = mSQLiteManager.queryRandomQuestionByIndex(index);
         return cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1)));
     }
 

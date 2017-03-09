@@ -17,6 +17,7 @@
     <string name="no_wrong_question">暂时没有错题...</string>
     <string name="no_collect_question">暂时没有收藏题目...</string>
     <string name="no_exam_wrong_question">还没有模拟考试错题...</string>
+    <string name="dialog_title_random_practise_end">随机练习结束，再来一次？</string>
     <string name="dialog_title_time_up">考试时间已到，当前得分为：</string>
     <string name="dialog_title_check_wrong_questions">是否查看错题</string>
     <string name="dialog_title_exam_exit">还没完成模拟考试，你确定要退出吗？</string>

@@ -58,7 +58,7 @@ public class SQLContainer {
         return  "SELECT * FROM " + DBConstants.COLLECT_QUESTION_TABLE + " WHERE id=" + id;
     }
 
-    public static String getCollectRandomQuestionIdByIndexSQL(int index){
+    public static String getRandomQuestionByIndexSQL(int index){
         return  "SELECT * FROM " + DBConstants.RANDOM_EXAM_TABLE + " WHERE _id=" + index;
     }
 

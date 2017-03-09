@@ -1,5 +1,6 @@
 package com.driver.go.activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,10 +14,17 @@ import android.widget.TextView;
 import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
+import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.http.RetrofitHttpRequest;
+import com.driver.go.http.SubscriberOnNextListener;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.utils.Util;
+import com.driver.go.widget.dialog.CustomDialog;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -48,17 +56,18 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     private TextView mTextExplain;
     private Button mButtonNext;
 
-    private int mCurrentIndex = 1;
+    private int mCurrentIndex = 0;
     private QuestionItem mCurrentQuestionItem;
     private boolean mIsChoiceOneAnswer;
     private boolean mIsExcluded = false;
+    private List<QuestionItem> mQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.random_practise);
-        initData();
         initView();
+        initData();
     }
 
     @Override
@@ -99,29 +108,32 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
         mButtonExplain.setOnClickListener(this);
         mButtonExclude.setOnClickListener(this);
 
-        mTextNum.setText(mCurrentIndex + "/" + sRandomQuestionTotalNum);
-        mTextTitle.setText(mCurrentQuestionItem.getQuestion());
-        mTextChoiceA.setText(mCurrentQuestionItem.getItem1());
-        mTextChoiceB.setText(mCurrentQuestionItem.getItem2());
-        mTextChoiceC.setText(mCurrentQuestionItem.getItem3());
-        mTextChoiceD.setText(mCurrentQuestionItem.getItem4());
-        mTextExplain.setText(mCurrentQuestionItem.getExplains());
-
-        if(!TextUtils.isEmpty(mCurrentQuestionItem.getUrl())){
-            mImageQuestion.setVisibility(View.VISIBLE);
-            mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
-        }
-
-        int id = getQuestionIdByIndex(mCurrentIndex);
-        if(checkCollected(id)){
-            setCollectImageSelected(mButtonCollect);
-        }
     }
 
     @Override
     public void initData() {
-        mCurrentIndex = loadRandomQuestionIndex();
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentIndex));
+        initQuestion();
+    }
+
+    private void initQuestion() {
+        RetrofitHttpRequest.getInstance().getC1Subject1RandomQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+            @Override
+            public void onNext(List<QuestionItem> questionItems) {
+                mQuestions = questionItems;
+                mCurrentQuestionItem = mQuestions.get(0);
+                updateUI(mCurrentQuestionItem);
+
+                if(!TextUtils.isEmpty(mCurrentQuestionItem.getUrl())){
+                    mImageQuestion.setVisibility(View.VISIBLE);
+                    mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
+                }
+                int id = getQuestionIdByIndex(mCurrentIndex);
+                if(checkCollected(id)){
+                    setCollectImageSelected(mButtonCollect);
+                }
+
+            }
+        });
     }
 
 
@@ -253,31 +265,47 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     //下一题
     private void showNextQuestion() {
         if(hasInternet()){
-            if(++mCurrentIndex > Profile.RANDOM_TOTAL_ITEM){
-                mCurrentIndex--;
-                //清空数据库，重新请求随机数据插入数据类
-                saveRandomQuestionIndex(mCurrentIndex);
-                ToastManager.showCompelteRandomPracticeMsg();
-                clearTableData(DBConstants.RANDOM_EXAM_TABLE);
-                return;
-            }
-
             //没有进行选择
             if(!mIsChoiceOneAnswer){
                 ToastManager.showSelectOneAnswerMsg();
                 return;
             }
 
+            if(++mCurrentIndex >= Profile.RANDOM_TOTAL_ITEM){
+                //清空数据库，重新请求随机数据插入数据类
+                showCompleteDialog();
+                return;
+            }
+
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryRandomQuestionById(mCurrentIndex));
-            saveRandomQuestionIndex(mCurrentIndex);
+            mCurrentQuestionItem = mQuestions.get(mCurrentIndex);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
             mIsExcluded = false;
         }else{
             ToastManager.showNoNetworkMsg();
         }
+    }
 
+    public void showCompleteDialog(){
+        final CustomDialog dialog = new CustomDialog(this, Util.getResString(R.string.dialog_title_random_practise_end));
+        dialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
+            @Override
+            public void onConfirm() {
+                mCurrentIndex = 0;
+                dialog.dissmiss();
+                initUI();
+                initQuestion();
+            }
+
+            @Override
+            public void onCancel() {
+                dialog.dissmiss();
+                IntentManager.finishActivity(PracticeRandomActivity.this);
+
+            }
+        });
+        dialog.show();
     }
 
     private void setAllAnswerUnSelect(){
@@ -314,7 +342,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     }
 
     private void updateUI(QuestionItem item){
-        mTextNum.setText(mCurrentIndex%10 + "/" + sRandomQuestionTotalNum);
+        mTextNum.setText(mCurrentIndex+1 + "/" + sRandomQuestionTotalNum);
         mTextTitle.setText(item.getQuestion());
         mTextChoiceA.setText(item.getItem1());
         mTextChoiceB.setText(item.getItem2());
