@@ -133,7 +133,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     }
 
     private void initQuestionData() {
-        Cursor cursor = mSQLiteManager.getAllWrongQuestions();
+        Cursor cursor = mSQLiteManager.getPractiseWrongQuestions();
         mQuestions = new ArrayList<>();
         while(cursor.moveToNext()){
             QuestionItem item = EntityConvertManager.getQuestionItemEntity(cursor);
@@ -184,7 +184,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
 
     //删除错题
     private void handleDeleteWrongQuestion() {
-        mSQLiteManager.deleteQuestionById(DBConstants.WRONG_QUESTION_TABLE,mCurrentQuestionItem.getId());
+        mSQLiteManager.deleteQuestionById(DBConstants.PRACTISE_WRONG_QUESTION_TABLE,mCurrentQuestionItem.getId());
         showNextQuestion();
         ToastManager.showShortMsg("删除成功!");
 

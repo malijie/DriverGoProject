@@ -22,7 +22,7 @@ public class SQLContainer {
     }
 
     public static String getCreateWrongQuestionTableSQL(){
-        return "CREATE TABLE IF NOT EXISTS " + DBConstants.WRONG_QUESTION_TABLE + "(_id INTEGER PRIMARY KEY AUTOINCREMENT,id int,question varchar(100)," +
+        return "CREATE TABLE IF NOT EXISTS " + DBConstants.PRACTISE_WRONG_QUESTION_TABLE + "(_id INTEGER PRIMARY KEY AUTOINCREMENT,id int,question varchar(100)," +
                 "answer varchar(10), item1 varchar(100),item2 varchar(100)," +
                 "item3 varchar(100),item4 varchar(100),explains varchar(400)," +
                 "url varchar(100))";
@@ -67,19 +67,12 @@ public class SQLContainer {
         return "DELETE FROM " + tableName;
     }
 
-    public static String getAllWrongQuestionsSQL(){
-        return "SELECT * FROM " + DBConstants.WRONG_QUESTION_TABLE;
+
+    public static String getAllQuestionsSQL(String tableName){
+        return "SELECT * FROM " + tableName;
     }
 
     public static String deleteQuestionSQL(String tableName,int id){
         return "DELETE FROM " + tableName + " WHERE id=" + id;
-    }
-
-    public static String getAllCollectQuestionsSQL(){
-        return "SELECT * FROM " + DBConstants.COLLECT_QUESTION_TABLE;
-    }
-
-    public static String getAllExamWrongQuestionSQL(){
-        return "SELECT * FROM " + DBConstants.EXAM_WRONG_QUESTION_TABLE;
     }
 }

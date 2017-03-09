@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.driver.go.R;
 import com.driver.go.base.Profile;
@@ -64,7 +63,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     }
 
     public void addWrongQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+        mSQLiteManager.insertQuestion2Table(DBConstants.PRACTISE_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
     protected void saveCollectQuestion(QuestionItem q){

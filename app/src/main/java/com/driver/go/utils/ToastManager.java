@@ -58,6 +58,10 @@ public class ToastManager {
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.no_collect_question),Toast.LENGTH_SHORT);
     }
 
+    public static void showNoExamWrongQuestionMsg() {
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.no_exam_wrong_question),Toast.LENGTH_SHORT);
+    }
+
     public static void showCompleteCollectQuestionMsg() {
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.complete_all_collect_question),Toast.LENGTH_SHORT);
     }
