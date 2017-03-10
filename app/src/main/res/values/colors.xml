@@ -12,6 +12,7 @@
     <color name="app_green_normal">#6ECA3B</color>
     <color name="app_green_selected">#58bc20</color>
     <color name="font_grey">#949494</color>
+    <color name="font_red">#f95050</color>
     <color name="line_normal_grey">#bababa</color>
     <color name="line_light_grey">#e2e1e1</color>
     <color name="light_grey">#e4e3e3</color>
