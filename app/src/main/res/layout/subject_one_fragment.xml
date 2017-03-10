@@ -173,6 +173,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
                     <ImageButton
+                        android:id="@+id/id_main_button_exam_data"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/kaoshijilu_selector"/>

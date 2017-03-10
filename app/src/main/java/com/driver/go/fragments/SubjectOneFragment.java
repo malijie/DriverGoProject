@@ -20,11 +20,18 @@ import com.driver.go.activity.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
+import com.driver.go.entity.QuestionItem;
+import com.driver.go.http.RetrofitHttpRequest;
+import com.driver.go.http.SubscriberOnNextListener;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
+
+import java.util.List;
 
 //科目一
 public class SubjectOneFragment extends Fragment implements View.OnClickListener{
     private SQLiteManager mSQLiteManager = null;
+    private ImageButton mButtonExamData;
     private ImageButton mButtonPractiseWrongQuestion;
     private ImageButton mButtonOrderPractise;
     private ImageButton mButtonReciteQuestion;
@@ -58,8 +65,10 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
         mButtonExam = (ImageButton) v.findViewById(R.id.id_main_button_exam);
         mButtonSkill = (ImageButton) v.findViewById(R.id.id_main_button_driver_skill);
         mButtonPractiseWrongQuestion = (ImageButton) v.findViewById(R.id.id_main_button_practise_wrong_question);
+        mButtonExamData = (ImageButton) v.findViewById(R.id.id_main_button_exam_data);
 
         mButtonSkill.setOnClickListener(this);
+        mButtonExamData.setOnClickListener(this);
         mButtonExam.setOnClickListener(this);
         mButtonDriverTip.setOnClickListener(this);
         mButtonRandomQuestion.setOnClickListener(this);
@@ -111,6 +120,9 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
                 }else {
                     ToastManager.showNoWrongQuestionMsg();
                 }
+                break;
+            case R.id.id_main_button_exam_data:
+               //考试数据
                 break;
         }
     }

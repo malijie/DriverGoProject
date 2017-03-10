@@ -68,6 +68,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
         setContentView(R.layout.random_practise);
         initView();
         initData();
+
     }
 
     @Override
@@ -119,6 +120,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
         RetrofitHttpRequest.getInstance().getC1Subject1RandomQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
             @Override
             public void onNext(List<QuestionItem> questionItems) {
+                super.onNext(questionItems);
                 mQuestions = questionItems;
                 mCurrentQuestionItem = mQuestions.get(0);
                 updateUI(mCurrentQuestionItem);
@@ -127,8 +129,8 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
                     mImageQuestion.setVisibility(View.VISIBLE);
                     mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
                 }
-                int id = getQuestionIdByIndex(mCurrentIndex);
-                if(checkCollected(id)){
+
+                if(checkCollected(mCurrentQuestionItem.getId())){
                     setCollectImageSelected(mButtonCollect);
                 }
 

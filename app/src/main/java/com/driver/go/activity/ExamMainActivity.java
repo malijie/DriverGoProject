@@ -346,7 +346,6 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     }
 
     private void showCompleteExamDialog(){
-        int wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount();
         String title = "模拟考试得分" + getExamScore()  + ",是否查看错题";
         CustomDialog dialog = new CustomDialog(this,title);
         dialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
