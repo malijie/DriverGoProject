@@ -1,6 +1,8 @@
 package com.driver.go.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.driver.go.R;
@@ -10,8 +12,9 @@ import com.driver.go.base.Profile;
  * Created by Administrator on 2017/3/4.
  */
 
-public class DriverExamSkillActivity extends DriverBaseActivity{
+public class DriverExamSkillActivity extends DriverBaseActivity implements View.OnClickListener{
     private TextView mTextTitle;
+    private ImageButton mButtonBack;
     private TextView mTextContent;
 
     @Override
@@ -24,12 +27,23 @@ public class DriverExamSkillActivity extends DriverBaseActivity{
 
     @Override
     public void initView() {
+        mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
         mTextTitle = (TextView) findViewById(R.id.id_driver_skill_text_title);
         mTextContent = (TextView) findViewById(R.id.id_driver_skil_text_content);
+        mButtonBack.setOnClickListener(this);
     }
 
     @Override
     public void initData() {
         mTextContent.setText(Profile.DRIVER_SKILL);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.id_title_bar_button_back:
+                finishActivity(this);
+            break;
+        }
     }
 }

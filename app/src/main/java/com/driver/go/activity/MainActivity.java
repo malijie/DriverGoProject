@@ -3,7 +3,10 @@ package com.driver.go.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.driver.go.R;
 import com.driver.go.adapter.TabAdapter;
@@ -22,6 +25,8 @@ import java.util.List;
 
 public class MainActivity extends DriverBaseActivity{
     private RetrofitHttpRequest mHttpRequest;
+    private TextView mTextTitle;
+    private ImageButton mButtonBack;
     private ViewPager mViewPager;
     private TabPageIndicator mTabPageIndicator;
     private TabAdapter mAdapter;
@@ -43,16 +48,23 @@ public class MainActivity extends DriverBaseActivity{
         List<Fragment> fragmentList = new ArrayList<>();
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         mTabPageIndicator = (TabPageIndicator) findViewById(R.id.id_indicator);
+        mTextTitle = (TextView) findViewById(R.id.id_title_bar_text_title);
+        mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
         fragmentList.add(new SubjectOneFragment());
         fragmentList.add(new SubjectFourFragment());
         fragmentList.add(new MyDriverFragment());
         mAdapter = new TabAdapter(getSupportFragmentManager(),fragmentList);
         mViewPager.setAdapter(mAdapter);
         mTabPageIndicator.setViewPager(mViewPager, 0);
+
+        mButtonBack.setVisibility(View.GONE);
+        mTextTitle.setText(Util.getResString(R.string.main_title));
+
     }
 
     @Override
     public void initData() {
+
         mHttpRequest = RetrofitHttpRequest.getInstance();
         if(hasInternet()){
             if(!isOrderTableExist()){
