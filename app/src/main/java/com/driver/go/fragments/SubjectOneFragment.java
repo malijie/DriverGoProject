@@ -8,25 +8,19 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.driver.go.R;
-import com.driver.go.activity.CollectQuestionsActivity;
-import com.driver.go.activity.DriverExamSkillActivity;
-import com.driver.go.activity.DriverTipActivity;
-import com.driver.go.activity.ExamMainActivity;
-import com.driver.go.activity.ExamWrongQuestionActivity;
-import com.driver.go.activity.PracticeOrderActivity;
-import com.driver.go.activity.PracticeRandomActivity;
-import com.driver.go.activity.PractiseWrongQuestionActivity;
-import com.driver.go.activity.RecitePracticeOrderActivity;
+import com.driver.go.activity.c1.CollectQuestionsActivity;
+import com.driver.go.activity.c1.DriverExamSkillActivity;
+import com.driver.go.activity.c1.DriverTipActivity;
+import com.driver.go.activity.c1.ExamMainActivity;
+import com.driver.go.activity.c1.ExamWrongQuestionActivity;
+import com.driver.go.activity.c1.PracticeOrderActivity;
+import com.driver.go.activity.c1.PracticeRandomActivity;
+import com.driver.go.activity.c1.PractiseWrongQuestionActivity;
+import com.driver.go.activity.c1.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
-import com.driver.go.entity.QuestionItem;
-import com.driver.go.http.RetrofitHttpRequest;
-import com.driver.go.http.SubscriberOnNextListener;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
-
-import java.util.List;
 
 //科目一
 public class SubjectOneFragment extends Fragment implements View.OnClickListener{

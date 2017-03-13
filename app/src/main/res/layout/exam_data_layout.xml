@@ -108,5 +108,24 @@
                 android:textSize="@dimen/font_size_16"/>
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/light_grey"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/font_green"
+            android:textSize="@dimen/font_size_20"
+            android:text="历史成绩"
+            android:layout_marginLeft="18dp"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
+    </ListView>
 
 </LinearLayout>

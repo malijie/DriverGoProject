@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/id_exam_data_item_text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试时间:"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/font_grey"
+        android:textSize="@dimen/font_size_16"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-3-13 11:22"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/font_grey"
+        android:textSize="@dimen/font_size_16"
+        android:layout_toRightOf="@id/id_exam_data_item_text_title"/>
+    <TextView
+        android:id="@+id/id_exam_data_item_text_score_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="得分:"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/font_grey"
+        android:textSize="@dimen/font_size_16"
+        android:layout_below="@id/id_exam_data_item_text_title"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="98"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/font_grey"
+        android:textSize="@dimen/font_size_16"
+        android:layout_below="@id/id_exam_data_item_text_title"
+        android:layout_toRightOf="@id/id_exam_data_item_text_score_title"/>
+
+</RelativeLayout>

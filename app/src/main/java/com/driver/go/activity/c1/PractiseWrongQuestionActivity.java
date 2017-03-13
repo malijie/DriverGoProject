@@ -1,4 +1,4 @@
-package com.driver.go.activity;
+package com.driver.go.activity.c1;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,7 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
+import com.driver.go.activity.DriverBaseActivity;
 import com.driver.go.control.EntityConvertManager;
+import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 
@@ -20,10 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by malijie on 2017/3/3.
+ * Created by malijie on 2017/3/1.
  */
 
-public class CollectQuestionsActivity extends DriverBaseActivity implements View.OnClickListener{
+public class PractiseWrongQuestionActivity  extends DriverBaseActivity implements View.OnClickListener{
 
     private ImageButton mButtonBack;
     private ImageButton mButtonDelete;
@@ -61,7 +63,7 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.collect_practise);
+        setContentView(R.layout.wrong_practise);
         initData();
         initView();
     }
@@ -69,29 +71,29 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
     @Override
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
-        mImageQuestion = (ImageView) findViewById(R.id.id_collect_practice_image_question);
+        mImageQuestion = (ImageView) findViewById(R.id.id_wrong_practice_image_question);
         mTextNum = (TextView) findViewById(R.id.id_question_title_text_num);
-        mLayoutDetailExplain = (LinearLayout) findViewById(R.id.id_collect_practice_layout_explain);
+        mLayoutDetailExplain = (LinearLayout) findViewById(R.id.id_wrong_practice_layout_explain);
         mLayoutExclude = (LinearLayout) findViewById(R.id.id_question_title_layout_exclude);
         mLayoutDelete = (LinearLayout) findViewById(R.id.id_question_title_layout_delete);
-        mLayoutChoiceA = (RelativeLayout) findViewById(R.id.id_collect_practice_layout_choice_a);
-        mLayoutChoiceB = (RelativeLayout) findViewById(R.id.id_collect_practice_layout_choice_b);
-        mLayoutChoiceC = (RelativeLayout) findViewById(R.id.id_collect_practice_layout_choice_c);
-        mLayoutChoiceD = (RelativeLayout) findViewById(R.id.id_collect_practice_layout_choice_d);
-        mImageChoiceA = (ImageView) findViewById(R.id.id_collect_practice_image_choice_a);
-        mImageChoiceB = (ImageView) findViewById(R.id.id_collect_practice_image_choice_b);
-        mImageChoiceC = (ImageView) findViewById(R.id.id_collect_practice_image_choice_c);
-        mImageChoiceD = (ImageView) findViewById(R.id.id_collect_practice_image_choice_d);
+        mLayoutChoiceA = (RelativeLayout) findViewById(R.id.id_wrong_practice_layout_choice_a);
+        mLayoutChoiceB = (RelativeLayout) findViewById(R.id.id_wrong_practice_layout_choice_b);
+        mLayoutChoiceC = (RelativeLayout) findViewById(R.id.id_wrong_practice_layout_choice_c);
+        mLayoutChoiceD = (RelativeLayout) findViewById(R.id.id_wrong_practice_layout_choice_d);
+        mImageChoiceA = (ImageView) findViewById(R.id.id_wrong_practice_image_choice_a);
+        mImageChoiceB = (ImageView) findViewById(R.id.id_wrong_practice_image_choice_b);
+        mImageChoiceC = (ImageView) findViewById(R.id.id_wrong_practice_image_choice_c);
+        mImageChoiceD = (ImageView) findViewById(R.id.id_wrong_practice_image_choice_d);
         mButtonCollect = (ImageButton) findViewById(R.id.id_question_title_button_collect);
         mButtonExplain = (ImageButton) findViewById(R.id.id_question_title_button_explain);
-        mTextExplain = (TextView) findViewById(R.id.id_collect_practice_text_explain);
-        mImageItem = (ImageView) findViewById(R.id.id_collect_practice_image_item);
-        mTextTitle = (TextView) findViewById(R.id.id_collect_practice_text_title);
-        mTextChoiceA= (TextView) findViewById(R.id.id_collect_practice_text_choice_a);
-        mTextChoiceB= (TextView) findViewById(R.id.id_collect_practice_text_choice_b);
-        mTextChoiceC= (TextView) findViewById(R.id.id_collect_practice_text_choice_c);
-        mTextChoiceD= (TextView) findViewById(R.id.id_collect_practice_text_choice_d);
-        mButtonNext = (Button) findViewById(R.id.id_collect_practice_button_next);
+        mTextExplain = (TextView) findViewById(R.id.id_wrong_practice_text_explain);
+        mImageItem = (ImageView) findViewById(R.id.id_wrong_practice_image_item);
+        mTextTitle = (TextView) findViewById(R.id.id_wrong_practice_text_title);
+        mTextChoiceA= (TextView) findViewById(R.id.id_wrong_practice_text_choice_a);
+        mTextChoiceB= (TextView) findViewById(R.id.id_wrong_practice_text_choice_b);
+        mTextChoiceC= (TextView) findViewById(R.id.id_wrong_practice_text_choice_c);
+        mTextChoiceD= (TextView) findViewById(R.id.id_wrong_practice_text_choice_d);
+        mButtonNext = (Button) findViewById(R.id.id_wrong_practice_button_next);
         mButtonDelete = (ImageButton) findViewById(R.id.id_question_title_button_delete);
 
         mButtonBack.setOnClickListener(this);
@@ -132,7 +134,7 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
     }
 
     private void initQuestionData() {
-        Cursor cursor = mSQLiteManager.getAllCollectQuestions();
+        Cursor cursor = mSQLiteManager.getPractiseWrongQuestions();
         mQuestions = new ArrayList<>();
         while(cursor.moveToNext()){
             QuestionItem item = EntityConvertManager.getQuestionItemEntity(cursor);
@@ -153,44 +155,43 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
                 showExplain();
                 break;
 
-            case R.id.id_collect_practice_button_next:
+            case R.id.id_wrong_practice_button_next:
                 showNextQuestion();
                 break;
 
-            case R.id.id_collect_practice_layout_choice_a:
+            case R.id.id_wrong_practice_layout_choice_a:
                 handleAnswerAction(ANSWER_A,mImageChoiceA);
                 break;
 
-            case R.id.id_collect_practice_layout_choice_b:
+            case R.id.id_wrong_practice_layout_choice_b:
                 handleAnswerAction(ANSWER_B,mImageChoiceB);
                 break;
 
-            case R.id.id_collect_practice_layout_choice_c:
+            case R.id.id_wrong_practice_layout_choice_c:
                 handleAnswerAction(ANSWER_C,mImageChoiceC);
                 break;
 
-            case R.id.id_collect_practice_layout_choice_d:
+            case R.id.id_wrong_practice_layout_choice_d:
                 handleAnswerAction(ANSWER_D,mImageChoiceD);
                 break;
             case R.id.id_question_title_button_collect:
                 handleCollectAction();
                 break;
             case R.id.id_question_title_button_delete:
-                handleDeleteCollectQuestion();
+                handleDeleteWrongQuestion();
                 break;
         }
     }
 
     //删除错题
-    private void handleDeleteCollectQuestion() {
-        mSQLiteManager.deleteItemFromCollectQuestionById(mCurrentQuestionItem.getId());
+    private void handleDeleteWrongQuestion() {
+        mSQLiteManager.deleteQuestionById(DBConstants.PRACTISE_WRONG_QUESTION_TABLE,mCurrentQuestionItem.getId());
         showNextQuestion();
         ToastManager.showShortMsg("删除成功!");
 
     }
 
     //排除一个错误答案
-
     private void handleCollectAction() {
         if(checkCollected(mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
@@ -260,7 +261,8 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
 //            }
             if(++mCurrentIndex== mQuestions.size()){
                 mCurrentIndex--;
-                ToastManager.showCompleteCollectQuestionMsg();
+                //清空数据库，重新请求随机数据插入数据类
+                ToastManager.showCompleteWrongQuestionMsg();
                 return;
             }
             initUI();

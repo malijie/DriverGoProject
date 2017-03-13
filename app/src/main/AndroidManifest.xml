@@ -18,15 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PracticeOrderActivity"/>
-        <activity android:name=".activity.RecitePracticeOrderActivity"/>
-        <activity android:name=".activity.PracticeRandomActivity"/>
-        <activity android:name=".activity.PractiseWrongQuestionActivity"/>
-        <activity android:name=".activity.CollectQuestionsActivity"/>
-        <activity android:name=".activity.DriverTipActivity"/>
-        <activity android:name=".activity.DriverExamSkillActivity"/>
-        <activity android:name=".activity.ExamMainActivity"/>
-        <activity android:name=".activity.ExamWrongQuestionActivity"/>
+        <activity android:name=".activity.c1.PracticeOrderActivity"/>
+        <activity android:name=".activity.c1.RecitePracticeOrderActivity"/>
+        <activity android:name=".activity.c1.PracticeRandomActivity"/>
+        <activity android:name=".activity.c1.PractiseWrongQuestionActivity"/>
+        <activity android:name=".activity.c1.CollectQuestionsActivity"/>
+        <activity android:name=".activity.c1.DriverTipActivity"/>
+        <activity android:name=".activity.c1.DriverExamSkillActivity"/>
+        <activity android:name=".activity.c1.ExamMainActivity"/>
+        <activity android:name=".activity.c1.ExamWrongQuestionActivity"/>
+        <activity android:name=".activity.c1.ExamDataActivity"/>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
-package com.driver.go.activity;
+package com.driver.go.activity.c1;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,57 +11,54 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
+import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
-import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
+
 
 /**
- * Created by malijie on 2017/3/1.
+ * Created by Administrator on 2016/12/1.
  */
-
-public class PractiseWrongQuestionActivity  extends DriverBaseActivity implements View.OnClickListener{
+public class PracticeOrderActivity extends DriverBaseActivity implements View.OnClickListener{
 
     private ImageButton mButtonBack;
-    private ImageButton mButtonDelete;
     private TextView mTextNum;
     private LinearLayout mLayoutDetailExplain;
     private RelativeLayout mLayoutChoiceA;
     private RelativeLayout mLayoutChoiceB;
     private RelativeLayout mLayoutChoiceC;
     private RelativeLayout mLayoutChoiceD;
-    private LinearLayout mLayoutDelete;
-    private LinearLayout mLayoutExclude;
     private ImageView mImageChoiceA;
     private ImageView mImageChoiceB;
     private ImageView mImageChoiceC;
     private ImageView mImageChoiceD;
-    private ImageButton mButtonCollect;
-    private ImageButton mButtonExplain;
-    private ImageView mImageItem;
-    private ImageView mImageQuestion;
-    private TextView mTextTitle;
     private TextView mTextChoiceA;
     private TextView mTextChoiceB;
     private TextView mTextChoiceC;
     private TextView mTextChoiceD;
+    private ImageButton mButtonCollect;
+    private ImageButton mButtonExplain;
+    private ImageButton mButtonExclude;
+    private ImageView mImageItem;
+    private ImageView mImageQuestion;
+    private TextView mTextTitle;
+
     private TextView mTextExplain;
     private Button mButtonNext;
-    private List<QuestionItem> mQuestions;
 
-    private int mCurrentIndex = 0;
+    private int mCurrentId = 1;
     private QuestionItem mCurrentQuestionItem;
     private boolean mIsChoiceOneAnswer;
-    private int mQuestionsCount;
     private boolean mIsExcluded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wrong_practise);
+        setContentView(R.layout.order_practise);
         initData();
         initView();
     }
@@ -70,30 +66,29 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     @Override
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
-        mImageQuestion = (ImageView) findViewById(R.id.id_wrong_practice_image_question);
+        mImageQuestion = (ImageView) findViewById(R.id.id_order_practice_image_question);
         mTextNum = (TextView) findViewById(R.id.id_question_title_text_num);
-        mLayoutDetailExplain = (LinearLayout) findViewById(R.id.id_wrong_practice_layout_explain);
-        mLayoutExclude = (LinearLayout) findViewById(R.id.id_question_title_layout_exclude);
-        mLayoutDelete = (LinearLayout) findViewById(R.id.id_question_title_layout_delete);
-        mLayoutChoiceA = (RelativeLayout) findViewById(R.id.id_wrong_practice_layout_choice_a);
-        mLayoutChoiceB = (RelativeLayout) findViewById(R.id.id_wrong_practice_layout_choice_b);
-        mLayoutChoiceC = (RelativeLayout) findViewById(R.id.id_wrong_practice_layout_choice_c);
-        mLayoutChoiceD = (RelativeLayout) findViewById(R.id.id_wrong_practice_layout_choice_d);
-        mImageChoiceA = (ImageView) findViewById(R.id.id_wrong_practice_image_choice_a);
-        mImageChoiceB = (ImageView) findViewById(R.id.id_wrong_practice_image_choice_b);
-        mImageChoiceC = (ImageView) findViewById(R.id.id_wrong_practice_image_choice_c);
-        mImageChoiceD = (ImageView) findViewById(R.id.id_wrong_practice_image_choice_d);
+        mLayoutDetailExplain = (LinearLayout) findViewById(R.id.id_order_practice_layout_explain);
+        mLayoutChoiceA = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_a);
+        mLayoutChoiceB = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_b);
+        mLayoutChoiceC = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_c);
+        mLayoutChoiceD = (RelativeLayout) findViewById(R.id.id_order_practice_layout_choice_d);
+        mImageChoiceA = (ImageView) findViewById(R.id.id_order_practice_image_choice_a);
+        mImageChoiceB = (ImageView) findViewById(R.id.id_order_practice_image_choice_b);
+        mImageChoiceC = (ImageView) findViewById(R.id.id_order_practice_image_choice_c);
+        mImageChoiceD = (ImageView) findViewById(R.id.id_order_practice_image_choice_d);
+        mTextChoiceA= (TextView) findViewById(R.id.id_order_practice_text_choice_a);
+        mTextChoiceB= (TextView) findViewById(R.id.id_order_practice_text_choice_b);
+        mTextChoiceC= (TextView) findViewById(R.id.id_order_practice_text_choice_c);
+        mTextChoiceD= (TextView) findViewById(R.id.id_order_practice_text_choice_d);
         mButtonCollect = (ImageButton) findViewById(R.id.id_question_title_button_collect);
         mButtonExplain = (ImageButton) findViewById(R.id.id_question_title_button_explain);
-        mTextExplain = (TextView) findViewById(R.id.id_wrong_practice_text_explain);
-        mImageItem = (ImageView) findViewById(R.id.id_wrong_practice_image_item);
-        mTextTitle = (TextView) findViewById(R.id.id_wrong_practice_text_title);
-        mTextChoiceA= (TextView) findViewById(R.id.id_wrong_practice_text_choice_a);
-        mTextChoiceB= (TextView) findViewById(R.id.id_wrong_practice_text_choice_b);
-        mTextChoiceC= (TextView) findViewById(R.id.id_wrong_practice_text_choice_c);
-        mTextChoiceD= (TextView) findViewById(R.id.id_wrong_practice_text_choice_d);
-        mButtonNext = (Button) findViewById(R.id.id_wrong_practice_button_next);
-        mButtonDelete = (ImageButton) findViewById(R.id.id_question_title_button_delete);
+        mButtonExclude = (ImageButton) findViewById(R.id.id_question_title_button_exclude);
+        mTextExplain = (TextView) findViewById(R.id.id_order_practice_text_explain);
+        mImageItem = (ImageView) findViewById(R.id.id_order_practice_image_item);
+        mTextTitle = (TextView) findViewById(R.id.id_order_practice_text_title);
+
+        mButtonNext = (Button) findViewById(R.id.id_order_practice_button_next);
 
         mButtonBack.setOnClickListener(this);
         mLayoutDetailExplain.setOnClickListener(this);
@@ -105,41 +100,30 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
         mButtonExplain.setOnClickListener(this);
         mButtonCollect.setOnClickListener(this);
         mButtonExplain.setOnClickListener(this);
-        mButtonDelete.setOnClickListener(this);
+        mButtonExclude.setOnClickListener(this);
 
-        mTextNum.setText(mCurrentIndex+1 + "/" + mQuestionsCount);
+        mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
         mTextChoiceA.setText(mCurrentQuestionItem.getItem1());
         mTextChoiceB.setText(mCurrentQuestionItem.getItem2());
         mTextChoiceC.setText(mCurrentQuestionItem.getItem3());
         mTextChoiceD.setText(mCurrentQuestionItem.getItem4());
         mTextExplain.setText(mCurrentQuestionItem.getExplains());
-        mLayoutDelete.setVisibility(View.VISIBLE);
-        mLayoutExclude.setVisibility(View.GONE);
-
 
         if(!TextUtils.isEmpty(mCurrentQuestionItem.getUrl())){
             mImageQuestion.setVisibility(View.VISIBLE);
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
-        updateCollectUI();
+        if(checkCollected(mCurrentId)){
+            setCollectImageSelected(mButtonCollect);
+        }
     }
 
     @Override
     public void initData() {
-        initQuestionData();
-        mCurrentQuestionItem = mQuestions.get(0);
-    }
-
-    private void initQuestionData() {
-        Cursor cursor = mSQLiteManager.getPractiseWrongQuestions();
-        mQuestions = new ArrayList<>();
-        while(cursor.moveToNext()){
-            QuestionItem item = EntityConvertManager.getQuestionItemEntity(cursor);
-            mQuestions.add(item);
-        }
-        mQuestionsCount =mQuestions.size();
+        mCurrentId = loadOrderQuestionIndex();
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 
 
@@ -150,47 +134,63 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
                 finishActivity(this);
                 break;
 
+            case R.id.id_question_title_button_exclude:
+                handleExcludeAction();
+                break;
             case R.id.id_question_title_button_explain:
                 showExplain();
                 break;
 
-            case R.id.id_wrong_practice_button_next:
+            case R.id.id_order_practice_button_next:
                 showNextQuestion();
                 break;
 
-            case R.id.id_wrong_practice_layout_choice_a:
+            case R.id.id_order_practice_layout_choice_a:
                 handleAnswerAction(ANSWER_A,mImageChoiceA);
                 break;
 
-            case R.id.id_wrong_practice_layout_choice_b:
+            case R.id.id_order_practice_layout_choice_b:
                 handleAnswerAction(ANSWER_B,mImageChoiceB);
                 break;
 
-            case R.id.id_wrong_practice_layout_choice_c:
+            case R.id.id_order_practice_layout_choice_c:
                 handleAnswerAction(ANSWER_C,mImageChoiceC);
                 break;
 
-            case R.id.id_wrong_practice_layout_choice_d:
+            case R.id.id_order_practice_layout_choice_d:
                 handleAnswerAction(ANSWER_D,mImageChoiceD);
                 break;
             case R.id.id_question_title_button_collect:
                 handleCollectAction();
                 break;
-            case R.id.id_question_title_button_delete:
-                handleDeleteWrongQuestion();
-                break;
         }
     }
 
-    //删除错题
-    private void handleDeleteWrongQuestion() {
-        mSQLiteManager.deleteQuestionById(DBConstants.PRACTISE_WRONG_QUESTION_TABLE,mCurrentQuestionItem.getId());
-        showNextQuestion();
-        ToastManager.showShortMsg("删除成功!");
+    //排除一个错误答案
+    private void handleExcludeAction() {
+        if(mIsExcluded){
+            ToastManager.showAlreadyExcludeMsg();
+            return;
+        }
 
+        while(true){
+            int randomIndex = new Random().nextInt(4);
+            if(randomIndex>0 && randomIndex != Integer.parseInt(mCurrentQuestionItem.getAnswer())){
+                if(randomIndex == 1){
+                    showWrongAnswerImage(mImageChoiceA);
+                }else if(randomIndex == 2){
+                    showWrongAnswerImage(mImageChoiceB);
+                }else if(randomIndex == 3){
+                    showWrongAnswerImage(mImageChoiceC);
+                }else if(randomIndex == 4){
+                    showWrongAnswerImage(mImageChoiceD);
+                }
+                mIsExcluded = true;
+                break;
+            }
+        }
     }
 
-    //排除一个错误答案
     private void handleCollectAction() {
         if(checkCollected(mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
@@ -220,6 +220,8 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
         }else{
             //选中错误答案
             showWrongAnswerImage(imageView);
+            //记录错题
+            addWrongQuestionItem(mCurrentQuestionItem);
             //禁止再次选择
             setAllAnswerUnSelect();
             //显示正确答案
@@ -254,26 +256,44 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     private void showNextQuestion() {
         if(hasInternet()){
             //没有进行选择
-//            if(!mIsChoiceOneAnswer){
-//                ToastManager.showSelectOneAnswerMsg();
-//                return;
-//            }
-            if(++mCurrentIndex== mQuestions.size()){
-                mCurrentIndex--;
-                //清空数据库，重新请求随机数据插入数据类
-                ToastManager.showCompleteWrongQuestionMsg();
+            if(!mIsChoiceOneAnswer){
+                ToastManager.showSelectOneAnswerMsg();
                 return;
             }
+
+            if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
+                mCurrentId--;
+                ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
+                return;
+            }
+
             initUI();
-            mCurrentQuestionItem = mQuestions.get(mCurrentIndex);
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+            saveOrderQuestionIndex(mCurrentId);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
             mIsExcluded = false;
         }else{
-            ToastManager.showNoNetworkMsg();
+            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
         }
 
     }
+
+    //上一题
+//    private void showPreQuestion(){
+//        initUI();
+//        if(hasInternet()) {
+//            if(--mCurrentId< 1){
+//                mCurrentId++;
+//                ToastManager.showLongMsg(getString(R.string.no_pre_order_question));
+//                return;
+//            }
+//            mCurrentQuestionItem = EntityConvertManager.getOrderQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+//            updateUI(mCurrentQuestionItem);
+//        }else{
+//            ToastManager.showLongMsg(getString(R.string.current_network_unavailable));
+//        }
+//    }
 
     private void setAllAnswerUnSelect(){
         mLayoutChoiceA.setClickable(false);
@@ -309,7 +329,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     }
 
     private void updateUI(QuestionItem item){
-        mTextNum.setText(mCurrentIndex+1 + "/" + mQuestionsCount);
+        mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
         mTextTitle.setText(item.getQuestion());
         mTextChoiceA.setText(item.getItem1());
         mTextChoiceB.setText(item.getItem2());
@@ -334,15 +354,5 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
             mLayoutChoiceC.setVisibility(View.VISIBLE);
             mLayoutChoiceD.setVisibility(View.VISIBLE);
         }
-
-        updateCollectUI();
-
-    }
-
-    private void updateCollectUI(){
-        if(checkCollected(mCurrentQuestionItem.getId())){
-            setCollectImageSelected(mButtonCollect);
-        }
     }
 }
-

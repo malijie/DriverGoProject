@@ -1,4 +1,4 @@
-package com.driver.go.activity;
+package com.driver.go.activity.c1;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.driver.go.R;
+import com.driver.go.activity.DriverBaseActivity;
 import com.driver.go.base.Profile;
 
 /**
