@@ -136,4 +136,10 @@ public class SQLiteManager {
         cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.C1_EXAM_RECORD_TABLE),null);
         return cursor;
     }
+
+    public int getMaxScore(){
+        cursor = mDB.rawQuery(SQLContainer.getMaxScoreSQL(),null);
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(0)));
+    }
 }

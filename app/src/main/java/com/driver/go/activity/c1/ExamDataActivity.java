@@ -1,11 +1,11 @@
 package com.driver.go.activity.c1;
 
-import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.driver.go.R;
 import com.driver.go.activity.DriverBaseActivity;
@@ -15,7 +15,6 @@ import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.ExamRecord;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,9 +24,9 @@ import java.util.List;
 public class ExamDataActivity extends DriverBaseActivity implements View.OnClickListener{
     private ImageButton mButtonBack;
     private ListView mListView;
+    private List<ExamRecord> mExamRecords;
+    private TextView mTextMaxScore;
 
-
-    List<ExamRecord> mExamRecords;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +37,12 @@ public class ExamDataActivity extends DriverBaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-
+        mTextMaxScore = (TextView) findViewById(R.id.id_exam_data_text_max_score);
         mListView = (ListView) findViewById(R.id.id_exam_data_lv);
         mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
         mButtonBack.setOnClickListener(this);
+
+        mTextMaxScore.setText(String.valueOf(mSQLiteManager.getMaxScore()));
         mListView.setAdapter(new CommonAdapter<ExamRecord>(this,R.layout.exam_data_item,mExamRecords) {
             @Override
             public void convert(ViewHolder holder, ExamRecord item) {

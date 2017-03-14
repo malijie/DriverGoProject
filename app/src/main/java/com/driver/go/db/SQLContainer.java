@@ -83,4 +83,8 @@ public class SQLContainer {
     public static String getInsertExamRecordDataSQL(String tableName,String date,int score){
         return "INSERT INTO " + tableName + " VALUES(" + score + ",'" +date + "')";
     }
+
+    public static String getMaxScoreSQL(){
+        return "SELECT MAX(score) from " + DBConstants.C1_EXAM_RECORD_TABLE;
+    }
 }
