@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -7,7 +6,7 @@
     <include layout="@layout/title_bar" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="clip_horizontal"
         android:orientation="vertical"
         android:gravity="center"
@@ -123,6 +122,7 @@
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
     <ListView
+        android:id="@+id/id_exam_data_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp">

@@ -11,6 +11,7 @@ import com.driver.go.R;
 import com.driver.go.activity.c1.CollectQuestionsActivity;
 import com.driver.go.activity.c1.DriverExamSkillActivity;
 import com.driver.go.activity.c1.DriverTipActivity;
+import com.driver.go.activity.c1.ExamDataActivity;
 import com.driver.go.activity.c1.ExamMainActivity;
 import com.driver.go.activity.c1.ExamWrongQuestionActivity;
 import com.driver.go.activity.c1.PracticeOrderActivity;
@@ -117,6 +118,7 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.id_main_button_exam_data:
                //考试数据
+                IntentManager.startActivity(ExamDataActivity.class);
                 break;
         }
     }

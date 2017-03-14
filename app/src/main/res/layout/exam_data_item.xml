@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/id_exam_data_item_text_title"
+        android:id="@+id/id_exam_data_item_text_time_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="测试时间:"
@@ -11,6 +11,7 @@
         android:textColor="@color/font_grey"
         android:textSize="@dimen/font_size_16"/>
     <TextView
+        android:id="@+id/id_exam_data_item_text_time_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2017-3-13 11:22"
@@ -18,7 +19,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/font_grey"
         android:textSize="@dimen/font_size_16"
-        android:layout_toRightOf="@id/id_exam_data_item_text_title"/>
+        android:layout_toRightOf="@id/id_exam_data_item_text_time_title"/>
     <TextView
         android:id="@+id/id_exam_data_item_text_score_title"
         android:layout_width="wrap_content"
@@ -28,8 +29,9 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/font_grey"
         android:textSize="@dimen/font_size_16"
-        android:layout_below="@id/id_exam_data_item_text_title"/>
+        android:layout_below="@id/id_exam_data_item_text_time_title"/>
     <TextView
+        android:id="@+id/id_exam_data_item_text_score_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="98"
@@ -37,7 +39,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/font_grey"
         android:textSize="@dimen/font_size_16"
-        android:layout_below="@id/id_exam_data_item_text_title"
+        android:layout_below="@id/id_exam_data_item_text_time_title"
         android:layout_toRightOf="@id/id_exam_data_item_text_score_title"/>
 
 </RelativeLayout>
