@@ -42,6 +42,10 @@ public class SQLContainer {
                 "url varchar(100))";
     }
 
+    public static String getCreateC1ExamRecordTableSQL(){
+        return "CREATE TABLE IF NOT EXISTS " + DBConstants.C1_EXAM_RECORD_TABLE + "(score int,date varchar(100))";
+    }
+
     public static String getFirstOrderExamDataSQL(){
           return "SELECT * FROM " + DBConstants.ORDER_EXAM_TABLE + " WHERE id=1";
     }
@@ -72,7 +76,11 @@ public class SQLContainer {
         return "SELECT * FROM " + tableName;
     }
 
-    public static String deleteQuestionSQL(String tableName,int id){
+    public static String getDeleteQuestionSQL(String tableName, int id){
         return "DELETE FROM " + tableName + " WHERE id=" + id;
+    }
+
+    public static String getInsertExamRecordDataSQL(String tableName,String date,int score){
+        return "INSERT INTO " + tableName + " VALUES(" + score + ",'" +date + "')";
     }
 }

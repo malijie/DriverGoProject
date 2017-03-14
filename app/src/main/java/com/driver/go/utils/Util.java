@@ -8,6 +8,9 @@ import android.view.View;
 
 import com.driver.go.base.DriverGoApplication;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by malijie on 2017/2/24.
  */
@@ -33,5 +36,9 @@ public class Util {
 
     public static View getView(int resId){
         return LayoutInflater.from(DriverGoApplication.sContext).inflate(resId,null);
+    }
+
+    public static String getCurrentDate(){
+        return  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
     }
 }

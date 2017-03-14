@@ -70,7 +70,6 @@ public class MainActivity extends DriverBaseActivity{
             if(!isOrderTableExist()){
                 fetchOrderQuestionData2DB();
             }
-            fetchRandomQuestionData2DB();
         }else{
             ToastManager.showNoNetworkMsg();
         }

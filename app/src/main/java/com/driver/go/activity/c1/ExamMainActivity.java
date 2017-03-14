@@ -139,6 +139,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
                         mStrSecond = "00";
                         mStrMinute = "00";
                         mTextTime.setText(mStrMinute + ":" + mStrSecond);
+                        saveExamRecordData();
                         showTimeUpDialog();
                         return;
                     }
@@ -170,7 +171,13 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
                     break;
             }
         }
+
+
     };
+
+    private void saveExamRecordData() {
+        mSQLiteManager.insertExamRecordData(DBConstants.C1_EXAM_RECORD_TABLE,Util.getCurrentDate(),getExamScore());
+    }
 
     private void showTimeUpDialog() {
         String title = Util.getResString(R.string.dialog_title_time_up) + getExamScore() + Util.getResString(R.string.dialog_title_check_wrong_questions);
@@ -332,6 +339,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
 
             if(++mCurrentIndex >= Profile.EXAM_TOTAL_ITEM){
                 mCurrentIndex--;
+                saveExamRecordData();
                 showCompleteExamDialog();
                 return;
             }
