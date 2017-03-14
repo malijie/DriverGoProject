@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/id_exam_data_text_no_questions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1315"
@@ -67,31 +68,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1315"
-                android:layout_gravity="center"
-                android:textColor="@color/font_red"
-                android:textSize="@dimen/font_size_20"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="未做题"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/font_grey"
-                android:textSize="@dimen/font_size_16"/>
-        </LinearLayout>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/font_grey"/>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
+                android:id="@+id/id_exam_data_text_right_questions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1315"
@@ -107,6 +84,33 @@
                 android:textColor="@color/font_grey"
                 android:textSize="@dimen/font_size_16"/>
         </LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/font_grey"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/id_exam_data_text_wrong_questions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1315"
+                android:layout_gravity="center"
+                android:textColor="@color/font_red"
+                android:textSize="@dimen/font_size_20"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="做错题"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/font_grey"
+                android:textSize="@dimen/font_size_16"/>
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
