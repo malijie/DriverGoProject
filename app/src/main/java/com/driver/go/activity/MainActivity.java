@@ -52,7 +52,7 @@ public class MainActivity extends DriverBaseActivity{
         mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
         fragmentList.add(new SubjectOneFragment());
         fragmentList.add(new SubjectFourFragment());
-        fragmentList.add(new MyDriverFragment());
+//        fragmentList.add(new MyDriverFragment());
         mAdapter = new TabAdapter(getSupportFragmentManager(),fragmentList);
         mViewPager.setAdapter(mAdapter);
         mTabPageIndicator.setViewPager(mViewPager, 0);
@@ -83,7 +83,7 @@ public class MainActivity extends DriverBaseActivity{
         mHttpRequest.getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
             @Override
             public void onNext(final List<QuestionItem> questionItems) {
-                new Thread(new Runnable() {
+                new Thread( new Runnable() {
                     @Override
                     public void run() {
                         for(QuestionItem item:questionItems){

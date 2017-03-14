@@ -41,4 +41,9 @@ public class Util {
     public static String getCurrentDate(){
         return  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
     }
+
+
+    public static int getColor(int resColor){
+        return DriverGoApplication.sContext.getResources().getColor(resColor);
+    }
 }
