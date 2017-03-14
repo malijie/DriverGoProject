@@ -87,15 +87,15 @@ public class SQLiteManager {
 
 
     public Cursor getPractiseWrongQuestions(){
-       return mDB.rawQuery(SQLContainer.getAllQuestionsSQL(DBConstants.PRACTISE_WRONG_QUESTION_TABLE),null);
+       return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.PRACTISE_WRONG_QUESTION_TABLE),null);
     }
 
     public Cursor getAllExamWrongQuestions(){
-        return mDB.rawQuery(SQLContainer.getAllQuestionsSQL(DBConstants.EXAM_WRONG_QUESTION_TABLE),null);
+        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.EXAM_WRONG_QUESTION_TABLE),null);
     }
 
     public boolean hasQuestions(String tableName){
-        cursor = mDB.rawQuery(SQLContainer.getAllQuestionsSQL(tableName),null);
+        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(tableName),null);
         return cursor.moveToFirst();
     }
 
@@ -104,7 +104,7 @@ public class SQLiteManager {
     }
 
     public Cursor getAllCollectQuestions() {
-        return mDB.rawQuery(SQLContainer.getAllQuestionsSQL(DBConstants.COLLECT_QUESTION_TABLE),null);
+        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.COLLECT_QUESTION_TABLE),null);
     }
 
     public void closeDB(){
@@ -119,16 +119,21 @@ public class SQLiteManager {
     }
 
     public boolean hasCollectQuestions() {
-        cursor = mDB.rawQuery(SQLContainer.getAllQuestionsSQL(DBConstants.COLLECT_QUESTION_TABLE),null);
+        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.COLLECT_QUESTION_TABLE),null);
         return cursor.moveToFirst();
     }
 
     public int getExamWrongQuestionCount() {
-        cursor = mDB.rawQuery(SQLContainer.getAllQuestionsSQL(DBConstants.EXAM_WRONG_QUESTION_TABLE),null);
+        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.EXAM_WRONG_QUESTION_TABLE),null);
         return cursor.getCount();
     }
 
     public void insertExamRecordData(String tableName,String date,int score){
         mDB.execSQL(SQLContainer.getInsertExamRecordDataSQL(tableName,date,score));
+    }
+
+    public Cursor getExamRecord(){
+        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.C1_EXAM_RECORD_TABLE),null);
+        return cursor;
     }
 }

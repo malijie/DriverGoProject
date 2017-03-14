@@ -72,7 +72,7 @@ public class SQLContainer {
     }
 
 
-    public static String getAllQuestionsSQL(String tableName){
+    public static String getAllDataSQL(String tableName){
         return "SELECT * FROM " + tableName;
     }
 
