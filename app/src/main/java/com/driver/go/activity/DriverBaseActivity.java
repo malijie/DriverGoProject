@@ -12,6 +12,7 @@ import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.utils.SharePreferenceUtil;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;
@@ -23,6 +24,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
     public static int sRandomQuestionTotalNum = Profile.RANDOM_TOTAL_ITEM;
     public static final int sExamQuestionTotalNum = Profile.EXAM_TOTAL_ITEM;
+    public RetrofitHttpRequest mRetrofitHttpRequest = null;
     public SQLiteManager mSQLiteManager = null;
     public ImageLoader mImageLoader = null;
     protected final String ANSWER_A = "1";
@@ -42,6 +44,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     }
 
     private void initManager() {
+        mRetrofitHttpRequest = RetrofitHttpRequest.getInstance();
         mImageLoader = ImageLoader.getInstance();
     }
 

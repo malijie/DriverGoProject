@@ -1,71 +1,102 @@
 package com.driver.go.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.adapter.TabAdapter;
 import com.driver.go.entity.QuestionItem;
-import com.driver.go.fragments.MyDriverFragment;
 import com.driver.go.fragments.SubjectFourFragment;
 import com.driver.go.fragments.SubjectOneFragment;
-import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
-import com.viewpagerindicator.TabPageIndicator;
+import com.driver.go.widget.ViewPagerIndicator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends DriverBaseActivity{
-    private RetrofitHttpRequest mHttpRequest;
     private TextView mTextTitle;
     private ImageButton mButtonBack;
-    private ViewPager mViewPager;
-    private TabPageIndicator mTabPageIndicator;
-    private TabAdapter mAdapter;
+
+    private ViewPager mViewpager;
+    private ViewPagerIndicator mViewPagerIndicator;
+    private List<String> mTitles = Arrays.asList("科目一", "科目四");
+    private List<android.support.v4.app.Fragment> mContents = new ArrayList<android.support.v4.app.Fragment>();// 装载ViewPager数据的List
+    private FragmentPagerAdapter mAdapter;// ViewPager适配器
+    private FragmentManager mSupportFragmentManager;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-
-        initView();
         initData();
+        initView();
     }
 
     @Override
-    public void initView()
-    {
-        List<Fragment> fragmentList = new ArrayList<>();
-        mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
-        mTabPageIndicator = (TabPageIndicator) findViewById(R.id.id_indicator);
+    public void initView() {
         mTextTitle = (TextView) findViewById(R.id.id_title_bar_text_title);
         mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
-        fragmentList.add(new SubjectOneFragment());
-        fragmentList.add(new SubjectFourFragment());
-//        fragmentList.add(new MyDriverFragment());
-        mAdapter = new TabAdapter(getSupportFragmentManager(),fragmentList);
-        mViewPager.setAdapter(mAdapter);
-        mTabPageIndicator.setViewPager(mViewPager, 0);
-
         mButtonBack.setVisibility(View.GONE);
         mTextTitle.setText(Util.getResString(R.string.main_title));
+        mViewpager = (ViewPager) findViewById(R.id.id_viewpager);
+        mViewPagerIndicator = (ViewPagerIndicator) findViewById(R.id.id_indicator);
 
+        SubjectOneFragment subjectOneFragment = new SubjectOneFragment();
+        SubjectFourFragment subjectFourFragment = new SubjectFourFragment();
+        mContents.add(subjectOneFragment);
+        mContents.add(subjectFourFragment);
+
+        mAdapter = new FragmentPagerAdapter(mSupportFragmentManager) {
+
+            @Override
+            public int getCount() {
+                return mContents.size();
+            }
+
+            @Override
+            public android.support.v4.app.Fragment getItem(int position) {
+                return mContents.get(position);
+            }
+
+        };
+
+        //动态设置tab
+        mViewPagerIndicator.setVisibleTabCount(2);
+        mViewPagerIndicator.setTabItemTitles(mTitles);
+
+        mViewpager.setAdapter(mAdapter);
+        mViewPagerIndicator.setViewPager(mViewpager, 0);
+
+        mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
     public void initData() {
 
-        mHttpRequest = RetrofitHttpRequest.getInstance();
+        this.mSupportFragmentManager = getSupportFragmentManager();
         if(hasInternet()){
             if(!isOrderTableExist()){
                 fetchOrderQuestionData2DB();
@@ -80,7 +111,7 @@ public class MainActivity extends DriverBaseActivity{
      * 抓取C1顺序练习题目并插入数据库
      */
     private void fetchOrderQuestionData2DB(){
-        mHttpRequest.getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+        mRetrofitHttpRequest.getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
             @Override
             public void onNext(final List<QuestionItem> questionItems) {
                 new Thread( new Runnable() {
@@ -92,26 +123,6 @@ public class MainActivity extends DriverBaseActivity{
                     }
                 }).start();
 
-            }
-        });
-    }
-
-    /**
-     * 抓取C1随机练习题目并插入数据库
-     */
-    private void fetchRandomQuestionData2DB(){
-        mHttpRequest.getC1Subject1RandomQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
-            @Override
-            public void onNext(final List<QuestionItem> questionItems) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for(int i=0;i<10;i++){
-                            QuestionItem item = questionItems.get(i);
-                            addRandomQuestionItem(item);
-                        }
-                    }
-                }).start();
             }
         });
     }
