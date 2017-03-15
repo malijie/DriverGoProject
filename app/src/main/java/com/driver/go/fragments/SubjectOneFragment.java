@@ -1,5 +1,11 @@
 package com.driver.go.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,10 +27,17 @@ import com.driver.go.activity.c1.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
+import com.driver.go.entity.QuestionItem;
+import com.driver.go.http.RetrofitHttpRequest;
+import com.driver.go.http.SubscriberOnNextListener;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.utils.Util;
+
+import java.util.List;
 
 //科目一
-public class SubjectOneFragment extends Fragment implements View.OnClickListener{
+public class SubjectOneFragment extends BaseFragment implements View.OnClickListener{
     private SQLiteManager mSQLiteManager = null;
     private ImageButton mButtonExamData;
     private ImageButton mButtonPractiseWrongQuestion;
@@ -39,8 +52,9 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {   View v = inflater.inflate(R.layout.subject_one_fragment, container, false);
+                             Bundle savedInstanceState){
+        super.onCreateView(inflater,container,savedInstanceState);
+        View v = inflater.inflate(R.layout.subject_one_fragment, container, false);
         initViews(v);
         initData();
         return v;
@@ -48,6 +62,8 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
 
     private void initData() {
         mSQLiteManager = SQLiteManager.getInstance();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        getActivity().registerReceiver(receiver,filter);
     }
 
     private void initViews(View v) {
@@ -78,10 +94,19 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.id_main_image_order_practice:
-                IntentManager.startActivity(PracticeOrderActivity.class);
+                //顺序练习
+                if(isDownloadDB()){
+                    IntentManager.startActivity(PracticeOrderActivity.class);
+                }else{
+                    ToastManager.showNoNetworkMsg();
+                }
                 break;
             case R.id.id_main_image_recite_question:
-                IntentManager.startActivity(RecitePracticeOrderActivity.class);
+                if(isDownloadDB()){
+                    IntentManager.startActivity(RecitePracticeOrderActivity.class);
+                }else{
+                    ToastManager.showNoNetworkMsg();
+                }
                 break;
             case R.id.id_main_image_random_question:
                 IntentManager.startActivity(PracticeRandomActivity.class);
@@ -133,5 +158,36 @@ public class SubjectOneFragment extends Fragment implements View.OnClickListener
 
     private boolean checkHasCollectQuestions(){
         return mSQLiteManager.hasCollectQuestions();
+    }
+
+    public BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                if (Util.hasInternet()) {
+                    RetrofitHttpRequest.getInstance().getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+                        @Override
+                        public void onNext(final List<QuestionItem> questionItems) {
+                            new Thread( new Runnable() {
+                                @Override
+                                public void run() {
+                                    for(QuestionItem item:questionItems){
+                                        addOrderQuestionItem(item);
+                                    }
+                                }
+                            }).start();
+
+                        }
+                    });
+                }
+            }
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        getActivity().unregisterReceiver(receiver);
+        super.onDestroy();
     }
 }

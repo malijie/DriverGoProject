@@ -405,7 +405,6 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
                 if (Util.hasInternet()) {
-                    Logger.d("update");
                     initQuestion();
                 }
             }

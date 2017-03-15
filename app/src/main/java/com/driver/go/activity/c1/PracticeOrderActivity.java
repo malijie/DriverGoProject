@@ -1,5 +1,10 @@
 package com.driver.go.activity.c1;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +21,7 @@ import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.utils.Util;
 
 import java.util.Random;
 
@@ -122,6 +128,9 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
 
     @Override
     public void initData() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(receiver,filter);
+
         mCurrentId = loadOrderQuestionIndex();
         mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
@@ -361,5 +370,21 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         }
     }
 
-    
+    public BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                if (Util.hasInternet()) {
+                    updateUI(mCurrentQuestionItem);
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
 }

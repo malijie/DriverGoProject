@@ -1,5 +1,10 @@
 package com.driver.go.activity.c1;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -108,6 +113,9 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
 
     @Override
     public void initData() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(receiver,filter);
+
         mRetrofitRequest = RetrofitHttpRequest.getInstance();
         initTime();
         initQuestion();
@@ -214,6 +222,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(receiver);
         mHandler.removeMessages(MSG_HANDLE_TIME);
     }
 
@@ -433,6 +442,19 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
 
         dialog.show();
     }
+
+    public BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                if (Util.hasInternet()) {
+                    initQuestion();
+                }
+            }
+        }
+    };
+
 
     @Override
     public void onBackPressed() {
