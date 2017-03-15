@@ -1,5 +1,10 @@
 package com.driver.go.activity.c1;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +22,7 @@ import com.driver.go.control.IntentManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.widget.dialog.CustomDialog;
@@ -110,6 +116,8 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
 
     @Override
     public void initData() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(receiver,filter);
         initQuestion();
     }
 
@@ -221,6 +229,11 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     }
 
     private void handleAnswerAction(String answer,ImageView imageView){
+        if(!hasInternet()){
+            ToastManager.showNoNetworkMsg();
+            return;
+        }
+
         mIsChoiceOneAnswer = true;
         setAllAnswerUnSelect();
         if(checkAnswer(answer)){
@@ -366,5 +379,42 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
             mLayoutChoiceC.setVisibility(View.VISIBLE);
             mLayoutChoiceD.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        final CustomDialog dialog = new CustomDialog(this,getString(R.string.dialog_title_exit_random_practise));
+        dialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
+            @Override
+            public void onConfirm() {
+                dialog.dissmiss();
+                finishActivity(PracticeRandomActivity.this);
+            }
+
+            @Override
+            public void onCancel() {
+                dialog.dissmiss();
+            }
+        });
+        dialog.show();
+    }
+
+    public BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                if (Util.hasInternet()) {
+                    Logger.d("update");
+                    initQuestion();
+                }
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 }

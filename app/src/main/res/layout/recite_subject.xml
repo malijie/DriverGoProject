@@ -25,7 +25,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:textSize="@dimen/font_size_20"
-            android:text="机动车驾驶人违法驾驶造成重大交通是鬼构成犯罪的，研发追究什么责任？"/>
+            android:text=""/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/id_order_practice_image_choice_a"
             android:layout_centerVertical="true"
-            android:text="刑事责任"
+            android:text=""
             android:textSize="@dimen/font_size_20"
             android:textColor="@color/text_black"/>
     </RelativeLayout>
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/id_order_practice_image_choice_b"
             android:layout_centerVertical="true"
-            android:text="刑事责任"
+            android:text=""
             android:textSize="@dimen/font_size_20"
             android:textColor="@color/text_black"/>
     </RelativeLayout>
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/id_order_practice_image_choice_c"
             android:layout_centerVertical="true"
-            android:text="刑事责任"
+            android:text=""
             android:textSize="@dimen/font_size_20"
             android:textColor="@color/text_black"/>
     </RelativeLayout>
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/id_order_practice_image_choice_d"
             android:layout_centerVertical="true"
-            android:text="刑事责任"
+            android:text=""
             android:textSize="@dimen/font_size_20"
             android:textColor="@color/text_black"/>
     </RelativeLayout>

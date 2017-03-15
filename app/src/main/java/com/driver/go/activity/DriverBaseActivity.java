@@ -2,9 +2,11 @@ package com.driver.go.activity;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.driver.go.R;
 import com.driver.go.base.Profile;
@@ -13,6 +15,7 @@ import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.SharePreferenceUtil;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;

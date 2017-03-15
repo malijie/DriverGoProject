@@ -103,6 +103,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
         mLayoutChoiceC.setOnClickListener(this);
         mLayoutChoiceD.setOnClickListener(this);
 
+
     }
 
     @Override
@@ -220,7 +221,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.id_exam_title_button_back:
-                IntentManager.finishActivity(this);
+                showExitDialog();
                 break;
             case R.id.id_exam_title_button_collect:
                 handleCollectAction();
@@ -266,6 +267,11 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     }
 
     private void handleAnswerAction(String answer,ImageView imageView){
+        if(!hasInternet()){
+            ToastManager.showNoNetworkMsg();
+            return;
+        }
+
         mIsChoiceOneAnswer = true;
         setAllAnswerUnSelect();
         if(checkAnswer(answer)){
@@ -370,9 +376,8 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
             }
         });
         dialog.show();
-
-
     }
+
 
     private void initUI(){
         mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_shoucang);
@@ -410,8 +415,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
         }
     }
 
-    @Override
-    public void onBackPressed() {
+    private void showExitDialog(){
         final CustomDialog dialog = new CustomDialog(this,
                 Util.getResString(R.string.dialog_title_exam_exit));
 
@@ -428,5 +432,10 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
         });
 
         dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        showExitDialog();
     }
 }

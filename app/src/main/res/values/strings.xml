@@ -23,5 +23,6 @@
     <string name="dialog_title_check_wrong_questions">是否查看错题</string>
     <string name="dialog_title_exam_exit">还没完成模拟考试，你确定要退出吗？</string>
     <string name="dialog_title_exam_complete">已完成所有题目</string>
+    <string name="dialog_title_exit_random_practise">确定退出吗？退出后随机练习将重头开始</string>
 
 </resources>

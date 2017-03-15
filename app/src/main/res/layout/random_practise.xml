@@ -33,8 +33,7 @@
                     android:textColor="@color/text_black"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:textSize="@dimen/font_size_20"
-                    android:text="机动车驾驶人违法驾驶造成重大交通是鬼构成犯罪的，研发追究什么责任？"/>
+                    android:textSize="@dimen/font_size_20"/>
             </LinearLayout>
 
             <ImageView
@@ -68,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/id_random_practice_image_choice_a"
                     android:layout_centerVertical="true"
-                    android:text="刑事责任"
+                    android:text=""
                     android:textSize="@dimen/font_size_20"
                     android:textColor="@color/text_black"/>
                 <View
@@ -100,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/id_random_practice_image_choice_b"
                     android:layout_centerVertical="true"
-                    android:text="刑事责任"
+                    android:text=""
                     android:textSize="@dimen/font_size_20"
                     android:textColor="@color/text_black"/>
                 <View
@@ -132,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/id_random_practice_image_choice_c"
                     android:layout_centerVertical="true"
-                    android:text="刑事责任"
+                    android:text=""
                     android:textSize="@dimen/font_size_20"
                     android:textColor="@color/text_black"/>
                 <View
@@ -163,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/id_random_practice_image_choice_d"
                     android:layout_centerVertical="true"
-                    android:text="刑事责任"
+                    android:text=""
                     android:textSize="@dimen/font_size_20"
                     android:textColor="@color/text_black"/>
                 <View

@@ -212,6 +212,11 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     }
 
     private void handleAnswerAction(String answer,ImageView imageView){
+        if(!hasInternet()){
+            ToastManager.showNoNetworkMsg();
+            return;
+        }
+
         mIsChoiceOneAnswer = true;
         setAllAnswerUnSelect();
         if(checkAnswer(answer)){
@@ -355,4 +360,6 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             mLayoutChoiceD.setVisibility(View.VISIBLE);
         }
     }
+
+    
 }

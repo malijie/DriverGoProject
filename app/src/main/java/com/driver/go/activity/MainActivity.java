@@ -39,6 +39,8 @@ public class MainActivity extends DriverBaseActivity{
         setContentView(R.layout.activity_main);
         initData();
         initView();
+
+
     }
 
     @Override
