@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.driver.go.activity.DriverBaseActivity;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
@@ -27,7 +28,7 @@ public class BaseFragment extends Fragment {
 
     public boolean isDownloadSubject1DB(){
         if(mSQLiteManager != null){
-            return mSQLiteManager.queryOrderQuestionById(1).moveToFirst();
+            return mSQLiteManager.queryOrderQuestionById(DriverBaseActivity.SUBJECT_TYPE_1,1).moveToFirst();
         }
         return false;
     }

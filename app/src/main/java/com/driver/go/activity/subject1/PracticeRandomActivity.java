@@ -134,7 +134,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
                     mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
                 }
 
-                if(checkCollected(mCurrentQuestionItem.getId())){
+                if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
                     setCollectImageSelected(mButtonCollect);
                 }
 
@@ -208,7 +208,7 @@ public class PracticeRandomActivity  extends DriverBaseActivity implements View.
     }
 
     private void handleCollectAction() {
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{

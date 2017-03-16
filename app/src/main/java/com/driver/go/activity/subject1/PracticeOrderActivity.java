@@ -121,7 +121,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
-        if(checkCollected(mCurrentId)){
+        if(checkCollected(SUBJECT_TYPE_1,mCurrentId)){
             setCollectImageSelected(mButtonCollect);
         }
     }
@@ -131,8 +131,8 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
 
-        mCurrentId = loadOrderQuestionIndex();
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+        mCurrentId = loadOrderQuestionIndex(SUBJECT_TYPE_1);
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_1,mCurrentId));
     }
 
 
@@ -201,7 +201,7 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
     }
 
     private void handleCollectAction() {
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{
@@ -282,8 +282,8 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             }
 
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
-            saveOrderQuestionIndex(mCurrentId);
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_1,mCurrentId));
+            saveOrderQuestionIndex(SUBJECT_TYPE_1,mCurrentId);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;
             mIsExcluded = false;

@@ -73,8 +73,8 @@ public class ExamDataActivity extends DriverBaseActivity implements View.OnClick
     public void initData() {
         Cursor cursor = mSQLiteManager.getExamRecord();
         maxScore = mSQLiteManager.getMaxScore();
-        wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount();
-        noWrittenQuestionCount = sOrderQuestionTotalNum - SharePreferenceUtil.loadOrderQuestionIndex();
+        wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount(SUBJECT_TYPE_1);
+        noWrittenQuestionCount = sOrderQuestionTotalNum - SharePreferenceUtil.loadSubject1OrderQuestionIndex();
         rightQuestionCount = sOrderQuestionTotalNum - wrongQuestionCount;
 
         mExamRecords = new ArrayList<>();

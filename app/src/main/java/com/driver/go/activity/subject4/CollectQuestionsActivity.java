@@ -133,7 +133,7 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
     }
 
     private void initQuestionData() {
-        Cursor cursor = mSQLiteManager.getAllCollectQuestions();
+        Cursor cursor = mSQLiteManager.getAllCollectQuestions(SUBJECT_TYPE_4);
         mQuestions = new ArrayList<>();
         while(cursor.moveToNext()){
             QuestionItem item = EntityConvertManager.getQuestionItemEntity(cursor);
@@ -184,7 +184,7 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
 
     //删除错题
     private void handleDeleteCollectQuestion() {
-        mSQLiteManager.deleteItemFromCollectQuestionById(mCurrentQuestionItem.getId());
+        mSQLiteManager.deleteItemFromCollectQuestionById(SUBJECT_TYPE_4,mCurrentQuestionItem.getId());
         showNextQuestion();
         ToastManager.showShortMsg("删除成功!");
 
@@ -193,7 +193,7 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
     //排除一个错误答案
 
     private void handleCollectAction() {
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_4,mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{
@@ -340,7 +340,7 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
     }
 
     private void updateCollectUI(){
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_4,mCurrentQuestionItem.getId())){
             setCollectImageSelected(mButtonCollect);
         }
     }

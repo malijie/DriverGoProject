@@ -21,6 +21,8 @@ import com.driver.go.utils.image.ImageLoader;
  * Created by Administrator on 2016/11/5.
  */
 public abstract class DriverBaseActivity extends FragmentActivity {
+    public static final int SUBJECT_TYPE_1 = 1;
+    public static final int SUBJECT_TYPE_4 = 4;
     public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
     public static int sRandomQuestionTotalNum = Profile.RANDOM_TOTAL_ITEM;
     public static final int sExamQuestionTotalNum = Profile.EXAM_TOTAL_ITEM;
@@ -31,6 +33,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     protected final String ANSWER_B = "2";
     protected final String ANSWER_C = "3";
     protected final String ANSWER_D = "4";
+
 
 
     public abstract void initView();
@@ -86,37 +89,43 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         return Util.hasInternet();
     }
 
-    protected void saveOrderQuestionIndex(int index){
-        SharePreferenceUtil.saveOrderQuestionIndex(index);
+    protected void saveOrderQuestionIndex(int subjectType,int index){
+        if(subjectType == SUBJECT_TYPE_1){
+            SharePreferenceUtil.saveSubject1OrderQuestionIndex(index);
+        }else if(subjectType == SUBJECT_TYPE_4){
+            SharePreferenceUtil.saveSubject4OrderQuestionIndex(index);
+        }
     }
 
-    protected int loadRandomQuestionIndex(){
-       return SharePreferenceUtil.loadRandomQuestionIndex();
+    protected int loadOrderQuestionIndex(int subjectType){
+        if(subjectType == SUBJECT_TYPE_1){
+            return SharePreferenceUtil.loadSubject1OrderQuestionIndex();
+        }
+        return SharePreferenceUtil.loadSubject4OrderQuestionIndex();
     }
 
-    protected void saveRandomQuestionIndex(int index){
-        SharePreferenceUtil.saveRandomQuestionIndex(index);
+    protected void saveReciteQuestionIndex(int subjectType,int index){
+        if(subjectType == SUBJECT_TYPE_1){
+            SharePreferenceUtil.saveSubject1ReciteQuestionIndex(index);
+        }else if(subjectType == SUBJECT_TYPE_4){
+            SharePreferenceUtil.saveSubject4ReciteQuestionIndex(index);
+        }
     }
 
-    protected int loadOrderQuestionIndex(){
-        return SharePreferenceUtil.loadOrderQuestionIndex();
+    protected int loadReciteQuestionIndex(int subjectType){
+        if(subjectType == SUBJECT_TYPE_1){
+            SharePreferenceUtil.loadSubject1ReciteQuestionIndex();
+        }
+        return SharePreferenceUtil.loadSubject4ReciteQuestionIndex();
     }
 
-    protected void saveReciteQuestionIndex(int index){
-        SharePreferenceUtil.saveReciteQuestionIndex(index);
-    }
-
-    protected int loadReciteQuestionIndex(){
-        return SharePreferenceUtil.loadReciteQuestionIndex();
-    }
-
-    protected boolean checkCollected(int id){
-        Cursor cursor = mSQLiteManager.queryCollectQuestionById(id);
+    protected boolean checkCollected(int subjectType,int id){
+        Cursor cursor = mSQLiteManager.queryCollectQuestionById(subjectType,id);
         return cursor.moveToFirst();
     }
 
-    protected int getQuestionIdByIndex(int index){
-        Cursor cursor = mSQLiteManager.queryRandomQuestionByIndex(index);
+    protected int getQuestionIdByIndex(int subjectType,int index){
+        Cursor cursor = mSQLiteManager.queryRandomQuestionByIndex(subjectType,index);
         return cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1)));
     }
 

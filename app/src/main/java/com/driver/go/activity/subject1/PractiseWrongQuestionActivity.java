@@ -134,7 +134,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     }
 
     private void initQuestionData() {
-        Cursor cursor = mSQLiteManager.getPractiseWrongQuestions();
+        Cursor cursor = mSQLiteManager.getPractiseWrongQuestions(SUBJECT_TYPE_1);
         mQuestions = new ArrayList<>();
         while(cursor.moveToNext()){
             QuestionItem item = EntityConvertManager.getQuestionItemEntity(cursor);
@@ -193,7 +193,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
 
     //排除一个错误答案
     private void handleCollectAction() {
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{
@@ -341,7 +341,7 @@ public class PractiseWrongQuestionActivity  extends DriverBaseActivity implement
     }
 
     private void updateCollectUI(){
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
             setCollectImageSelected(mButtonCollect);
         }
     }

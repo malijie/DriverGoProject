@@ -208,7 +208,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     }
 
     private int getExamScore(){
-        return 100-mSQLiteManager.getExamWrongQuestionCount();
+        return 100-mSQLiteManager.getExamWrongQuestionCount(SUBJECT_TYPE_1);
     }
 
     private void initTime() {
@@ -264,7 +264,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
      * 点击收藏
      */
     private void handleCollectAction() {
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{

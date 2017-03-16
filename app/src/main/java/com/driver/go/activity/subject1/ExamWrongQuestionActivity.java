@@ -134,7 +134,7 @@ public class ExamWrongQuestionActivity extends DriverBaseActivity implements Vie
     }
 
     private void initQuestionData() {
-        Cursor cursor = mSQLiteManager.getAllExamWrongQuestions();
+        Cursor cursor = mSQLiteManager.getAllExamWrongQuestions(SUBJECT_TYPE_1);
         mQuestions = new ArrayList<>();
         while(cursor.moveToNext()){
             QuestionItem item = EntityConvertManager.getQuestionItemEntity(cursor);
@@ -194,7 +194,7 @@ public class ExamWrongQuestionActivity extends DriverBaseActivity implements Vie
     //排除一个错误答案
 
     private void handleCollectAction() {
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{
@@ -342,7 +342,7 @@ public class ExamWrongQuestionActivity extends DriverBaseActivity implements Vie
     }
 
     private void updateCollectUI(){
-        if(checkCollected(mCurrentQuestionItem.getId())){
+        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
             setCollectImageSelected(mButtonCollect);
         }
     }

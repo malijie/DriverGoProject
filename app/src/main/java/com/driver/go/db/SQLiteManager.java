@@ -3,6 +3,10 @@ package com.driver.go.db;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.driver.go.activity.DriverBaseActivity;
+
+import java.sql.Driver;
+
 /**
  * Created by malijie on 2017/2/22.
  */
@@ -64,26 +68,33 @@ public class SQLiteManager {
         mDB.execSQL(sql);
     }
 
-    public Cursor queryOrderQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getSubject1OrderExamItemByIdSQL(id),null);
+    public Cursor queryOrderQuestionById(int subjectType,int id) {
+        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+            cursor = mDB.rawQuery(SQLContainer.getSubject1OrderExamItemByIdSQL(id),null);
+        }else{
+            cursor = mDB.rawQuery(SQLContainer.getSubject4OrderExamItemByIdSQL(id),null);
+        }
         cursor.moveToNext();
         return cursor;
     }
 
-    public Cursor queryRandomQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getSubject1RandomExamItemByIdSQL(id),null);
+    public Cursor queryCollectQuestionById(int subjectType,int id) {
+        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+            cursor = mDB.rawQuery(SQLContainer.getSubject1CollectQuestionItemByIdSQL(id),null);
+        }else{
+            cursor = mDB.rawQuery(SQLContainer.getSubject4CollectQuestionItemByIdSQL(id),null);
+        }
         cursor.moveToNext();
         return cursor;
     }
 
-    public Cursor queryCollectQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getSubject1CollectQuestionItemByIdSQL(id),null);
-        cursor.moveToNext();
-        return cursor;
-    }
+    public Cursor queryRandomQuestionByIndex(int subjectType,int index) {
+        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+            cursor = mDB.rawQuery(SQLContainer.getSubject1RandomQuestionByIndexSQL(index),null);
+        }else{
+            cursor = mDB.rawQuery(SQLContainer.getSubject4RandomQuestionByIndexSQL(index),null);
+        }
 
-    public Cursor queryRandomQuestionByIndex(int index) {
-        cursor = mDB.rawQuery(SQLContainer.getSubject1RandomQuestionByIndexSQL(index),null);
         cursor.moveToNext();
         return cursor;
     }
@@ -93,12 +104,18 @@ public class SQLiteManager {
     }
 
 
-    public Cursor getPractiseWrongQuestions(){
-       return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE),null);
+    public Cursor getPractiseWrongQuestions(int subjectType){
+        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+          return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE),null);
+        }
+       return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT4_PRACTISE_WRONG_QUESTION_TABLE),null);
     }
 
-    public Cursor getAllExamWrongQuestions(){
-        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE),null);
+    public Cursor getAllExamWrongQuestions(int subjectType){
+        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+           return  mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE),null);
+        }
+        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT4_EXAM_WRONG_QUESTION_TABLE),null);
     }
 
     public boolean hasQuestions(String tableName){
@@ -110,8 +127,11 @@ public class SQLiteManager {
         mDB.execSQL(SQLContainer.getDeleteQuestionSQL(tableName,id));
     }
 
-    public Cursor getAllCollectQuestions() {
-        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE),null);
+    public Cursor getAllCollectQuestions(int subjectType) {
+        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+            return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE),null);
+        }
+        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT4_COLLECT_QUESTION_TABLE),null);
     }
 
     public void closeDB(){
@@ -121,8 +141,12 @@ public class SQLiteManager {
     }
 
 
-    public void deleteItemFromCollectQuestionById(int id) {
-        mDB.execSQL(SQLContainer.getDeleteQuestionSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,id));
+    public void deleteItemFromCollectQuestionById(int subjectType,int id) {
+        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+            mDB.execSQL(SQLContainer.getDeleteQuestionSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,id));
+        }else{
+            mDB.execSQL(SQLContainer.getDeleteQuestionSQL(DBConstants.SUBJECT4_COLLECT_QUESTION_TABLE,id));
+        }
     }
 
     public boolean hasCollectQuestions(String tableName) {
@@ -130,8 +154,12 @@ public class SQLiteManager {
         return cursor.moveToFirst();
     }
 
-    public int getExamWrongQuestionCount() {
-        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE),null);
+    public int getExamWrongQuestionCount(int subjectType) {
+        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+            cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE),null);
+        }else{
+            cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT4_EXAM_WRONG_QUESTION_TABLE),null);
+        }
         return cursor.getCount();
     }
 
