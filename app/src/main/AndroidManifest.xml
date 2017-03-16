@@ -19,16 +19,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.c1.PracticeOrderActivity"/>
-        <activity android:name=".activity.c1.RecitePracticeOrderActivity"/>
-        <activity android:name=".activity.c1.PracticeRandomActivity"/>
-        <activity android:name=".activity.c1.PractiseWrongQuestionActivity"/>
-        <activity android:name=".activity.c1.CollectQuestionsActivity"/>
-        <activity android:name=".activity.c1.DriverTipActivity"/>
-        <activity android:name=".activity.c1.DriverExamSkillActivity"/>
-        <activity android:name=".activity.c1.ExamMainActivity"/>
-        <activity android:name=".activity.c1.ExamWrongQuestionActivity"/>
-        <activity android:name=".activity.c1.ExamDataActivity"/>
+        <activity android:name=".activity.subject1.PracticeOrderActivity"/>
+        <activity android:name=".activity.subject1.RecitePracticeOrderActivity"/>
+        <activity android:name=".activity.subject1.PracticeRandomActivity"/>
+        <activity android:name=".activity.subject1.PractiseWrongQuestionActivity"/>
+        <activity android:name=".activity.subject1.CollectQuestionsActivity"/>
+        <activity android:name=".activity.subject1.DriverTipActivity"/>
+        <activity android:name=".activity.subject1.DriverExamSkillActivity"/>
+        <activity android:name=".activity.subject1.ExamMainActivity"/>
+        <activity android:name=".activity.subject1.ExamWrongQuestionActivity"/>
+        <activity android:name=".activity.subject1.ExamDataActivity"/>
+
+        <activity android:name=".activity.subject4.PracticeOrderActivity"/>
+        <activity android:name=".activity.subject4.RecitePracticeOrderActivity"/>
+        <activity android:name=".activity.subject4.PracticeRandomActivity"/>
+        <activity android:name=".activity.subject4.PractiseWrongQuestionActivity"/>
+        <activity android:name=".activity.subject4.CollectQuestionsActivity"/>
+        <activity android:name=".activity.subject4.DriverTipActivity"/>
+        <activity android:name=".activity.subject4.DriverExamSkillActivity"/>
+        <activity android:name=".activity.subject4.ExamMainActivity"/>
+        <activity android:name=".activity.subject4.ExamWrongQuestionActivity"/>
+        <activity android:name=".activity.subject4.ExamDataActivity"/>
     </application>
 
 </manifest>

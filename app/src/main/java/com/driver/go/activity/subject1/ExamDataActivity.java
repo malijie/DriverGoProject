@@ -1,4 +1,4 @@
-package com.driver.go.activity.c1;
+package com.driver.go.activity.subject1;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import com.driver.go.activity.DriverBaseActivity;
 import com.driver.go.adapter.CommonAdapter;
 import com.driver.go.adapter.ViewHolder;
 import com.driver.go.control.EntityConvertManager;
-import com.driver.go.db.DBConstants;
 import com.driver.go.entity.ExamRecord;
 import com.driver.go.utils.SharePreferenceUtil;
 

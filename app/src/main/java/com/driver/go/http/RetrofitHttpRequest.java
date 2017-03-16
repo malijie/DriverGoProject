@@ -50,6 +50,14 @@ public class RetrofitHttpRequest {
         toSubscribe(observable,subscriber);
     }
 
+    public void getC1Subject4OrderQuestions(Subscriber subscriber){
+        Observable observable = sRetrofitService.getQuestions(
+                Profile.DRIVER_SUBJECT_FOUR, Profile.DRIVER_MODEL_ONE,
+                Profile.APP_KEY, Profile.TEST_TYPE_ORDER)
+                .map(new HttpResultFunc<List<QuestionItem>>());
+        toSubscribe(observable,subscriber);
+    }
+
     public void getC1Subject1RandomQuestions(Subscriber subscriber){
         Observable observable = sRetrofitService.getQuestions(
                 Profile.DRIVER_SUBJECT_ONE, Profile.DRIVER_MODEL_ONE,

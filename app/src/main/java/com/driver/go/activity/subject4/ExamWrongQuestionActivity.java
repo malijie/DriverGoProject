@@ -1,4 +1,4 @@
-package com.driver.go.activity.c1;
+package com.driver.go.activity.subject4;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -185,7 +185,7 @@ public class ExamWrongQuestionActivity extends DriverBaseActivity implements Vie
 
     //删除错题
     private void handleDeleteWrongQuestion() {
-        mSQLiteManager.deleteQuestionById(DBConstants.EXAM_WRONG_QUESTION_TABLE,mCurrentQuestionItem.getId());
+        mSQLiteManager.deleteQuestionById(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE,mCurrentQuestionItem.getId());
         showNextQuestion();
         ToastManager.showShortMsg("删除成功!");
 

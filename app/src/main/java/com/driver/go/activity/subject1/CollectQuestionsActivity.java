@@ -1,4 +1,4 @@
-package com.driver.go.activity.c1;
+package com.driver.go.activity.subject1;
 
 import android.database.Cursor;
 import android.os.Bundle;

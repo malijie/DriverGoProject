@@ -29,17 +29,24 @@ public class SQLiteManager {
 
     public void createTables(){
         if(mDB != null){
-            mDB.execSQL(SQLContainer.getCreateOrderExamTableSQL());
-            mDB.execSQL(SQLContainer.getCreateRandomExamTableSQL());
-            mDB.execSQL(SQLContainer.getCreateWrongQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateCollectQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateExamWrongQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateC1ExamRecordTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject1OrderExamTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject1RandomExamTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject1WrongQuestionTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject1CollectQuestionTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject1ExamWrongQuestionTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject1ExamRecordTableSQL());
+
+            mDB.execSQL(SQLContainer.getCreateSubject4OrderExamTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject4RandomExamTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject4WrongQuestionTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject4CollectQuestionTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject4ExamWrongQuestionTableSQL());
+            mDB.execSQL(SQLContainer.getCreateSubject4ExamRecordTableSQL());
         }
     }
 
     public boolean isOrderTableHasData(){
-        cursor = mDB.rawQuery(SQLContainer.getFirstOrderExamDataSQL(),null);
+        cursor = mDB.rawQuery(SQLContainer.getSubject1FirstOrderExamDataSQL(),null);
         if(cursor.moveToNext()){
             return true;
         }
@@ -58,25 +65,25 @@ public class SQLiteManager {
     }
 
     public Cursor queryOrderQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getOrderExamItemByIdSQL(id),null);
+        cursor = mDB.rawQuery(SQLContainer.getSubject1OrderExamItemByIdSQL(id),null);
         cursor.moveToNext();
         return cursor;
     }
 
     public Cursor queryRandomQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getRandomExamItemByIdSQL(id),null);
+        cursor = mDB.rawQuery(SQLContainer.getSubject1RandomExamItemByIdSQL(id),null);
         cursor.moveToNext();
         return cursor;
     }
 
     public Cursor queryCollectQuestionById(int id) {
-        cursor = mDB.rawQuery(SQLContainer.getCollectQuestionItemByIdSQL(id),null);
+        cursor = mDB.rawQuery(SQLContainer.getSubject1CollectQuestionItemByIdSQL(id),null);
         cursor.moveToNext();
         return cursor;
     }
 
     public Cursor queryRandomQuestionByIndex(int index) {
-        cursor = mDB.rawQuery(SQLContainer.getRandomQuestionByIndexSQL(index),null);
+        cursor = mDB.rawQuery(SQLContainer.getSubject1RandomQuestionByIndexSQL(index),null);
         cursor.moveToNext();
         return cursor;
     }
@@ -87,11 +94,11 @@ public class SQLiteManager {
 
 
     public Cursor getPractiseWrongQuestions(){
-       return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.PRACTISE_WRONG_QUESTION_TABLE),null);
+       return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE),null);
     }
 
     public Cursor getAllExamWrongQuestions(){
-        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.EXAM_WRONG_QUESTION_TABLE),null);
+        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE),null);
     }
 
     public boolean hasQuestions(String tableName){
@@ -104,7 +111,7 @@ public class SQLiteManager {
     }
 
     public Cursor getAllCollectQuestions() {
-        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.COLLECT_QUESTION_TABLE),null);
+        return mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE),null);
     }
 
     public void closeDB(){
@@ -115,16 +122,16 @@ public class SQLiteManager {
 
 
     public void deleteItemFromCollectQuestionById(int id) {
-        mDB.execSQL(SQLContainer.getDeleteQuestionSQL(DBConstants.COLLECT_QUESTION_TABLE,id));
+        mDB.execSQL(SQLContainer.getDeleteQuestionSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,id));
     }
 
     public boolean hasCollectQuestions() {
-        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.COLLECT_QUESTION_TABLE),null);
+        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE),null);
         return cursor.moveToFirst();
     }
 
     public int getExamWrongQuestionCount() {
-        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.EXAM_WRONG_QUESTION_TABLE),null);
+        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE),null);
         return cursor.getCount();
     }
 
@@ -133,12 +140,12 @@ public class SQLiteManager {
     }
 
     public Cursor getExamRecord(){
-        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.C1_EXAM_RECORD_TABLE),null);
+        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_C1_EXAM_RECORD_TABLE),null);
         return cursor;
     }
 
     public int getMaxScore(){
-        cursor = mDB.rawQuery(SQLContainer.getMaxScoreSQL(),null);
+        cursor = mDB.rawQuery(SQLContainer.getSubject1MaxScoreSQL(),null);
         cursor.moveToFirst();
         return cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(0)));
     }

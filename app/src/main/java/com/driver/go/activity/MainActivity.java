@@ -1,5 +1,10 @@
 package com.driver.go.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,7 +17,9 @@ import com.driver.go.R;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.fragments.SubjectFourFragment;
 import com.driver.go.fragments.SubjectOneFragment;
+import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.widget.ViewPagerIndicator;
@@ -31,7 +38,6 @@ public class MainActivity extends DriverBaseActivity{
     private List<android.support.v4.app.Fragment> mContents = new ArrayList<android.support.v4.app.Fragment>();// 装载ViewPager数据的List
     private FragmentPagerAdapter mAdapter;// ViewPager适配器
     private FragmentManager mSupportFragmentManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +113,13 @@ public class MainActivity extends DriverBaseActivity{
             ToastManager.showNoNetworkMsg();
         }
 
+//        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+//        registerReceiver(receiver,filter);
+
     }
 
     /**
-     * 抓取C1顺序练习题目并插入数据库
+     * 抓取科目一，科目四顺序练习题目并插入数据库
      */
     private void fetchOrderQuestionData2DB(){
         mRetrofitHttpRequest.getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
@@ -120,7 +129,22 @@ public class MainActivity extends DriverBaseActivity{
                     @Override
                     public void run() {
                         for(QuestionItem item:questionItems){
-                            addOrderQuestionItem(item);
+                            addSubject1OrderQuestionItem(item);
+                        }
+                    }
+                }).start();
+
+            }
+        });
+
+        mRetrofitHttpRequest.getC1Subject4OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+            @Override
+            public void onNext(final List<QuestionItem> questionItems) {
+                new Thread( new Runnable() {
+                    @Override
+                    public void run() {
+                        for(QuestionItem item:questionItems){
+                            addSubject4OrderQuestionItem(item);
                         }
                     }
                 }).start();
@@ -129,4 +153,41 @@ public class MainActivity extends DriverBaseActivity{
         });
     }
 
+
+
+//    public BroadcastReceiver receiver = new BroadcastReceiver() {
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            Logger.d("broadcast into ...");
+//            if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+//                if(mSQLiteManager.isOrderTableHasData()){
+//                    return;
+//                }
+//                if (Util.hasInternet()) {
+//                    Logger.d("broadcast...");
+//                    RetrofitHttpRequest.getInstance().getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+//                        @Override
+//                        public void onNext(final List<QuestionItem> questionItems) {
+//                            new Thread( new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    for(QuestionItem item:questionItems){
+//                                        addSubject1OrderQuestionItem(item);
+//                                    }
+//                                }
+//                            }).start();
+//
+//                        }
+//                    });
+//                }
+//            }
+//        }
+//    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        unregisterReceiver(receiver);
+    }
 }

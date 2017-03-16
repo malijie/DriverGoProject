@@ -17,7 +17,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQLContainer.getCreateOrderExamTableSQL());
+        db.execSQL(SQLContainer.getCreateSubject1OrderExamTableSQL());
     }
 
     @Override

@@ -2,11 +2,9 @@ package com.driver.go.activity;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.driver.go.R;
 import com.driver.go.base.Profile;
@@ -15,7 +13,6 @@ import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.SharePreferenceUtil;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;
@@ -61,23 +58,24 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         return mSQLiteManager.isOrderTableHasData();
     }
 
-    public void addOrderQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+    public void addSubject1OrderQuestionItem(QuestionItem q){
+        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
-    public void addRandomQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.RANDOM_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+
+    public void addSubject4OrderQuestionItem(QuestionItem q){
+        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
     public void addWrongQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.PRACTISE_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
     protected void saveCollectQuestion(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.COLLECT_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
     public void addExamWrongQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.EXAM_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
     public void finishActivity(Activity activity){

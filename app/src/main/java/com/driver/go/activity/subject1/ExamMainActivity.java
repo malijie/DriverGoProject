@@ -1,4 +1,4 @@
-package com.driver.go.activity.c1;
+package com.driver.go.activity.subject1;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -119,7 +119,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
         mRetrofitRequest = RetrofitHttpRequest.getInstance();
         initTime();
         initQuestion();
-        clearTableData(DBConstants.EXAM_WRONG_QUESTION_TABLE);
+        clearTableData(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE);
     }
 
     private void initQuestion() {
@@ -185,7 +185,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     };
 
     private void saveExamRecordData() {
-        mSQLiteManager.insertExamRecordData(DBConstants.C1_EXAM_RECORD_TABLE,Util.getCurrentDate(),getExamScore());
+        mSQLiteManager.insertExamRecordData(DBConstants.SUBJECT1_C1_EXAM_RECORD_TABLE,Util.getCurrentDate(),getExamScore());
     }
 
     private void showTimeUpDialog() {

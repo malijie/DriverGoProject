@@ -1,4 +1,4 @@
-package com.driver.go.activity.c1;
+package com.driver.go.activity.subject1;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,7 +22,6 @@ import com.driver.go.control.IntentManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.widget.dialog.CustomDialog;

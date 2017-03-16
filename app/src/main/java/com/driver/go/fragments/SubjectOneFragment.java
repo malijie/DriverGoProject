@@ -1,40 +1,27 @@
 package com.driver.go.fragments;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.driver.go.R;
-import com.driver.go.activity.c1.CollectQuestionsActivity;
-import com.driver.go.activity.c1.DriverExamSkillActivity;
-import com.driver.go.activity.c1.DriverTipActivity;
-import com.driver.go.activity.c1.ExamDataActivity;
-import com.driver.go.activity.c1.ExamMainActivity;
-import com.driver.go.activity.c1.ExamWrongQuestionActivity;
-import com.driver.go.activity.c1.PracticeOrderActivity;
-import com.driver.go.activity.c1.PracticeRandomActivity;
-import com.driver.go.activity.c1.PractiseWrongQuestionActivity;
-import com.driver.go.activity.c1.RecitePracticeOrderActivity;
+import com.driver.go.activity.subject1.CollectQuestionsActivity;
+import com.driver.go.activity.subject1.DriverExamSkillActivity;
+import com.driver.go.activity.subject1.DriverTipActivity;
+import com.driver.go.activity.subject1.ExamDataActivity;
+import com.driver.go.activity.subject1.ExamMainActivity;
+import com.driver.go.activity.subject1.ExamWrongQuestionActivity;
+import com.driver.go.activity.subject1.PracticeOrderActivity;
+import com.driver.go.activity.subject1.PracticeRandomActivity;
+import com.driver.go.activity.subject1.PractiseWrongQuestionActivity;
+import com.driver.go.activity.subject1.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
-import com.driver.go.entity.QuestionItem;
-import com.driver.go.http.RetrofitHttpRequest;
-import com.driver.go.http.SubscriberOnNextListener;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
-import com.driver.go.utils.Util;
 
-import java.util.List;
 
 //科目一
 public class SubjectOneFragment extends BaseFragment implements View.OnClickListener{
@@ -62,8 +49,7 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
 
     private void initData() {
         mSQLiteManager = SQLiteManager.getInstance();
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        getActivity().registerReceiver(receiver,filter);
+
     }
 
     private void initViews(View v) {
@@ -95,14 +81,14 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
         switch (view.getId()){
             case R.id.id_main_image_order_practice:
                 //顺序练习
-                if(isDownloadDB()){
+                if(isDownloadSubject1DB()){
                     IntentManager.startActivity(PracticeOrderActivity.class);
                 }else{
                     ToastManager.showNoNetworkMsg();
                 }
                 break;
             case R.id.id_main_image_recite_question:
-                if(isDownloadDB()){
+                if(isDownloadSubject1DB()){
                     IntentManager.startActivity(RecitePracticeOrderActivity.class);
                 }else{
                     ToastManager.showNoNetworkMsg();
@@ -149,45 +135,21 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
     }
 
     private boolean checkHasPractiseWrongQuestions(){
-       return mSQLiteManager.hasQuestions(DBConstants.PRACTISE_WRONG_QUESTION_TABLE);
+       return mSQLiteManager.hasQuestions(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE);
     }
 
     private boolean checkHasExamWrongQuestions(){
-        return mSQLiteManager.hasQuestions(DBConstants.EXAM_WRONG_QUESTION_TABLE);
+        return mSQLiteManager.hasQuestions(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE);
     }
 
     private boolean checkHasCollectQuestions(){
         return mSQLiteManager.hasCollectQuestions();
     }
 
-    public BroadcastReceiver receiver = new BroadcastReceiver() {
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                if (Util.hasInternet()) {
-                    RetrofitHttpRequest.getInstance().getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
-                        @Override
-                        public void onNext(final List<QuestionItem> questionItems) {
-                            new Thread( new Runnable() {
-                                @Override
-                                public void run() {
-                                    for(QuestionItem item:questionItems){
-                                        addOrderQuestionItem(item);
-                                    }
-                                }
-                            }).start();
-
-                        }
-                    });
-                }
-            }
-        }
-    };
 
     @Override
     public void onDestroy() {
-        getActivity().unregisterReceiver(receiver);
         super.onDestroy();
     }
 }

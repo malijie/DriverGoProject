@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
-import com.driver.go.utils.Logger;
 
 /**
  * Created by malijie on 2017/3/15.
@@ -26,14 +25,15 @@ public class BaseFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    public boolean isDownloadDB(){
+    public boolean isDownloadSubject1DB(){
         if(mSQLiteManager != null){
             return mSQLiteManager.queryOrderQuestionById(1).moveToFirst();
         }
         return false;
     }
 
+
     public void addOrderQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 }
