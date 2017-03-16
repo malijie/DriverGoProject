@@ -135,15 +135,15 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
     }
 
     private boolean checkHasPractiseWrongQuestions(){
-        return mSQLiteManager.hasQuestions(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE);
+        return mSQLiteManager.hasQuestions(DBConstants.SUBJECT4_PRACTISE_WRONG_QUESTION_TABLE);
     }
 
     private boolean checkHasExamWrongQuestions(){
-        return mSQLiteManager.hasQuestions(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE);
+        return mSQLiteManager.hasQuestions(DBConstants.SUBJECT4_EXAM_WRONG_QUESTION_TABLE);
     }
 
     private boolean checkHasCollectQuestions(){
-        return mSQLiteManager.hasCollectQuestions();
+        return mSQLiteManager.hasCollectQuestions(DBConstants.SUBJECT4_COLLECT_QUESTION_TABLE);
     }
 
 

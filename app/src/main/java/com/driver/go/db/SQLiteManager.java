@@ -125,8 +125,8 @@ public class SQLiteManager {
         mDB.execSQL(SQLContainer.getDeleteQuestionSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,id));
     }
 
-    public boolean hasCollectQuestions() {
-        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE),null);
+    public boolean hasCollectQuestions(String tableName) {
+        cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(tableName),null);
         return cursor.moveToFirst();
     }
 

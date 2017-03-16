@@ -143,7 +143,7 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
     }
 
     private boolean checkHasCollectQuestions(){
-        return mSQLiteManager.hasCollectQuestions();
+        return mSQLiteManager.hasCollectQuestions(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE);
     }
 
 
