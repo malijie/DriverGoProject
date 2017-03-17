@@ -14,7 +14,7 @@ import com.driver.go.base.Profile;
  * Created by Administrator on 2017/3/4.
  */
 
-public class DriverTipActivity extends SubjectFourBaseActivity implements View.OnClickListener{
+public class DriverTipActivity extends DriverBaseActivity implements View.OnClickListener{
     private TextView mTextContent;
     private ImageButton mButtonBack;
 
@@ -26,14 +26,12 @@ public class DriverTipActivity extends SubjectFourBaseActivity implements View.O
         initData();
     }
 
-    @Override
     public void initView() {
         mTextContent = (TextView) findViewById(R.id.id_driver_tip_text_content);
         mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
         mButtonBack.setOnClickListener(this);
     }
 
-    @Override
     public void initData() {
         mTextContent.setText(Profile.DRIVER_TIP);
     }

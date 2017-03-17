@@ -135,7 +135,7 @@ public class PracticeRandomActivity extends SubjectFourBaseActivity implements V
                     mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
                 }
 
-                if(checkCollected(SUBJECT_TYPE_4,mCurrentQuestionItem.getId())){
+                if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
                     setCollectImageSelected(mButtonCollect);
                 }
 
@@ -209,7 +209,7 @@ public class PracticeRandomActivity extends SubjectFourBaseActivity implements V
     }
 
     private void handleCollectAction() {
-        if(checkCollected(SUBJECT_TYPE_4,mCurrentQuestionItem.getId())){
+        if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{

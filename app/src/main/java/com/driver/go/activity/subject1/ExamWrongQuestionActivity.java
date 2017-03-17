@@ -194,7 +194,7 @@ public class ExamWrongQuestionActivity extends SubjectOneBaseActivity implements
     //排除一个错误答案
 
     private void handleCollectAction() {
-        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
+        if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{
@@ -342,7 +342,7 @@ public class ExamWrongQuestionActivity extends SubjectOneBaseActivity implements
     }
 
     private void updateCollectUI(){
-        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
+        if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             setCollectImageSelected(mButtonCollect);
         }
     }

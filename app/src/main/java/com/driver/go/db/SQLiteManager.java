@@ -75,5 +75,9 @@ public class SQLiteManager extends SQLiteCommon{
         return mISQLiteBehavior.getMaxScore();
     }
 
+    public boolean checkCollected(int id){
+        return mISQLiteBehavior.checkCollected(id);
+    }
+
 
 }

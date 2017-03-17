@@ -123,7 +123,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
-        if(checkCollected(SUBJECT_TYPE_4,mCurrentId)){
+        if(mSQLiteManager.checkCollected(mCurrentId)){
             setCollectImageSelected(mButtonCollect);
         }
     }
@@ -203,7 +203,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
     }
 
     private void handleCollectAction() {
-        if(checkCollected(SUBJECT_TYPE_4,mCurrentQuestionItem.getId())){
+        if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{

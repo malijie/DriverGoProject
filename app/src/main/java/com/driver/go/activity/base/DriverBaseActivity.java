@@ -116,11 +116,6 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         return SharePreferenceUtil.loadSubject4ReciteQuestionIndex();
     }
 
-    protected boolean checkCollected(int subjectType,int id){
-        Cursor cursor = mSQLiteManager.queryCollectQuestionById(id);
-        return cursor.moveToFirst();
-    }
-
     protected int getQuestionIdByIndex(int index){
         Cursor cursor = mSQLiteManager.queryRandomQuestionByIndex(index);
         return cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1)));

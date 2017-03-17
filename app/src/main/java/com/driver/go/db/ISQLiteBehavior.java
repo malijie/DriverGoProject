@@ -17,4 +17,5 @@ public interface ISQLiteBehavior {
     int getExamWrongQuestionCount();
     int getMaxScore();
     Cursor getExamRecordResult();
+    boolean checkCollected(int id);
 }

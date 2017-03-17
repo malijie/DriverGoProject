@@ -73,4 +73,9 @@ public class SubjectFourSQLiteBehavior implements ISQLiteBehavior{
         cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(DBConstants.SUBJECT4_C1_EXAM_RECORD_TABLE),null);
         return cursor;
     }
+
+    @Override
+    public boolean checkCollected(int id) {
+        return queryCollectQuestionById(id).moveToFirst();
+    }
 }

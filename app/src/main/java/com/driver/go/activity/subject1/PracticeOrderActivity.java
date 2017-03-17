@@ -122,7 +122,7 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
 
-        if(checkCollected(SUBJECT_TYPE_1,mCurrentId)){
+        if(mSQLiteManager.checkCollected(mCurrentId)){
             setCollectImageSelected(mButtonCollect);
         }
     }
@@ -204,7 +204,7 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
     }
 
     private void handleCollectAction() {
-        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
+        if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{

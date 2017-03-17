@@ -264,7 +264,7 @@ public class ExamMainActivity extends SubjectFourBaseActivity implements View.On
      * 点击收藏
      */
     private void handleCollectAction() {
-        if(checkCollected(SUBJECT_TYPE_4,mCurrentQuestionItem.getId())){
+        if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{

@@ -193,7 +193,7 @@ public class PractiseWrongQuestionActivity extends SubjectOneBaseActivity implem
 
     //排除一个错误答案
     private void handleCollectAction() {
-        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
+        if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             ToastManager.showAlreadyCollectMsg();
             return ;
         }else{
@@ -341,7 +341,7 @@ public class PractiseWrongQuestionActivity extends SubjectOneBaseActivity implem
     }
 
     private void updateCollectUI(){
-        if(checkCollected(SUBJECT_TYPE_1,mCurrentQuestionItem.getId())){
+        if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             setCollectImageSelected(mButtonCollect);
         }
     }
