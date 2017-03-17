@@ -6,14 +6,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 
 /**
  * Created by Administrator on 2017/3/4.
  */
 
-public class DriverExamSkillActivity extends DriverBaseActivity implements View.OnClickListener{
+public class DriverExamSkillActivity extends SubjectFourBaseActivity implements View.OnClickListener{
     private TextView mTextTitle;
     private ImageButton mButtonBack;
     private TextView mTextContent;
@@ -30,7 +30,7 @@ public class DriverExamSkillActivity extends DriverBaseActivity implements View.
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
         mTextTitle = (TextView) findViewById(R.id.id_driver_skill_text_title);
-        mTextContent = (TextView) findViewById(R.id.id_driver_skil_text_content);
+        mTextContent = (TextView) findViewById(R.id.id_driver_skill_text_content);
         mButtonBack.setOnClickListener(this);
     }
 

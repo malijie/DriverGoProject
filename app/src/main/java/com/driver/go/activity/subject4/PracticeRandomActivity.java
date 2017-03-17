@@ -16,7 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
 import com.driver.go.entity.QuestionItem;
@@ -32,7 +33,7 @@ import java.util.Random;
 /**
  * Created by malijie on 2016/12/1.
  */
-public class PracticeRandomActivity  extends DriverBaseActivity implements View.OnClickListener{
+public class PracticeRandomActivity extends SubjectFourBaseActivity implements View.OnClickListener{
 
     private ImageButton mButtonBack;
     private TextView mTextNum;

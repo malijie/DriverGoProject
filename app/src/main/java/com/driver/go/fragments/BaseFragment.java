@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.driver.go.activity.DriverBaseActivity;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.db.SubjectOneSQLiteBehavior;

@@ -1,10 +1,5 @@
 package com.driver.go.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,12 +9,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.driver.go.R;
+import com.driver.go.activity.base.DriverBaseActivity;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.fragments.SubjectFourFragment;
 import com.driver.go.fragments.SubjectOneFragment;
-import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.widget.ViewPagerIndicator;
@@ -28,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends DriverBaseActivity{
+public class MainActivity extends DriverBaseActivity {
     private TextView mTextTitle;
     private ImageButton mButtonBack;
 
@@ -45,11 +39,8 @@ public class MainActivity extends DriverBaseActivity{
         setContentView(R.layout.activity_main);
         initData();
         initView();
-
-
     }
 
-    @Override
     public void initView() {
         mTextTitle = (TextView) findViewById(R.id.id_title_bar_text_title);
         mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
@@ -101,7 +92,6 @@ public class MainActivity extends DriverBaseActivity{
         });
     }
 
-    @Override
     public void initData() {
 
         this.mSupportFragmentManager = getSupportFragmentManager();

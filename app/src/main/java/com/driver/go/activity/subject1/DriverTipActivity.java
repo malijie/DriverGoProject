@@ -6,7 +6,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectOneBaseActivity;
 import com.driver.go.base.Profile;
 
 /**
@@ -25,14 +26,12 @@ public class DriverTipActivity extends DriverBaseActivity implements View.OnClic
         initData();
     }
 
-    @Override
     public void initView() {
         mTextContent = (TextView) findViewById(R.id.id_driver_tip_text_content);
         mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
         mButtonBack.setOnClickListener(this);
     }
 
-    @Override
     public void initData() {
         mTextContent.setText(Profile.DRIVER_TIP);
     }

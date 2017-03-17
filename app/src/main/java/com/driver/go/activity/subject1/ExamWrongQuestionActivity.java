@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectOneBaseActivity;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
@@ -25,7 +25,7 @@ import java.util.List;
  * Created by malijie on 2017/3/1.
  */
 
-public class ExamWrongQuestionActivity extends DriverBaseActivity implements View.OnClickListener{
+public class ExamWrongQuestionActivity extends SubjectOneBaseActivity implements View.OnClickListener{
 
     private ImageButton mButtonBack;
     private ImageButton mButtonDelete;
@@ -134,7 +134,7 @@ public class ExamWrongQuestionActivity extends DriverBaseActivity implements Vie
     }
 
     private void initQuestionData() {
-        Cursor cursor = mSQLiteManager.getAllExamWrongQuestions(SUBJECT_TYPE_1);
+        Cursor cursor = mSQLiteManager.getAllExamWrongQuestions();
         mQuestions = new ArrayList<>();
         while(cursor.moveToNext()){
             QuestionItem item = EntityConvertManager.getQuestionItemEntity(cursor);

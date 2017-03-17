@@ -16,11 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.db.SubjectFourSQLiteBehavior;
-import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
@@ -31,7 +31,7 @@ import java.util.Random;
 /**
  * Created by Administrator on 2016/12/1.
  */
-public class PracticeOrderActivity extends DriverBaseActivity implements View.OnClickListener{
+public class PracticeOrderActivity extends SubjectFourBaseActivity implements View.OnClickListener{
 
     private ImageButton mButtonBack;
     private TextView mTextNum;
@@ -134,7 +134,6 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         registerReceiver(receiver,filter);
 
         mCurrentId = loadOrderQuestionIndex(SUBJECT_TYPE_4);
-        mSQLiteManager.setSubjectBehavior(new SubjectFourSQLiteBehavior());
         mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 

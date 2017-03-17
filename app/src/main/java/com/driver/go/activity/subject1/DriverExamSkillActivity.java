@@ -6,8 +6,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectOneBaseActivity;
 import com.driver.go.base.Profile;
+import com.driver.go.utils.Logger;
 
 /**
  * Created by Administrator on 2017/3/4.
@@ -22,19 +24,19 @@ public class DriverExamSkillActivity extends DriverBaseActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driver_skill);
+
         initView();
         initData();
     }
 
-    @Override
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_title_bar_button_back);
         mTextTitle = (TextView) findViewById(R.id.id_driver_skill_text_title);
-        mTextContent = (TextView) findViewById(R.id.id_driver_skil_text_content);
+        mTextContent = (TextView) findViewById(R.id.id_driver_skill_text_content);
         mButtonBack.setOnClickListener(this);
+
     }
 
-    @Override
     public void initData() {
         mTextContent.setText(Profile.DRIVER_SKILL);
     }

@@ -1,4 +1,4 @@
-package com.driver.go.activity;
+package com.driver.go.activity.base;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -13,6 +13,7 @@ import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.SharePreferenceUtil;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;
@@ -34,10 +35,6 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     protected final String ANSWER_C = "3";
     protected final String ANSWER_D = "4";
 
-
-
-    public abstract void initView();
-    public abstract void initData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,12 +117,12 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     }
 
     protected boolean checkCollected(int subjectType,int id){
-        Cursor cursor = mSQLiteManager.queryCollectQuestionById(subjectType,id);
+        Cursor cursor = mSQLiteManager.queryCollectQuestionById(id);
         return cursor.moveToFirst();
     }
 
-    protected int getQuestionIdByIndex(int subjectType,int index){
-        Cursor cursor = mSQLiteManager.queryRandomQuestionByIndex(subjectType,index);
+    protected int getQuestionIdByIndex(int index){
+        Cursor cursor = mSQLiteManager.queryRandomQuestionByIndex(index);
         return cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1)));
     }
 

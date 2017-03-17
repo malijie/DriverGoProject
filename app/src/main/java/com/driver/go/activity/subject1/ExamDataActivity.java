@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectOneBaseActivity;
 import com.driver.go.adapter.CommonAdapter;
 import com.driver.go.adapter.ViewHolder;
 import com.driver.go.control.EntityConvertManager;
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by malijie on 2017/3/13.
  */
 
-public class ExamDataActivity extends DriverBaseActivity implements View.OnClickListener{
+public class ExamDataActivity extends SubjectOneBaseActivity implements View.OnClickListener{
     private ImageButton mButtonBack;
     private ListView mListView;
     private TextView mTextNoQuestionsCount;
@@ -71,9 +71,9 @@ public class ExamDataActivity extends DriverBaseActivity implements View.OnClick
 
     @Override
     public void initData() {
-        Cursor cursor = mSQLiteManager.getExamRecord();
+        Cursor cursor = mSQLiteManager.getExamRecordResult();
         maxScore = mSQLiteManager.getMaxScore();
-        wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount(SUBJECT_TYPE_1);
+        wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount();
         noWrittenQuestionCount = sOrderQuestionTotalNum - SharePreferenceUtil.loadSubject1OrderQuestionIndex();
         rightQuestionCount = sOrderQuestionTotalNum - wrongQuestionCount;
 

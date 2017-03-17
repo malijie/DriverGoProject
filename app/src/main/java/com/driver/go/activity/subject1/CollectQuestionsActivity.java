@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectOneBaseActivity;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
@@ -24,7 +24,7 @@ import java.util.List;
  * Created by malijie on 2017/3/3.
  */
 
-public class CollectQuestionsActivity extends DriverBaseActivity implements View.OnClickListener{
+public class CollectQuestionsActivity extends SubjectOneBaseActivity implements View.OnClickListener{
 
     private ImageButton mButtonBack;
     private ImageButton mButtonDelete;
@@ -133,7 +133,7 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
     }
 
     private void initQuestionData() {
-        Cursor cursor = mSQLiteManager.getAllCollectQuestions(SUBJECT_TYPE_1);
+        Cursor cursor = mSQLiteManager.getAllCollectQuestions();
         mQuestions = new ArrayList<>();
         while(cursor.moveToNext()){
             QuestionItem item = EntityConvertManager.getQuestionItemEntity(cursor);
@@ -184,7 +184,7 @@ public class CollectQuestionsActivity extends DriverBaseActivity implements View
 
     //删除错题
     private void handleDeleteCollectQuestion() {
-        mSQLiteManager.deleteItemFromCollectQuestionById(SUBJECT_TYPE_1,mCurrentQuestionItem.getId());
+        mSQLiteManager.deleteItemFromCollectQuestionById(mCurrentQuestionItem.getId());
         showNextQuestion();
         ToastManager.showShortMsg("删除成功!");
 

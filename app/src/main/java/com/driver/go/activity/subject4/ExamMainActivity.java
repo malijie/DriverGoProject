@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
@@ -34,7 +34,7 @@ import java.util.List;
  * Created by malijie on 2017/3/6.
  */
 
-public class ExamMainActivity extends DriverBaseActivity implements View.OnClickListener{
+public class ExamMainActivity extends SubjectFourBaseActivity implements View.OnClickListener{
     private RetrofitHttpRequest mRetrofitRequest = null;
 
     private static final int MSG_HANDLE_TIME = 0;
@@ -208,7 +208,7 @@ public class ExamMainActivity extends DriverBaseActivity implements View.OnClick
     }
 
     private int getExamScore(){
-        return 100-mSQLiteManager.getExamWrongQuestionCount(SUBJECT_TYPE_4);
+        return 100-mSQLiteManager.getExamWrongQuestionCount();
     }
 
     private void initTime() {

@@ -6,14 +6,15 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 
 /**
  * Created by Administrator on 2017/3/4.
  */
 
-public class DriverTipActivity extends DriverBaseActivity implements View.OnClickListener{
+public class DriverTipActivity extends SubjectFourBaseActivity implements View.OnClickListener{
     private TextView mTextContent;
     private ImageButton mButtonBack;
 

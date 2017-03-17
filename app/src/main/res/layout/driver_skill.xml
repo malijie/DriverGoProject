@@ -23,7 +23,7 @@
             android:textColor="@color/font_black"
             android:text="科目一考试技巧记忆口诀"/>
         <TextView
-            android:id="@+id/id_driver_skil_text_content"
+            android:id="@+id/id_driver_skill_text_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

@@ -16,7 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.DriverBaseActivity;
+import com.driver.go.activity.base.DriverBaseActivity;
+import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.db.SubjectFourSQLiteBehavior;
@@ -28,7 +29,7 @@ import com.driver.go.utils.Util;
 /**
  * Created by Administrator on 2016/12/1.
  */
-public class RecitePracticeOrderActivity extends DriverBaseActivity implements View.OnClickListener{
+public class RecitePracticeOrderActivity extends SubjectFourBaseActivity implements View.OnClickListener{
 
     private ImageButton mButtonBack;
     private TextView mTextNum;
