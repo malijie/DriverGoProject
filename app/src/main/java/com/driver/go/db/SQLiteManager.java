@@ -3,6 +3,8 @@ package com.driver.go.db;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.driver.go.entity.QuestionItem;
+
 /**
  * Created by malijie on 2017/2/22.
  */
@@ -77,6 +79,10 @@ public class SQLiteManager extends SQLiteCommon{
 
     public boolean checkCollected(int id){
         return mISQLiteBehavior.checkCollected(id);
+    }
+
+    public void saveCollectQuestion(QuestionItem q){
+        mISQLiteBehavior.saveCollectQuestion(q);
     }
 
 

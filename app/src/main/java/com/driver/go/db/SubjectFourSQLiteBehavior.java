@@ -3,6 +3,10 @@ package com.driver.go.db;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.Logger;
+
+
 /**
  * Created by malijie on 2017/3/17.
  */
@@ -77,5 +81,15 @@ public class SubjectFourSQLiteBehavior implements ISQLiteBehavior{
     @Override
     public boolean checkCollected(int id) {
         return queryCollectQuestionById(id).moveToFirst();
+    }
+
+    @Override
+    public void saveCollectQuestion(QuestionItem q) {
+        String sql = "INSERT INTO " + DBConstants.SUBJECT4_COLLECT_QUESTION_TABLE
+                + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
+                "VALUES ("+ q.getId()+ ",'" + q.getQuestion() + "'," + "'" + q.getAnswer() + "'," +
+                "'" + q.getItem1() + "',"+ "'" + q.getItem2() + "',"+"'" + q.getItem4() + "',"+
+                "'" + q.getItem4() + "',"+ "'" + q.getExplains() + "',"+"'" + q.getUrl() + "')";
+        mDB.execSQL(sql);
     }
 }

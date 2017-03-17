@@ -132,7 +132,6 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
 
-        mSQLiteManager.setSubjectBehavior(new SubjectOneSQLiteBehavior());
         mCurrentId = loadOrderQuestionIndex(SUBJECT_TYPE_1);
         mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
 

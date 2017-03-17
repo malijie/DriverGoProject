@@ -70,9 +70,9 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
     }
 
-    protected void saveCollectQuestion(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-    }
+//    protected void saveCollectQuestion(QuestionItem q){
+//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+//    }
 
     public void addExamWrongQuestionItem(QuestionItem q){
         mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
@@ -86,19 +86,19 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         return Util.hasInternet();
     }
 
+    protected int loadOrderQuestionIndex(int subjectType){
+        if(subjectType == SUBJECT_TYPE_1){
+            return SharePreferenceUtil.loadSubject1OrderQuestionIndex();
+        }
+        return SharePreferenceUtil.loadSubject4OrderQuestionIndex();
+    }
+
     protected void saveOrderQuestionIndex(int subjectType,int index){
         if(subjectType == SUBJECT_TYPE_1){
             SharePreferenceUtil.saveSubject1OrderQuestionIndex(index);
         }else if(subjectType == SUBJECT_TYPE_4){
             SharePreferenceUtil.saveSubject4OrderQuestionIndex(index);
         }
-    }
-
-    protected int loadOrderQuestionIndex(int subjectType){
-        if(subjectType == SUBJECT_TYPE_1){
-            return SharePreferenceUtil.loadSubject1OrderQuestionIndex();
-        }
-        return SharePreferenceUtil.loadSubject4OrderQuestionIndex();
     }
 
     protected void saveReciteQuestionIndex(int subjectType,int index){

@@ -2,6 +2,8 @@ package com.driver.go.db;
 
 import android.database.Cursor;
 
+import com.driver.go.entity.QuestionItem;
+
 /**
  * Created by malijie on 2017/3/17.
  */
@@ -18,4 +20,5 @@ public interface ISQLiteBehavior {
     int getMaxScore();
     Cursor getExamRecordResult();
     boolean checkCollected(int id);
+    void saveCollectQuestion(QuestionItem q);
 }
