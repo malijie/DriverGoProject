@@ -22,7 +22,6 @@ public class SharePreferenceUtil {
        return DriverGoApplication.sContext.getSharedPreferences(SP_USER_INFO, Context.MODE_PRIVATE).getInt(SUBJECT1_ORDER_QUESTION_CURRENT_INDEX_KEY,1);
     }
 
-
     public static void saveSubject1ReciteQuestionIndex(int index) {
         DriverGoApplication.sContext.getSharedPreferences(SP_USER_INFO, Context.MODE_PRIVATE).edit().putInt(SUBJECT1_RECITE_QUESTION_CURRENT_INDEX_KEY,index).commit();
     }

@@ -11,43 +11,65 @@ import java.sql.Driver;
  * Created by malijie on 2017/2/22.
  */
 
-public class SQLiteManager {
+public class SQLiteManager extends SQLiteCommon implements ISQLiteBehavior{
     private Cursor cursor;
     private static SQLiteManager sSQLiteManager = null;
-    private SQLiteDatabase mDB;
+    private static SQLiteDatabase mDB;
+    private ISQLiteBehavior mISQLiteBehavior;
 
-    private SQLiteManager(){
-        mDB = new SQLiteHelper().getWritableDatabase();
+    private SQLiteManager(SQLiteDatabase db){
+        super(db);
     }
 
     public static SQLiteManager getInstance(){
         if(sSQLiteManager == null){
             synchronized (SQLiteManager.class){
                 if(sSQLiteManager == null){
-                    sSQLiteManager = new SQLiteManager();
+                    mDB = new SQLiteHelper().getWritableDatabase();
+                    sSQLiteManager = new SQLiteManager(mDB);
                 }
             }
         }
         return sSQLiteManager;
     }
 
-    public void createTables(){
-        if(mDB != null){
-            mDB.execSQL(SQLContainer.getCreateSubject1OrderExamTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject1RandomExamTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject1WrongQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject1CollectQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject1ExamWrongQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject1ExamRecordTableSQL());
-
-            mDB.execSQL(SQLContainer.getCreateSubject4OrderExamTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject4RandomExamTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject4WrongQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject4CollectQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject4ExamWrongQuestionTableSQL());
-            mDB.execSQL(SQLContainer.getCreateSubject4ExamRecordTableSQL());
-        }
+    public void setSubjectBehavior(ISQLiteBehavior sqLiteBehavior){
+        mISQLiteBehavior = sqLiteBehavior;
     }
+
+    @Override
+    public Cursor queryOrderQuestionById(int id) {
+        return mISQLiteBehavior.queryOrderQuestionById(id);
+    }
+
+//    public void createTables(){
+//        if(mDB != null){
+//            mDB.execSQL(SQLContainer.getCreateSubject1OrderExamTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject1RandomExamTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject1WrongQuestionTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject1CollectQuestionTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject1ExamWrongQuestionTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject1ExamRecordTableSQL());
+//
+//            mDB.execSQL(SQLContainer.getCreateSubject4OrderExamTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject4RandomExamTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject4WrongQuestionTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject4CollectQuestionTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject4ExamWrongQuestionTableSQL());
+//            mDB.execSQL(SQLContainer.getCreateSubject4ExamRecordTableSQL());
+//        }
+//    }
+
+//    public Cursor queryOrderQuestionById(int subjectType,int id) {
+//        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
+//            cursor = mDB.rawQuery(SQLContainer.getSubject1OrderExamItemByIdSQL(id),null);
+//        }else{
+//            cursor = mDB.rawQuery(SQLContainer.getSubject4OrderExamItemByIdSQL(id),null);
+//        }
+//        cursor.moveToNext();
+//        return cursor;
+//    }
+
 
     public boolean isOrderTableHasData(){
         cursor = mDB.rawQuery(SQLContainer.getSubject1FirstOrderExamDataSQL(),null);
@@ -68,15 +90,6 @@ public class SQLiteManager {
         mDB.execSQL(sql);
     }
 
-    public Cursor queryOrderQuestionById(int subjectType,int id) {
-        if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
-            cursor = mDB.rawQuery(SQLContainer.getSubject1OrderExamItemByIdSQL(id),null);
-        }else{
-            cursor = mDB.rawQuery(SQLContainer.getSubject4OrderExamItemByIdSQL(id),null);
-        }
-        cursor.moveToNext();
-        return cursor;
-    }
 
     public Cursor queryCollectQuestionById(int subjectType,int id) {
         if(subjectType == DriverBaseActivity.SUBJECT_TYPE_1){
@@ -177,4 +190,6 @@ public class SQLiteManager {
         cursor.moveToFirst();
         return cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(0)));
     }
+
+
 }

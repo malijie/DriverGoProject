@@ -19,6 +19,7 @@ import com.driver.go.R;
 import com.driver.go.activity.DriverBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
+import com.driver.go.db.SubjectFourSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
@@ -129,7 +130,8 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
     @Override
     public void initData() {
         mCurrentId = loadReciteQuestionIndex(SUBJECT_TYPE_4);
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_4,mCurrentId));
+        mSQLiteManager.setSubjectBehavior(new SubjectFourSQLiteBehavior());
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 
 
@@ -182,7 +184,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
             }
             //没有进行选择
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_4,mCurrentId));
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveReciteQuestionIndex(SUBJECT_TYPE_4,mCurrentId);
             updateUI(mCurrentQuestionItem);
         }else{
@@ -200,7 +202,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
                 return;
             }
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_4,mCurrentId));
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveReciteQuestionIndex(SUBJECT_TYPE_4,mCurrentId);
             updateUI(mCurrentQuestionItem);
         }else{

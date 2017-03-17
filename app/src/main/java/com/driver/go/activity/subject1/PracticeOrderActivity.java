@@ -19,6 +19,7 @@ import com.driver.go.R;
 import com.driver.go.activity.DriverBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
+import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
@@ -131,8 +132,10 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
 
+        mSQLiteManager.setSubjectBehavior(new SubjectOneSQLiteBehavior());
         mCurrentId = loadOrderQuestionIndex(SUBJECT_TYPE_1);
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_1,mCurrentId));
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
+
     }
 
 
@@ -282,7 +285,8 @@ public class PracticeOrderActivity extends DriverBaseActivity implements View.On
             }
 
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_1,mCurrentId));
+
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveOrderQuestionIndex(SUBJECT_TYPE_1,mCurrentId);
             updateUI(mCurrentQuestionItem);
             mIsChoiceOneAnswer = false;

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.driver.go.activity.DriverBaseActivity;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
+import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
 
 /**
@@ -23,12 +24,13 @@ public class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mSQLiteManager = SQLiteManager.getInstance();
+        mSQLiteManager.setSubjectBehavior(new SubjectOneSQLiteBehavior());
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     public boolean isDownloadSubject1DB(){
         if(mSQLiteManager != null){
-            return mSQLiteManager.queryOrderQuestionById(DriverBaseActivity.SUBJECT_TYPE_1,1).moveToFirst();
+            return mSQLiteManager.queryOrderQuestionById(1).moveToFirst();
         }
         return false;
     }

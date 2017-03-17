@@ -129,7 +129,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
     @Override
     public void initData() {
         mCurrentId = loadReciteQuestionIndex(SUBJECT_TYPE_1);
-        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_1,mCurrentId));
+        mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 
 
@@ -182,7 +182,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
             }
             //没有进行选择
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_1,mCurrentId));
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveReciteQuestionIndex(SUBJECT_TYPE_1,mCurrentId);
             updateUI(mCurrentQuestionItem);
         }else{
@@ -200,7 +200,7 @@ public class RecitePracticeOrderActivity extends DriverBaseActivity implements V
                 return;
             }
             initUI();
-            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(SUBJECT_TYPE_1,mCurrentId));
+            mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
             saveReciteQuestionIndex(SUBJECT_TYPE_1,mCurrentId);
             updateUI(mCurrentQuestionItem);
         }else{
