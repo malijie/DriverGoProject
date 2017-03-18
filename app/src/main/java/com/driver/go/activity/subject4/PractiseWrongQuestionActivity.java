@@ -130,6 +130,7 @@ public class PractiseWrongQuestionActivity  extends SubjectFourBaseActivity impl
 
     @Override
     public void initData() {
+        super.initData();
         initQuestionData();
         mCurrentQuestionItem = mQuestions.get(0);
     }

@@ -22,6 +22,7 @@ import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.db.SubjectFourSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 
@@ -130,6 +131,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
 
     @Override
     public void initData() {
+        super.initData();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
 

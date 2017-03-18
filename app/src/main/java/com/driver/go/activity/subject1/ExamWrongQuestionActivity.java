@@ -129,6 +129,7 @@ public class ExamWrongQuestionActivity extends SubjectOneBaseActivity implements
 
     @Override
     public void initData() {
+        super.initData();
         initQuestionData();
         mCurrentQuestionItem = mQuestions.get(0);
     }

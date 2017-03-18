@@ -129,6 +129,7 @@ public class PractiseWrongQuestionActivity extends SubjectOneBaseActivity implem
 
     @Override
     public void initData() {
+        super.initData();
         initQuestionData();
         mCurrentQuestionItem = mQuestions.get(0);
     }

@@ -129,6 +129,7 @@ public class CollectQuestionsActivity extends SubjectFourBaseActivity implements
 
     @Override
     public void initData() {
+        super.initData();
         initQuestionData();
         mCurrentQuestionItem = mQuestions.get(0);
     }

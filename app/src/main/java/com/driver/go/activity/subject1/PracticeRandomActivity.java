@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
+import com.driver.go.activity.base.DriverBaseActivity;
 import com.driver.go.activity.base.SubjectOneBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
@@ -115,6 +116,7 @@ public class PracticeRandomActivity  extends SubjectOneBaseActivity implements V
 
     @Override
     public void initData() {
+//        super.initData();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
         initQuestion();
@@ -214,7 +216,7 @@ public class PracticeRandomActivity  extends SubjectOneBaseActivity implements V
         }else{
             ToastManager.showCollectSuccessMsg();
             mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
-            saveCollectQuestion(mCurrentQuestionItem);
+//            saveCollectQuestion(mCurrentQuestionItem);
         }
 
     }

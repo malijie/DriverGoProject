@@ -113,6 +113,7 @@ public class ExamMainActivity extends SubjectOneBaseActivity implements View.OnC
 
     @Override
     public void initData() {
+        super.initData();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
 

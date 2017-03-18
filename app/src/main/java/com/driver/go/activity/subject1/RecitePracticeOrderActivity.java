@@ -128,6 +128,7 @@ public class RecitePracticeOrderActivity extends SubjectOneBaseActivity implemen
 
     @Override
     public void initData() {
+        super.initData();
         mCurrentId = loadReciteQuestionIndex(SUBJECT_TYPE_1);
         mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }

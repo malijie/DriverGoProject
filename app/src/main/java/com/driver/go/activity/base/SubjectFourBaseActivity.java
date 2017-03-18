@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.driver.go.db.SubjectFourSQLiteBehavior;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.Logger;
 
 /**
  * Created by malijie on 2017/3/17.

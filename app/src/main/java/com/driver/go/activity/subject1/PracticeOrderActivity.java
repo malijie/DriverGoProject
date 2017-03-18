@@ -21,6 +21,7 @@ import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 
@@ -65,6 +66,7 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.order_practise);
         initData();
         initView();
@@ -129,6 +131,7 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
 
     @Override
     public void initData() {
+        super.initData();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
 

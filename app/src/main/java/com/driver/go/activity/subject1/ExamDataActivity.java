@@ -71,6 +71,7 @@ public class ExamDataActivity extends SubjectOneBaseActivity implements View.OnC
 
     @Override
     public void initData() {
+        super.initData();
         Cursor cursor = mSQLiteManager.getExamRecordResult();
         maxScore = mSQLiteManager.getMaxScore();
         wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount();

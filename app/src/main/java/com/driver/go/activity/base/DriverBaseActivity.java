@@ -43,6 +43,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         initManager();
     }
 
+
     private void initManager() {
         mRetrofitHttpRequest = RetrofitHttpRequest.getInstance();
         mImageLoader = ImageLoader.getInstance();

@@ -35,6 +35,7 @@ public class DriverExamSkillActivity extends DriverBaseActivity implements View.
     }
 
     public void initData() {
+
         mTextContent.setText(Profile.DRIVER_SKILL);
     }
 
