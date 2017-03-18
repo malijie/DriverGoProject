@@ -21,4 +21,5 @@ public interface ISQLiteBehavior {
     Cursor getExamRecordResult();
     boolean checkCollected(int id);
     void saveCollectQuestion(QuestionItem q);
+    void addQuestionItem2Table(String tableName,QuestionItem q);
 }

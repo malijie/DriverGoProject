@@ -59,25 +59,25 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         return mSQLiteManager.isOrderTableHasData();
     }
 
-    public void addSubject1OrderQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-    }
+//    public void addSubject1OrderQuestionItem(QuestionItem q){
+//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+//    }
+//
+//    public void addSubject4OrderQuestionItem(QuestionItem q){
+//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+//    }
 
-    public void addSubject4OrderQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-    }
-
-    public void addWrongQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+    public void saveQuestionItem2DB(String tableName, QuestionItem q){
+        mSQLiteManager.insertQuestion2Table(tableName,q);
     }
 
 //    protected void saveCollectQuestion(QuestionItem q){
 //        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
 //    }
 
-    public void addExamWrongQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-    }
+//    public void addExamWrongQuestionItem(QuestionItem q){
+//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+//    }
 
     public void finishActivity(Activity activity){
         IntentManager.finishActivity(activity);
@@ -112,7 +112,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
 
     protected int loadReciteQuestionIndex(int subjectType){
         if(subjectType == SUBJECT_TYPE_1){
-            SharePreferenceUtil.loadSubject1ReciteQuestionIndex();
+            return SharePreferenceUtil.loadSubject1ReciteQuestionIndex();
         }
         return SharePreferenceUtil.loadSubject4ReciteQuestionIndex();
     }

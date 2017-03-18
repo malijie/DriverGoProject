@@ -85,5 +85,8 @@ public class SQLiteManager extends SQLiteCommon{
         mISQLiteBehavior.saveCollectQuestion(q);
     }
 
+    public void insertQuestion2Table(String tableName,QuestionItem q){
+        mISQLiteBehavior.addQuestionItem2Table(tableName,q);
+    }
 
 }

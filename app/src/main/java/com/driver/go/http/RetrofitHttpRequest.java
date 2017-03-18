@@ -66,6 +66,14 @@ public class RetrofitHttpRequest {
         toSubscribe(observable,subscriber);
     }
 
+    public void getC1Subject4RandomQuestions(Subscriber subscriber){
+        Observable observable = sRetrofitService.getQuestions(
+                Profile.DRIVER_SUBJECT_FOUR, Profile.DRIVER_MODEL_ONE,
+                Profile.APP_KEY, Profile.TEST_TYPE_RANDOM)
+                .map(new HttpResultFunc<List<QuestionItem>>());
+        toSubscribe(observable,subscriber);
+    }
+
     private void toSubscribe(Observable observable, Subscriber subscriber){
         if(observable != null && subscriber != null){
             observable.observeOn(AndroidSchedulers.mainThread())

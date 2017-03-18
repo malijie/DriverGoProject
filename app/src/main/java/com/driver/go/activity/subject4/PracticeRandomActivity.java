@@ -16,10 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.base.DriverBaseActivity;
 import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
+import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
@@ -122,7 +122,7 @@ public class PracticeRandomActivity extends SubjectFourBaseActivity implements V
     }
 
     private void initQuestion() {
-        RetrofitHttpRequest.getInstance().getC1Subject1RandomQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+        RetrofitHttpRequest.getInstance().getC1Subject4RandomQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
             @Override
             public void onNext(List<QuestionItem> questionItems) {
                 super.onNext(questionItems);
@@ -243,7 +243,7 @@ public class PracticeRandomActivity extends SubjectFourBaseActivity implements V
             //选中错误答案
             showWrongAnswerImage(imageView);
             //记录错题
-            addWrongQuestionItem(mCurrentQuestionItem);
+            saveQuestionItem2DB(DBConstants.SUBJECT4_PRACTISE_WRONG_QUESTION_TABLE,mCurrentQuestionItem);
             //禁止再次选择
             setAllAnswerUnSelect();
             //显示正确答案

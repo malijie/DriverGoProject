@@ -124,7 +124,7 @@ public class ExamMainActivity extends SubjectFourBaseActivity implements View.On
     }
 
     private void initQuestion() {
-        mRetrofitRequest.getC1Subject1RandomQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+        mRetrofitRequest.getC1Subject4RandomQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
             @Override
             public void onNext(List<QuestionItem> questionItems) {
                 mQuestions = questionItems;
@@ -291,7 +291,7 @@ public class ExamMainActivity extends SubjectFourBaseActivity implements View.On
             //选中错误答案
             showWrongAnswerImage(imageView);
             //记录错题
-            addExamWrongQuestionItem(mCurrentQuestionItem);
+            saveQuestionItem2DB(DBConstants.SUBJECT4_EXAM_WRONG_QUESTION_TABLE,mCurrentQuestionItem);
             //禁止再次选择
             setAllAnswerUnSelect();
             //显示正确答案

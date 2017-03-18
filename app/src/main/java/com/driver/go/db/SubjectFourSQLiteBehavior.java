@@ -92,4 +92,15 @@ public class SubjectFourSQLiteBehavior implements ISQLiteBehavior{
                 "'" + q.getItem4() + "',"+ "'" + q.getExplains() + "',"+"'" + q.getUrl() + "')";
         mDB.execSQL(sql);
     }
+
+    @Override
+    public void addQuestionItem2Table(String tableName, QuestionItem q) {
+        String sql = "INSERT INTO " + tableName
+                + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
+                "VALUES ("+ q.getId() + ",'" + q.getQuestion() + "'," + "'" + q.getAnswer() + "'," +
+                "'" + q.getItem1() + "',"+ "'" + q.getItem2() + "',"+"'" + q.getItem3() + "',"+
+                "'" + q.getItem4() + "',"+ "'" + q.getExplains() + "',"+"'" + q.getUrl() + "')";
+        mDB.execSQL(sql);
+    }
+
 }

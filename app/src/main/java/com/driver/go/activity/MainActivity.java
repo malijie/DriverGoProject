@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.driver.go.R;
 import com.driver.go.activity.base.DriverBaseActivity;
+import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.fragments.SubjectFourFragment;
 import com.driver.go.fragments.SubjectOneFragment;
@@ -119,7 +120,7 @@ public class MainActivity extends DriverBaseActivity {
                     @Override
                     public void run() {
                         for(QuestionItem item:questionItems){
-                            addSubject1OrderQuestionItem(item);
+                            saveQuestionItem2DB(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,item);
                         }
                         
                     }
@@ -135,7 +136,7 @@ public class MainActivity extends DriverBaseActivity {
                     @Override
                     public void run() {
                         for(QuestionItem item:questionItems){
-                            addSubject4OrderQuestionItem(item);
+                            saveQuestionItem2DB(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,item);
                         }
                     }
                 }).start();

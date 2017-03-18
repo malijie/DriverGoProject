@@ -16,13 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.base.DriverBaseActivity;
 import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
-import com.driver.go.db.SubjectFourSQLiteBehavior;
+import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 
@@ -239,7 +237,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
             //选中错误答案
             showWrongAnswerImage(imageView);
             //记录错题
-            addWrongQuestionItem(mCurrentQuestionItem);
+            saveQuestionItem2DB(DBConstants.SUBJECT4_PRACTISE_WRONG_QUESTION_TABLE,mCurrentQuestionItem);
             //禁止再次选择
             setAllAnswerUnSelect();
             //显示正确答案

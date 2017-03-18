@@ -41,17 +41,6 @@ public class SQLiteCommon {
         return false;
     }
 
-    public void insertQuestion2Table(String tableName,int id,String question,String answer,
-                                     String item1,String item2,String item3,
-                                     String item4,String explains,String url){
-        String sql = "INSERT INTO " + tableName
-                + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
-                "VALUES ("+ id + ",'" + question + "'," + "'" + answer + "'," +
-                "'" + item1 + "',"+ "'" + item2 + "',"+"'" + item3 + "',"+
-                "'" + item4 + "',"+ "'" + explains + "',"+"'" + url + "')";
-        mDB.execSQL(sql);
-    }
-
     /**
      * 清空表数据
      * @param tableName

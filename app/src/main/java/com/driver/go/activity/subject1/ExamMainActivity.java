@@ -291,7 +291,7 @@ public class ExamMainActivity extends SubjectOneBaseActivity implements View.OnC
             //选中错误答案
             showWrongAnswerImage(imageView);
             //记录错题
-            addExamWrongQuestionItem(mCurrentQuestionItem);
+            saveQuestionItem2DB(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE,mCurrentQuestionItem);
             //禁止再次选择
             setAllAnswerUnSelect();
             //显示正确答案

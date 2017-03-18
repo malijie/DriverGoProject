@@ -40,7 +40,7 @@ public class BaseFragment extends Fragment {
     }
 
 
-    public void addOrderQuestionItem(QuestionItem q){
-        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-    }
+//    public void addOrderQuestionItem(QuestionItem q){
+//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
+//    }
 }
