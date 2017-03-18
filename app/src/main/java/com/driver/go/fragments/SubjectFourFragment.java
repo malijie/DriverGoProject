@@ -20,12 +20,13 @@ import com.driver.go.activity.subject4.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
+import com.driver.go.db.SubjectFourSQLiteBehavior;
+import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.utils.ToastManager;
 
 
 //科目四
 public class SubjectFourFragment extends BaseFragment implements View.OnClickListener{
-    private SQLiteManager mSQLiteManager = null;
     private ImageButton mButtonExamData;
     private ImageButton mButtonPractiseWrongQuestion;
     private ImageButton mButtonOrderPractise;
@@ -47,9 +48,9 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
         return v;
     }
 
-    private void initData() {
+    public void initData() {
         mSQLiteManager = SQLiteManager.getInstance();
-
+        mSQLiteManager.setSubjectBehavior(new SubjectFourSQLiteBehavior());
     }
 
     private void initViews(View v) {

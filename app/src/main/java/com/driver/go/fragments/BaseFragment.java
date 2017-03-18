@@ -11,6 +11,7 @@ import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.Logger;
 
 /**
  * Created by malijie on 2017/3/15.
@@ -22,16 +23,20 @@ public class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mSQLiteManager = SQLiteManager.getInstance();
-        mSQLiteManager.setSubjectBehavior(new SubjectOneSQLiteBehavior());
+        initData();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     public boolean isDownloadSubject1DB(){
         if(mSQLiteManager != null){
+
             return mSQLiteManager.queryOrderQuestionById(1).moveToFirst();
         }
         return false;
+    }
+
+    private void initData(){
+        mSQLiteManager = SQLiteManager.getInstance();
     }
 
 
