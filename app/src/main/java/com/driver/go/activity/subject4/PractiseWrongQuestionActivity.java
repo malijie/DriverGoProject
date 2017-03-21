@@ -188,7 +188,6 @@ public class PractiseWrongQuestionActivity  extends SubjectFourBaseActivity impl
 
     //删除错题
     private void handleDeleteWrongQuestion() {
-Logger.d("mCurrentQuestionItem.getId()=" + mCurrentQuestionItem.getId());
         mSQLiteManager.deleteQuestionById(mCurrentQuestionItem.getId());
         showNextQuestion();
         ToastManager.showShortMsg("删除成功!");

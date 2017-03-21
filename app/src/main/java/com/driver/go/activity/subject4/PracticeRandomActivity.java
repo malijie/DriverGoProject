@@ -23,6 +23,7 @@ import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.http.SubscriberOnNextListener;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.widget.dialog.CustomDialog;
@@ -69,8 +70,9 @@ public class PracticeRandomActivity extends SubjectFourBaseActivity implements V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.random_practise);
+Logger.mlj("onCreate...");
         initView();
-        initData();
+        initData2();
 
     }
 
@@ -114,8 +116,7 @@ public class PracticeRandomActivity extends SubjectFourBaseActivity implements V
 
     }
 
-    @Override
-    public void initData() {
+    public void initData2() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
         initQuestion();
@@ -134,6 +135,7 @@ public class PracticeRandomActivity extends SubjectFourBaseActivity implements V
                     mImageQuestion.setVisibility(View.VISIBLE);
                     mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
                 }
+
 
                 if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
                     setCollectImageSelected(mButtonCollect);
@@ -399,13 +401,17 @@ public class PracticeRandomActivity extends SubjectFourBaseActivity implements V
         dialog.show();
     }
 
+    private boolean mNetworkSwitch = false;
     public BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                if (Util.hasInternet()) {
+                if (Util.hasInternet() && mNetworkSwitch) {
                     initQuestion();
+                    mNetworkSwitch = false;
+                }else{
+                    mNetworkSwitch = true;
                 }
             }
         }

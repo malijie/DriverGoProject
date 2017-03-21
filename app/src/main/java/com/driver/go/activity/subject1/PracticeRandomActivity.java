@@ -400,13 +400,17 @@ public class PracticeRandomActivity  extends SubjectOneBaseActivity implements V
         dialog.show();
     }
 
+    private boolean mNetworkSwitch = false;
     public BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                if (Util.hasInternet()) {
+                if (Util.hasInternet() && mNetworkSwitch) {
                     initQuestion();
+                    mNetworkSwitch = false;
+                }else{
+                    mNetworkSwitch = true;
                 }
             }
         }

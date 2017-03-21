@@ -375,13 +375,18 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
         }
     }
 
+
+    private boolean mNetworkSwitch = false;
     public BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                if (Util.hasInternet()) {
+                if (Util.hasInternet() && mNetworkSwitch) {
                     updateUI(mCurrentQuestionItem);
+                    mNetworkSwitch = false;
+                }else{
+                    mNetworkSwitch = true;
                 }
             }
         }

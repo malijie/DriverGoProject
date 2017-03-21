@@ -37,7 +37,7 @@ public class Logger {
 		}
 	}
 
-	public static void d(String msg){
+	public static void mlj(String msg){
 		if(getLogSwitch()){
 			Log.d("MLJ", msg);
 		}
