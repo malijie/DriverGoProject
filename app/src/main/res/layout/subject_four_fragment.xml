@@ -20,7 +20,7 @@
                 android:id="@+id/id_main_image_order_practice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/order_practice_selector"
+                android:background="@drawable/subject4_order_practice_selector"
                 android:layout_centerInParent="true"/>
             <TextView
                 android:id="@+id/id_main_text_order_title"
@@ -60,7 +60,7 @@
                         android:id="@+id/id_main_image_random_question"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/suijilianxi_selector"/>
+                        android:background="@drawable/subject4_suijilianxi_selector"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                         android:id="@+id/id_main_image_recite_question"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/beitimoshi_selector"/>
+                        android:background="@drawable/subject4_beitimoshi_selector"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,11 +108,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
-            <ImageButton
+             <ImageButton
                 android:id="@+id/id_main_button_exam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/exam_practice_selector"
+                android:background="@drawable/subject4_exam_practice_selector"
                 android:layout_centerInParent="true"/>
 
             <TextView
@@ -152,7 +152,7 @@
                         android:id="@+id/id_main_button_exam_wrong_question"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/qianghualianxi_selector"/>
+                        android:background="@drawable/subject4_kaoshicuoti_selector"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                         android:id="@+id/id_main_button_exam_data"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/kaoshijilu_selector"/>
+                        android:background="@drawable/subject4_kaoshijilu_selector"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                 android:id="@+id/id_main_button_driver_tip"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/home_icon_jiakaofagui"/>e
+                android:background="@mipmap/subject4_kaoshifagui"/>e
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -222,7 +222,7 @@
                 android:id="@+id/id_main_button_driver_skill"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/home_icon_kaoshijiqiao"/>e
+                android:background="@mipmap/subject4_kaoshijiqiao"/>e
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -240,7 +240,7 @@
                 android:id="@+id/id_main_button_practise_wrong_question"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/home_icon_wodecuoti"/>e
+                android:background="@mipmap/subject4_wodecuoti"/>e
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
                 android:id="@+id/id_main_button_collect_question"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@mipmap/home_icon_wodeshoucang"/>e
+                android:background="@mipmap/subject4_wodeshoucang"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
