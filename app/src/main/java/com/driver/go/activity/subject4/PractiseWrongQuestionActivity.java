@@ -17,6 +17,7 @@ import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.control.EntityConvertManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 
 import java.util.ArrayList;
@@ -187,7 +188,8 @@ public class PractiseWrongQuestionActivity  extends SubjectFourBaseActivity impl
 
     //删除错题
     private void handleDeleteWrongQuestion() {
-        mSQLiteManager.deleteQuestionById(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE,mCurrentQuestionItem.getId());
+Logger.d("mCurrentQuestionItem.getId()=" + mCurrentQuestionItem.getId());
+        mSQLiteManager.deleteQuestionById(mCurrentQuestionItem.getId());
         showNextQuestion();
         ToastManager.showShortMsg("删除成功!");
 

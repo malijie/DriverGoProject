@@ -84,6 +84,7 @@ public class MainActivity extends DriverBaseActivity {
 
             @Override
             public void onPageSelected(int position) {
+
             }
 
             @Override
@@ -120,7 +121,7 @@ public class MainActivity extends DriverBaseActivity {
                     @Override
                     public void run() {
                         for(QuestionItem item:questionItems){
-                            saveQuestionItem2DB(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,item);
+                            saveQuestionItem2DB(DBConstants.SUBJECT1_ORDER_PRACTISE_TABLE,item);
                         }
                         
                     }

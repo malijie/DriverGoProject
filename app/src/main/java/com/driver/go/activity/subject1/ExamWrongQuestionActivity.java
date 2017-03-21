@@ -186,7 +186,7 @@ public class ExamWrongQuestionActivity extends SubjectOneBaseActivity implements
 
     //删除错题
     private void handleDeleteWrongQuestion() {
-        mSQLiteManager.deleteQuestionById(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE,mCurrentQuestionItem.getId());
+        mSQLiteManager.deleteQuestionById(mCurrentQuestionItem.getId());
         showNextQuestion();
         ToastManager.showShortMsg("删除成功!");
 

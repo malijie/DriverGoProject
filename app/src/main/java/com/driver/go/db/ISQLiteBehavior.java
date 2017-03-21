@@ -22,4 +22,5 @@ public interface ISQLiteBehavior {
     boolean checkCollected(int id);
     void saveCollectQuestion(QuestionItem q);
     void addQuestionItem2Table(String tableName,QuestionItem q);
+    void deleteQuestionById(int id);
 }

@@ -55,9 +55,6 @@ public class SQLiteCommon {
         return cursor.moveToFirst();
     }
 
-    public void deleteQuestionById(String tableName,int id){
-        mDB.execSQL(SQLContainer.getDeleteQuestionSQL(tableName,id));
-    }
 
     public boolean hasCollectQuestions(String tableName) {
         cursor = mDB.rawQuery(SQLContainer.getAllDataSQL(tableName),null);

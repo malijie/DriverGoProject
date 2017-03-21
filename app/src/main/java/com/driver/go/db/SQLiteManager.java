@@ -89,4 +89,8 @@ public class SQLiteManager extends SQLiteCommon{
         mISQLiteBehavior.addQuestionItem2Table(tableName,q);
     }
 
+    public void deleteQuestionById(int id){
+        mISQLiteBehavior.deleteQuestionById(id);
+    }
+
 }

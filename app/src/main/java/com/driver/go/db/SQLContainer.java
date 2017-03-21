@@ -9,14 +9,14 @@ public class SQLContainer {
     //--------------------------------------------------科目一----------------------------------------------
 
     public static String getCreateSubject1OrderExamTableSQL(){
-        return "CREATE TABLE IF NOT EXISTS " + DBConstants.SUBJECT1_ORDER_EXAM_TABLE + "(_id INTEGER PRIMARY KEY AUTOINCREMENT,id int,question varchar(100)," +
+        return "CREATE TABLE IF NOT EXISTS " + DBConstants.SUBJECT1_ORDER_PRACTISE_TABLE + "(_id INTEGER PRIMARY KEY AUTOINCREMENT,id int,question varchar(100)," +
                 "answer varchar(10), item1 varchar(100),item2 varchar(100)," +
                 "item3 varchar(100),item4 varchar(100),explains varchar(400)," +
                 "url varchar(100))";
     }
 
     public static String getCreateSubject1RandomExamTableSQL(){
-        return "CREATE TABLE IF NOT EXISTS " + DBConstants.SUBJECT1_RANDOM_EXAM_TABLE + "(_id INTEGER PRIMARY KEY AUTOINCREMENT,id int,question varchar(100)," +
+        return "CREATE TABLE IF NOT EXISTS " + DBConstants.SUBJECT1_RANDOM_PRACTISE_TABLE + "(_id INTEGER PRIMARY KEY AUTOINCREMENT,id int,question varchar(100)," +
                 "answer varchar(10), item1 varchar(100),item2 varchar(100)," +
                 "item3 varchar(100),item4 varchar(100),explains varchar(400)," +
                 "url varchar(100))";
@@ -48,15 +48,15 @@ public class SQLContainer {
     }
 
     public static String getSubject1FirstOrderExamDataSQL(){
-          return "SELECT * FROM " + DBConstants.SUBJECT1_ORDER_EXAM_TABLE + " WHERE id=1";
+          return "SELECT * FROM " + DBConstants.SUBJECT1_ORDER_PRACTISE_TABLE + " WHERE id=1";
     }
 
     public static String getSubject1OrderExamItemByIdSQL(int id){
-        return  "SELECT * FROM " + DBConstants.SUBJECT1_ORDER_EXAM_TABLE + " WHERE id=" + id;
+        return  "SELECT * FROM " + DBConstants.SUBJECT1_ORDER_PRACTISE_TABLE + " WHERE id=" + id;
     }
 
     public static String getSubject1RandomExamItemByIdSQL(int id){
-        return  "SELECT * FROM " + DBConstants.SUBJECT1_RANDOM_EXAM_TABLE + " WHERE _id=" + id;
+        return  "SELECT * FROM " + DBConstants.SUBJECT1_RANDOM_PRACTISE_TABLE + " WHERE _id=" + id;
     }
 
     public static String getSubject1CollectQuestionItemByIdSQL(int id){
@@ -64,7 +64,7 @@ public class SQLContainer {
     }
 
     public static String getSubject1RandomQuestionByIndexSQL(int index){
-        return  "SELECT * FROM " + DBConstants.SUBJECT1_RANDOM_EXAM_TABLE + " WHERE _id=" + index;
+        return  "SELECT * FROM " + DBConstants.SUBJECT1_RANDOM_PRACTISE_TABLE + " WHERE _id=" + index;
     }
 
     public static String getDeleteTableSQL(String tableName){

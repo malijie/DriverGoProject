@@ -100,4 +100,9 @@ public class SubjectOneSQLiteBehavior implements ISQLiteBehavior{
         mDB.execSQL(sql);
     }
 
+    @Override
+    public void deleteQuestionById(int id) {
+        mDB.execSQL(SQLContainer.getDeleteQuestionSQL(DBConstants.SUBJECT1_PRACTISE_WRONG_QUESTION_TABLE,id));
+    }
+
 }
