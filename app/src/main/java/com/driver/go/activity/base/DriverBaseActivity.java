@@ -24,7 +24,8 @@ import com.driver.go.utils.image.ImageLoader;
 public abstract class DriverBaseActivity extends FragmentActivity {
     public static final int SUBJECT_TYPE_1 = 1;
     public static final int SUBJECT_TYPE_4 = 4;
-    public static int sOrderQuestionTotalNum = Profile.ORDER_TOTAL_ITEM;
+    public static int sSubject1OrderQuestionTotalNum = Profile.SUBJECT1_ORDER_TOTAL_ITEM;
+    public static int sSubject4OrderQuestionTotalNum = Profile.SUBJECT4_ORDER_TOTAL_ITEM;
     public static int sRandomQuestionTotalNum = Profile.RANDOM_TOTAL_ITEM;
     public static final int sExamQuestionTotalNum = Profile.EXAM_TOTAL_ITEM;
     public RetrofitHttpRequest mRetrofitHttpRequest = null;
@@ -52,7 +53,9 @@ public abstract class DriverBaseActivity extends FragmentActivity {
 
     private void initDB(){
         mSQLiteManager = SQLiteManager.getInstance();
-        mSQLiteManager.createTables();
+        if(!mSQLiteManager.isOrderTableHasData()){
+            mSQLiteManager.createTables();
+        }
     }
 
     public boolean isOrderTableExist(){

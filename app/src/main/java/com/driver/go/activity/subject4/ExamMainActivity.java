@@ -77,7 +77,6 @@ public class ExamMainActivity extends SubjectFourBaseActivity implements View.On
         initView();
     }
 
-    @Override
     public void initView() {
         mImageQuestionContent =  (ImageView) findViewById(R.id.id_exam_main_image_question);
         mTextTime = (TextView) findViewById(R.id.id_exam_title_text_clock);
@@ -111,9 +110,7 @@ public class ExamMainActivity extends SubjectFourBaseActivity implements View.On
 
     }
 
-    @Override
     public void initData() {
-        super.initData();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
 

@@ -20,11 +20,11 @@ public class SubjectFourBaseActivity extends DriverBaseActivity{
 
     }
 
-    public void initView() {
+    private void initView() {
 
     }
 
-    public void initData() {
+    private void initData() {
         mSQLiteManager.setSubjectBehavior(new SubjectFourSQLiteBehavior());
     }
 

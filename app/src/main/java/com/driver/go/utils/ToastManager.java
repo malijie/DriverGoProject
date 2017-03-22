@@ -65,4 +65,8 @@ public class ToastManager {
     public static void showCompleteCollectQuestionMsg() {
         ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.complete_all_collect_question),Toast.LENGTH_SHORT);
     }
+
+    public static void showExitTipMsg(){
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.exit_tip),Toast.LENGTH_SHORT);
+    }
 }

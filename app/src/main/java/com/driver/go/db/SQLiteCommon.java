@@ -16,7 +16,7 @@ public class SQLiteCommon {
     }
 
     public void createTables(){
-        if(mDB != null){
+        if(mDB != null && !mDB.isDbLockedByCurrentThread()){
             mDB.execSQL(SQLContainer.getCreateSubject1OrderExamTableSQL());
             mDB.execSQL(SQLContainer.getCreateSubject1RandomExamTableSQL());
             mDB.execSQL(SQLContainer.getCreateSubject1WrongQuestionTableSQL());

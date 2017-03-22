@@ -68,7 +68,6 @@ public class RecitePracticeOrderActivity extends SubjectOneBaseActivity implemen
         initView();
     }
 
-    @Override
     public void initView() {
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -110,7 +109,7 @@ public class RecitePracticeOrderActivity extends SubjectOneBaseActivity implemen
         mButtonNext.setOnClickListener(this);
         mButtonPre.setOnClickListener(this);
 
-        mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
+        mTextNum.setText(mCurrentId + "/" + sSubject1OrderQuestionTotalNum);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
         mTextChoiceA.setText(mCurrentQuestionItem.getItem1());
         mTextChoiceB.setText(mCurrentQuestionItem.getItem2());
@@ -126,9 +125,7 @@ public class RecitePracticeOrderActivity extends SubjectOneBaseActivity implemen
         showRightAnswer(mCurrentQuestionItem.getAnswer());
     }
 
-    @Override
     public void initData() {
-        super.initData();
         mCurrentId = loadReciteQuestionIndex(SUBJECT_TYPE_1);
         mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
@@ -176,7 +173,7 @@ public class RecitePracticeOrderActivity extends SubjectOneBaseActivity implemen
     //下一题
     private void showNextQuestion() {
         if(hasInternet()){
-            if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
+            if(++mCurrentId> Profile.SUBJECT1_ORDER_TOTAL_ITEM){
                 mCurrentId--;
                 ToastManager.showCompleteReciteMsg();
                 return;
@@ -234,7 +231,7 @@ public class RecitePracticeOrderActivity extends SubjectOneBaseActivity implemen
     }
 
     private void updateUI(QuestionItem item){
-        mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
+        mTextNum.setText(mCurrentId + "/" + sSubject1OrderQuestionTotalNum);
         mTextTitle.setText(item.getQuestion());
         mTextChoiceA.setText(item.getItem1());
         mTextChoiceB.setText(item.getItem2());

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -97,54 +98,13 @@ public class MainActivity extends DriverBaseActivity {
     public void initData() {
 
         this.mSupportFragmentManager = getSupportFragmentManager();
-        if(hasInternet()){
-            if(!isOrderTableExist()){
-                fetchOrderQuestionData2DB();
-            }
-        }else{
-            ToastManager.showNoNetworkMsg();
-        }
 
 //        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 //        registerReceiver(receiver,filter);
 
     }
 
-    /**
-     * 抓取科目一，科目四顺序练习题目并插入数据库
-     */
-    private void fetchOrderQuestionData2DB(){
-        mRetrofitHttpRequest.getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
-            @Override
-            public void onNext(final List<QuestionItem> questionItems) {
-                new Thread( new Runnable() {
-                    @Override
-                    public void run() {
-                        for(QuestionItem item:questionItems){
-                            saveQuestionItem2DB(DBConstants.SUBJECT1_ORDER_PRACTISE_TABLE,item);
-                        }
-                        
-                    }
-                }).start();
 
-            }
-        });
-
-        mRetrofitHttpRequest.getC1Subject4OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
-            @Override
-            public void onNext(final List<QuestionItem> questionItems) {
-                new Thread( new Runnable() {
-                    @Override
-                    public void run() {
-                        for(QuestionItem item:questionItems){
-                            saveQuestionItem2DB(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,item);
-                        }
-                    }
-                }).start();
-
-            }
-        });
-    }
 
 
 
@@ -182,5 +142,22 @@ public class MainActivity extends DriverBaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 //        unregisterReceiver(receiver);
+    }
+
+    private long waitTime = 2000;
+    private long touchTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(event.getAction() == KeyEvent.ACTION_DOWN && KeyEvent.KEYCODE_BACK == keyCode) {
+            long currentTime = System.currentTimeMillis();
+            if((currentTime-touchTime)>=waitTime) {
+                ToastManager.showExitTipMsg();
+                touchTime = currentTime;
+            }else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

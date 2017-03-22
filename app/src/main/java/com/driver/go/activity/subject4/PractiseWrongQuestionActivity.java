@@ -70,7 +70,6 @@ public class PractiseWrongQuestionActivity  extends SubjectFourBaseActivity impl
         initView();
     }
 
-    @Override
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
         mImageQuestion = (ImageView) findViewById(R.id.id_wrong_practice_image_question);
@@ -129,9 +128,7 @@ public class PractiseWrongQuestionActivity  extends SubjectFourBaseActivity impl
         updateCollectUI();
     }
 
-    @Override
     public void initData() {
-        super.initData();
         initQuestionData();
         mCurrentQuestionItem = mQuestions.get(0);
     }

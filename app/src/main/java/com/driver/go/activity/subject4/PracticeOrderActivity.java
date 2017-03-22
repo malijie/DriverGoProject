@@ -70,7 +70,6 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
         initView();
     }
 
-    @Override
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
         mImageQuestion = (ImageView) findViewById(R.id.id_order_practice_image_question);
@@ -109,7 +108,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
         mButtonExplain.setOnClickListener(this);
         mButtonExclude.setOnClickListener(this);
 
-        mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
+        mTextNum.setText(mCurrentId + "/" + sSubject1OrderQuestionTotalNum);
         mTextTitle.setText(mCurrentQuestionItem.getQuestion());
         mTextChoiceA.setText(mCurrentQuestionItem.getItem1());
         mTextChoiceB.setText(mCurrentQuestionItem.getItem2());
@@ -127,9 +126,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
         }
     }
 
-    @Override
     public void initData() {
-        super.initData();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
 
@@ -277,7 +274,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
                 return;
             }
 
-            if(++mCurrentId> Profile.ORDER_TOTAL_ITEM){
+            if(++mCurrentId> Profile.SUBJECT4_ORDER_TOTAL_ITEM){
                 mCurrentId--;
                 ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
                 return;
@@ -345,7 +342,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
     }
 
     private void updateUI(QuestionItem item){
-        mTextNum.setText(mCurrentId + "/" + sOrderQuestionTotalNum);
+        mTextNum.setText(mCurrentId + "/" + sSubject1OrderQuestionTotalNum);
         mTextTitle.setText(item.getQuestion());
         mTextChoiceA.setText(item.getItem1());
         mTextChoiceB.setText(item.getItem2());

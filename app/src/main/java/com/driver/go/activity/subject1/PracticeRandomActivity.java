@@ -74,7 +74,6 @@ public class PracticeRandomActivity  extends SubjectOneBaseActivity implements V
 
     }
 
-    @Override
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
         mImageQuestion = (ImageView) findViewById(R.id.id_random_practice_image_question);
@@ -114,9 +113,7 @@ public class PracticeRandomActivity  extends SubjectOneBaseActivity implements V
 
     }
 
-    @Override
     public void initData() {
-//        super.initData();
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(receiver,filter);
         initQuestion();

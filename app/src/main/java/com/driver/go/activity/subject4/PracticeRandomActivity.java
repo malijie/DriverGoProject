@@ -76,7 +76,6 @@ Logger.mlj("onCreate...");
 
     }
 
-    @Override
     public void initView() {
         mButtonBack = (ImageButton) findViewById(R.id.id_question_title_button_back);
         mImageQuestion = (ImageView) findViewById(R.id.id_random_practice_image_question);

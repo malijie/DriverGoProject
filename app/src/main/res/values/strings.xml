@@ -24,5 +24,6 @@
     <string name="dialog_title_exam_exit">还没完成模拟考试，确定要退出吗？</string>
     <string name="dialog_title_exam_complete">已完成所有题目</string>
     <string name="dialog_title_exit_random_practise">退出后随机练习将重头开始</string>
+    <string name="exit_tip">再按一次将退出驾照通</string>
 
 </resources>

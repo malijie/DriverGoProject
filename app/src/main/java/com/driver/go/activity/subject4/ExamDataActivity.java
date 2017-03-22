@@ -8,7 +8,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.driver.go.R;
-import com.driver.go.activity.base.DriverBaseActivity;
 import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.adapter.CommonAdapter;
 import com.driver.go.adapter.ViewHolder;
@@ -45,7 +44,6 @@ public class ExamDataActivity extends SubjectFourBaseActivity implements View.On
         initView();
     }
 
-    @Override
     public void initView() {
         mTextMaxScore = (TextView) findViewById(R.id.id_exam_data_text_max_score);
         mListView = (ListView) findViewById(R.id.id_exam_data_lv);
@@ -70,14 +68,12 @@ public class ExamDataActivity extends SubjectFourBaseActivity implements View.On
         });
     }
 
-    @Override
     public void initData() {
-        super.initData();
         Cursor cursor = mSQLiteManager.getExamRecordResult();
         maxScore = mSQLiteManager.getMaxScore();
         wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount();
-        noWrittenQuestionCount = sOrderQuestionTotalNum - SharePreferenceUtil.loadSubject1OrderQuestionIndex();
-        rightQuestionCount = sOrderQuestionTotalNum - wrongQuestionCount;
+        noWrittenQuestionCount = sSubject1OrderQuestionTotalNum - SharePreferenceUtil.loadSubject1OrderQuestionIndex();
+        rightQuestionCount = sSubject1OrderQuestionTotalNum - wrongQuestionCount;
 
         mExamRecords = new ArrayList<>();
         for(cursor.moveToFirst();cursor.moveToNext();){

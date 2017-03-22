@@ -14,7 +14,8 @@ public class Profile {
     public static final String TEST_TYPE_ORDER = "order";//顺序联系
     public static final String TEST_TYPE_RANDOM = "random";//随机练习
 
-    public static final int ORDER_TOTAL_ITEM = 1229;//顺序练习总共题目
+    public static final int SUBJECT1_ORDER_TOTAL_ITEM = 1229;//顺序练习总共题目
+    public static final int SUBJECT4_ORDER_TOTAL_ITEM = 1094;//顺序练习总共题目
     public static final int RANDOM_TOTAL_ITEM = 100;//随机练习总共题目
     public static final int EXAM_TOTAL_ITEM = 100;//考试题目数目
 

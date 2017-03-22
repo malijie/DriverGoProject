@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.driver.go.entity.QuestionItem;
+import com.driver.go.utils.ToastManager;
 
 /**
  * Created by malijie on 2017/3/17.
@@ -14,7 +15,11 @@ public class SubjectOneSQLiteBehavior implements ISQLiteBehavior{
     private Cursor cursor = null;
 
     public SubjectOneSQLiteBehavior(){
-        mDB = new SQLiteHelper().getWritableDatabase();
+        if(mDB != null && mDB.isDbLockedByCurrentThread()){
+            return;
+        }else{
+            mDB = new SQLiteHelper().getWritableDatabase();
+        }
     }
     @Override
     public Cursor queryOrderQuestionById(int id) {
@@ -92,12 +97,16 @@ public class SubjectOneSQLiteBehavior implements ISQLiteBehavior{
 
     @Override
     public void addQuestionItem2Table(String tableName, QuestionItem q) {
-        String sql = "INSERT INTO " + tableName
-                + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
-                "VALUES ("+ q.getId() + ",'" + q.getQuestion() + "'," + "'" + q.getAnswer() + "'," +
-                "'" + q.getItem1() + "',"+ "'" + q.getItem2() + "',"+"'" + q.getItem3() + "',"+
-                "'" + q.getItem4() + "',"+ "'" + q.getExplains() + "',"+"'" + q.getUrl() + "')";
-        mDB.execSQL(sql);
+        if(mDB.isDbLockedByCurrentThread()){
+            ToastManager.showShortMsg("locked wait....");
+        }else{
+            String sql = "INSERT INTO " + tableName
+                    + "(id,question,answer,item1,item2,item3,item4,explains,url) " +
+                    "VALUES ("+ q.getId() + ",'" + q.getQuestion() + "'," + "'" + q.getAnswer() + "'," +
+                    "'" + q.getItem1() + "',"+ "'" + q.getItem2() + "',"+"'" + q.getItem3() + "',"+
+                    "'" + q.getItem4() + "',"+ "'" + q.getExplains() + "',"+"'" + q.getUrl() + "')";
+            mDB.execSQL(sql);
+        }
     }
 
     @Override

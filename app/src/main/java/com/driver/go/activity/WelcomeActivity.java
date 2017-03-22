@@ -10,7 +10,12 @@ import android.widget.ImageView;
 
 import com.driver.go.activity.base.DriverBaseActivity;
 import com.driver.go.R;
+import com.driver.go.db.DBConstants;
+import com.driver.go.entity.QuestionItem;
+import com.driver.go.http.SubscriberOnNextListener;
 import com.driver.go.utils.SharePreferenceUtil;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/21.
@@ -53,6 +58,44 @@ public class WelcomeActivity extends DriverBaseActivity{
                     startActivity(itMain);
                     WelcomeActivity.this.finish();
                 }
+            }
+        });
+
+        fetchOrderQuestionData2DB();
+    }
+
+    /**
+     * 抓取科目一，科目四顺序练习题目并插入数据库
+     */
+    private void fetchOrderQuestionData2DB(){
+        mRetrofitHttpRequest.getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+            @Override
+            public void onNext(final List<QuestionItem> questionItems) {
+                new Thread( new Runnable() {
+                    @Override
+                    public void run() {
+                        for(QuestionItem item:questionItems){
+                            saveQuestionItem2DB(DBConstants.SUBJECT1_ORDER_PRACTISE_TABLE,item);
+                        }
+
+                    }
+                }).start();
+
+            }
+        });
+
+        mRetrofitHttpRequest.getC1Subject4OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+            @Override
+            public void onNext(final List<QuestionItem> questionItems) {
+                new Thread( new Runnable() {
+                    @Override
+                    public void run() {
+                        for(QuestionItem item:questionItems){
+                            saveQuestionItem2DB(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,item);
+                        }
+                    }
+                }).start();
+
             }
         });
     }

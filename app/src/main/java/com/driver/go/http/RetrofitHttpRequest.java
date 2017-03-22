@@ -77,7 +77,7 @@ public class RetrofitHttpRequest {
     private void toSubscribe(Observable observable, Subscriber subscriber){
         if(observable != null && subscriber != null){
             observable.observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .subscribeOn(Schedulers.io())
                     .subscribe(subscriber);
         }
     }

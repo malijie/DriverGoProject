@@ -44,7 +44,6 @@ public class ExamDataActivity extends SubjectOneBaseActivity implements View.OnC
         initView();
     }
 
-    @Override
     public void initView() {
         mTextMaxScore = (TextView) findViewById(R.id.id_exam_data_text_max_score);
         mListView = (ListView) findViewById(R.id.id_exam_data_lv);
@@ -69,14 +68,12 @@ public class ExamDataActivity extends SubjectOneBaseActivity implements View.OnC
         });
     }
 
-    @Override
     public void initData() {
-        super.initData();
         Cursor cursor = mSQLiteManager.getExamRecordResult();
         maxScore = mSQLiteManager.getMaxScore();
         wrongQuestionCount = mSQLiteManager.getExamWrongQuestionCount();
-        noWrittenQuestionCount = sOrderQuestionTotalNum - SharePreferenceUtil.loadSubject1OrderQuestionIndex();
-        rightQuestionCount = sOrderQuestionTotalNum - wrongQuestionCount;
+        noWrittenQuestionCount = sSubject1OrderQuestionTotalNum - SharePreferenceUtil.loadSubject1OrderQuestionIndex();
+        rightQuestionCount = sSubject1OrderQuestionTotalNum - wrongQuestionCount;
 
         mExamRecords = new ArrayList<>();
         for(cursor.moveToFirst();cursor.moveToNext();){
