@@ -1,6 +1,5 @@
 package com.driver.go.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -10,6 +9,7 @@ import android.widget.ImageView;
 
 import com.driver.go.activity.base.DriverBaseActivity;
 import com.driver.go.R;
+import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.SubscriberOnNextListener;
@@ -30,10 +30,17 @@ public class WelcomeActivity extends DriverBaseActivity{
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//ȫ����ʾ
         super.setContentView(R.layout.welcome_layout);
 
+
+        initData();
+        initViews();
+    }
+
+    public void initViews(){
         mImageWelcome = (ImageView) findViewById(R.id.id_welcome_image);
         AlphaAnimation alpha = new AlphaAnimation(0.1f, 1.0f);
         alpha.setDuration(3000);
         mImageWelcome.setAnimation(alpha);
+
         alpha.setAnimationListener(new Animation.AnimationListener() {
 
             @Override
@@ -48,20 +55,23 @@ public class WelcomeActivity extends DriverBaseActivity{
             @Override
             public void onAnimationEnd(Animation animation) {
                 if(SharePreferenceUtil.loadIsFirstLoaded()){
-                    Intent itMain = new Intent(WelcomeActivity.this,GuideActivity.class);
-                    startActivity(itMain);
-                    WelcomeActivity.this.finish();
+                    IntentManager.startActivity(GuideActivity.class);
                     SharePreferenceUtil.saveIsFirstLoaded(false);
 
                 }else{
-                    Intent itMain = new Intent(WelcomeActivity.this,MainActivity.class);
-                    startActivity(itMain);
-                    WelcomeActivity.this.finish();
+                    IntentManager.startActivity(MainActivity.class);
                 }
+
+                finishActivity(WelcomeActivity.this);
             }
         });
+        mImageWelcome.startAnimation(alpha);
+    }
 
-        fetchOrderQuestionData2DB();
+    public void initData(){
+        if(SharePreferenceUtil.loadIsFirstLoaded()){
+            fetchOrderQuestionData2DB();
+        }
     }
 
     /**
