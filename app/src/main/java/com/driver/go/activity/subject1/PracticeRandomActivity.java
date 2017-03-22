@@ -213,7 +213,7 @@ public class PracticeRandomActivity  extends SubjectOneBaseActivity implements V
         }else{
             ToastManager.showCollectSuccessMsg();
             mButtonCollect.setBackgroundResource(R.mipmap.icon_examin_selected_shoucang);
-//            saveCollectQuestion(mCurrentQuestionItem);
+            mSQLiteManager.saveCollectQuestion(mCurrentQuestionItem);
         }
 
     }

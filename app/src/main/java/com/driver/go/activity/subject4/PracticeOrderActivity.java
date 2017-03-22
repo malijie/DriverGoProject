@@ -274,7 +274,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
                 return;
             }
 
-            if(++mCurrentId> Profile.SUBJECT4_ORDER_TOTAL_ITEM){
+            if(++mCurrentId> sSubject4OrderQuestionTotalNum){
                 mCurrentId--;
                 ToastManager.showLongMsg(getString(R.string.complete_all_order_question));
                 return;
