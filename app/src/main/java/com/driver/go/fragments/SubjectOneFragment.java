@@ -37,6 +37,8 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
     private ImageButton mButtonDriverTip;
     private ImageButton mButtonSkill;
     private ImageButton mButtonExam;
+    private ImageButton mButtonFeedback;
+    private ImageButton mButtonUpdate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,6 +65,8 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
         mButtonSkill = (ImageButton) v.findViewById(R.id.id_main_button_driver_skill);
         mButtonPractiseWrongQuestion = (ImageButton) v.findViewById(R.id.id_main_button_practise_wrong_question);
         mButtonExamData = (ImageButton) v.findViewById(R.id.id_main_button_exam_data);
+        mButtonFeedback = (ImageButton) v.findViewById(R.id.id_bottom_button_feedback);
+        mButtonUpdate = (ImageButton) v.findViewById(R.id.id_bottom_button_update);
 
         mButtonSkill.setOnClickListener(this);
         mButtonExamData.setOnClickListener(this);
@@ -74,6 +78,8 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
         mButtonExamWrongQuestion.setOnClickListener(this);
         mButtonCollectQuestion.setOnClickListener(this);
         mButtonPractiseWrongQuestion.setOnClickListener(this);
+        mButtonFeedback.setOnClickListener(this);
+        mButtonUpdate.setOnClickListener(this);
     }
 
     @Override
@@ -130,6 +136,12 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
             case R.id.id_main_button_exam_data:
                //考试数据
                 IntentManager.startActivity(ExamDataActivity.class);
+                break;
+            case R.id.id_bottom_button_feedback:
+
+                break;
+            case R.id.id_bottom_button_update:
+
                 break;
         }
     }

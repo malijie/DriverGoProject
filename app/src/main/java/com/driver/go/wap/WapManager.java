@@ -34,5 +34,13 @@ public class WapManager {
         mAppConnect.close();
     }
 
+    public void feedbackApp(){
+        mAppConnect.showFeedback(mContext);
+    }
+
+
+    public void updateApp(){
+        mAppConnect.checkUpdate(mContext);
+    }
 
 }

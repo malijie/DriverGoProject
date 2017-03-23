@@ -13,6 +13,6 @@ public class DriverGoApplication extends Application{
     public void onCreate() {
         super.onCreate();
         sContext = getApplicationContext();
-
+        
     }
 }
