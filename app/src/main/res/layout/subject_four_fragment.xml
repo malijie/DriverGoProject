@@ -29,7 +29,6 @@
                 android:text="顺序练习"
                 android:layout_below="@id/id_main_image_order_practice"
                 android:textSize="@dimen/font_size_20"
-                android:drawableRight="@mipmap/ic_big_exam_flag"
                 android:textColor="@color/font_grey"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
@@ -121,7 +120,6 @@
                 android:layout_height="wrap_content"
                 android:text="模拟考试"
                 android:textSize="@dimen/font_size_20"
-                android:drawableRight="@mipmap/ic_big_lianxi_flag"
                 android:textColor="@color/font_grey"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true" />

@@ -7,15 +7,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="150dp"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@color/white">
-
+        android:background="@color/white"
+        android:layout_marginTop="5dp">
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
             <ImageButton
                 android:id="@+id/id_main_image_order_practice"
                 android:layout_width="wrap_content"
@@ -29,7 +29,6 @@
                 android:text="顺序练习"
                 android:layout_below="@id/id_main_image_order_practice"
                 android:textSize="@dimen/font_size_20"
-                android:drawableRight="@mipmap/ic_big_exam_flag"
                 android:textColor="@color/font_grey"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
@@ -99,7 +98,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="150dp"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@color/white">
@@ -107,13 +106,8 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-            <ImageButton
-                android:id="@+id/id_main_button_exam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/exam_practice_selector"
-                android:layout_centerInParent="true"/>
+            android:layout_weight="1"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/id_main_text_exam"
@@ -121,9 +115,16 @@
                 android:layout_height="wrap_content"
                 android:text="模拟考试"
                 android:textSize="@dimen/font_size_20"
-                android:drawableRight="@mipmap/ic_big_lianxi_flag"
                 android:textColor="@color/font_grey"
                 android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:id="@+id/id_main_button_exam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/exam_practice_selector"
+                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
 
@@ -152,7 +153,7 @@
                         android:id="@+id/id_main_button_exam_wrong_question"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/qianghualianxi_selector"/>
+                        android:background="@drawable/kaoshicuoti_selector"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -188,85 +189,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageButton
-                android:id="@+id/id_main_button_driver_tip"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@mipmap/home_icon_jiakaofagui"/>e
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="驾考法规"
-                android:textSize="@dimen/font_size_18"
-                android:textColor="@color/font_grey"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageButton
-                android:id="@+id/id_main_button_driver_skill"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@mipmap/home_icon_kaoshijiqiao"/>e
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="考试技巧"
-                android:textSize="@dimen/font_size_18"
-                android:textColor="@color/font_grey"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageButton
-                android:id="@+id/id_main_button_practise_wrong_question"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@mipmap/home_icon_wodecuoti"/>e
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的错题"
-                android:textSize="@dimen/font_size_18"
-                android:textColor="@color/font_grey"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <ImageButton
-                android:id="@+id/id_main_button_collect_question"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@mipmap/home_icon_wodeshoucang"/>e
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的收藏"
-                android:textSize="@dimen/font_size_18"
-                android:textColor="@color/font_grey"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
+    <include layout="@layout/bottom"/>
 </LinearLayout>
