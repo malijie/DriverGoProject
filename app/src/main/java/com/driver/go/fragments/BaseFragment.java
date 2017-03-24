@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.driver.go.base.DriverGoApplication;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.Logger;
+import com.driver.go.wap.WapManager;
 
 /**
  * Created by malijie on 2017/3/15.
@@ -19,6 +21,7 @@ import com.driver.go.utils.Logger;
 
 public class BaseFragment extends Fragment {
     protected SQLiteManager mSQLiteManager = null;
+    protected WapManager mWapManager = null;
 
     @Nullable
     @Override
@@ -29,7 +32,6 @@ public class BaseFragment extends Fragment {
 
     public boolean isDownloadSubject1DB(){
         if(mSQLiteManager != null){
-
             return mSQLiteManager.queryOrderQuestionById(1).moveToFirst();
         }
         return false;
@@ -37,6 +39,7 @@ public class BaseFragment extends Fragment {
 
     private void initData(){
         mSQLiteManager = SQLiteManager.getInstance();
+        mWapManager = WapManager.getInstance(DriverGoApplication.sContext);
     }
 
 

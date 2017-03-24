@@ -138,10 +138,10 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
                 IntentManager.startActivity(ExamDataActivity.class);
                 break;
             case R.id.id_bottom_button_feedback:
-
+                mWapManager.feedbackApp();
                 break;
             case R.id.id_bottom_button_update:
-
+                mWapManager.updateApp();
                 break;
         }
     }
@@ -163,5 +163,6 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mWapManager.close();
     }
 }
