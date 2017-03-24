@@ -122,7 +122,7 @@ public class CollectQuestionsActivity extends SubjectFourBaseActivity implements
             mImageQuestion.setVisibility(View.VISIBLE);
             mImageLoader.showImage(mCurrentQuestionItem.getUrl(),mImageQuestion);
         }
-
+        updateQuestionTypeUI(mCurrentQuestionItem);
         updateCollectUI();
     }
 
@@ -324,15 +324,7 @@ public class CollectQuestionsActivity extends SubjectFourBaseActivity implements
         }
 
         //设置题目类型
-        if(TextUtils.isEmpty(item.getItem3())){
-            mImageItem.setImageResource(R.mipmap.judge_item);
-            mLayoutChoiceC.setVisibility(View.GONE);
-            mLayoutChoiceD.setVisibility(View.GONE);
-        }else{
-            mImageItem.setImageResource(R.mipmap.single_choice);
-            mLayoutChoiceC.setVisibility(View.VISIBLE);
-            mLayoutChoiceD.setVisibility(View.VISIBLE);
-        }
+        updateQuestionTypeUI(item);
 
         updateCollectUI();
 
@@ -341,6 +333,19 @@ public class CollectQuestionsActivity extends SubjectFourBaseActivity implements
     private void updateCollectUI(){
         if(mSQLiteManager.checkCollected(mCurrentQuestionItem.getId())){
             setCollectImageSelected(mButtonCollect);
+        }
+    }
+
+    private void updateQuestionTypeUI(QuestionItem item){
+        //设置题目类型
+        if(TextUtils.isEmpty(item.getItem3())){
+            mImageItem.setImageResource(R.mipmap.judge_item);
+            mLayoutChoiceC.setVisibility(View.GONE);
+            mLayoutChoiceD.setVisibility(View.GONE);
+        }else{
+            mImageItem.setImageResource(R.mipmap.single_choice);
+            mLayoutChoiceC.setVisibility(View.VISIBLE);
+            mLayoutChoiceD.setVisibility(View.VISIBLE);
         }
     }
 }

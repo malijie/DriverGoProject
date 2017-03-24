@@ -123,6 +123,7 @@ public class CollectQuestionsActivity extends SubjectOneBaseActivity implements 
         }
 
         updateCollectUI();
+        updateQuestionTypeUI(mCurrentQuestionItem);
     }
 
     public void initData() {
@@ -323,6 +324,14 @@ public class CollectQuestionsActivity extends SubjectOneBaseActivity implements 
         }
 
         //设置题目类型
+        updateQuestionTypeUI(item);
+
+        updateCollectUI();
+
+    }
+
+    private void updateQuestionTypeUI(QuestionItem item){
+        //设置题目类型
         if(TextUtils.isEmpty(item.getItem3())){
             mImageItem.setImageResource(R.mipmap.judge_item);
             mLayoutChoiceC.setVisibility(View.GONE);
@@ -332,9 +341,6 @@ public class CollectQuestionsActivity extends SubjectOneBaseActivity implements 
             mLayoutChoiceC.setVisibility(View.VISIBLE);
             mLayoutChoiceD.setVisibility(View.VISIBLE);
         }
-
-        updateCollectUI();
-
     }
 
     private void updateCollectUI(){
