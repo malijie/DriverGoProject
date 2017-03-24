@@ -39,7 +39,7 @@ public class BaseFragment extends Fragment {
 
     private void initData(){
         mSQLiteManager = SQLiteManager.getInstance();
-        mWapManager = WapManager.getInstance(DriverGoApplication.sContext);
+        mWapManager = WapManager.getInstance(getActivity());
     }
 
 

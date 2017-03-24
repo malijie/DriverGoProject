@@ -15,7 +15,8 @@ public class WapManager {
 
     private WapManager(Context context){
         mContext = context;
-        mAppConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,context);
+        mAppConnect = mAppConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,mContext);
+        mAppConnect.initUninstallAd(mContext);
     }
 
     public static WapManager getInstance(Context context){
