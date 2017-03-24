@@ -189,5 +189,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <include layout="@layout/bottom"/>
+    <include layout="@layout/subject1_bottom"/>
 </LinearLayout>
