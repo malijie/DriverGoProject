@@ -1,22 +1,27 @@
 package com.driver.go.activity.base;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ImageButton;
 
 import com.driver.go.R;
 import com.driver.go.base.Profile;
 import com.driver.go.control.IntentManager;
-import com.driver.go.db.DBConstants;
+import com.driver.go.utils.permission.PermissionController;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
 import com.driver.go.utils.Logger;
 import com.driver.go.utils.SharePreferenceUtil;
+import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;
+import com.driver.go.wap.IPayAction;
+import com.driver.go.wap.WapManager;
 
 /**
  * Created by Administrator on 2016/11/5.
@@ -24,6 +29,7 @@ import com.driver.go.utils.image.ImageLoader;
 public abstract class DriverBaseActivity extends FragmentActivity {
     public static final int SUBJECT_TYPE_1 = 1;
     public static final int SUBJECT_TYPE_4 = 4;
+    private Activity mActivity = null;
     public static int sSubject1OrderQuestionTotalNum = Profile.SUBJECT1_ORDER_TOTAL_ITEM;
     public static int sSubject4OrderQuestionTotalNum = Profile.SUBJECT4_ORDER_TOTAL_ITEM;
     public static int sRandomQuestionTotalNum = Profile.RANDOM_TOTAL_ITEM;
@@ -31,6 +37,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     public RetrofitHttpRequest mRetrofitHttpRequest = null;
     public SQLiteManager mSQLiteManager = null;
     public ImageLoader mImageLoader = null;
+    public WapManager mWapManager = null;
     protected final String ANSWER_A = "1";
     protected final String ANSWER_B = "2";
     protected final String ANSWER_C = "3";
@@ -40,6 +47,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = this;
         initDB();
         initManager();
     }
@@ -48,6 +56,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     private void initManager() {
         mRetrofitHttpRequest = RetrofitHttpRequest.getInstance();
         mImageLoader = ImageLoader.getInstance();
+        mWapManager = WapManager.getInstance(getApplicationContext());
     }
 
 
@@ -139,5 +148,33 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         mSQLiteManager.closeDB();
+    }
+
+    private IPayAction mPayAction;
+    public void handlePayEvent(IPayAction payAction){
+        mPayAction = payAction;
+        if(mPayAction != null){
+            mPayAction.pay(mActivity);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        boolean isAllPermissionAllowed = true;
+        if(requestCode == PermissionController.RESULT_CODE){
+            for(int i=0;i<grantResults.length;i++){
+                if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                    isAllPermissionAllowed = false;
+                    break;
+                }
+            }
+
+            if(isAllPermissionAllowed){
+                handlePayEvent(mPayAction);
+            }
+        }else{
+            ToastManager.showAllowPermissionTip();
+        }
     }
 }

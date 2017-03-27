@@ -15,11 +15,7 @@ public class SubjectOneSQLiteBehavior implements ISQLiteBehavior{
     private Cursor cursor = null;
 
     public SubjectOneSQLiteBehavior(){
-        if(mDB != null && mDB.isDbLockedByCurrentThread()){
-            return;
-        }else{
-            mDB = new SQLiteHelper().getWritableDatabase();
-        }
+        mDB = new SQLiteHelper().getWritableDatabase();
     }
     @Override
     public Cursor queryOrderQuestionById(int id) {
