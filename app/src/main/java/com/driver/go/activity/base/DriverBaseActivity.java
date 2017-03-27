@@ -169,12 +169,11 @@ public abstract class DriverBaseActivity extends FragmentActivity {
                     break;
                 }
             }
-
             if(isAllPermissionAllowed){
                 handlePayEvent(mPayAction);
+            }else{
+                ToastManager.showAllowPermissionTip();
             }
-        }else{
-            ToastManager.showAllowPermissionTip();
         }
     }
 }
