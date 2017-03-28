@@ -40,6 +40,10 @@ public class WapManager {
     }
 
 
+    public PayConnect getPayConnect(){
+        return mPayConnect;
+    }
+
     public void close(){
         mAppConnect.close();
     }
@@ -60,6 +64,8 @@ public class WapManager {
     //PayConnect.getInstance(context).pay(context,
     //orderId, userId, price, goodsName, goodsDesc, notifyUrl, new MyPayResultListener());
     public void payForExam(float price,String goodsName,String goodsDesc,PayResultListener resultListener){
+        ToastManager.showShortMsg("payForExam");
+        mPayConnect  = PayConnect.getInstance(WapProfile.WAP_APP_ID, WapProfile.WAP_APP_PID, mContext);
         mPayConnect.pay(mContext, getOrderId(), DriverGoApplication.mDeviceId, price, goodsName, goodsDesc, "" ,resultListener);
     }
 
@@ -67,20 +73,4 @@ public class WapManager {
         return String.valueOf(System.currentTimeMillis() );
     }
 
-    public class MyPayResultListener implements PayResultListener {
-        @Override
-        public void onPayFinish(Context payViewContext,String order_id,int resultCode, String resultString, int payType, float amount, String goods_name) {
-            if(resultCode == 0){ // 支付成功
-                ToastManager.showShortMsg(resultString + "：" + amount + "元");
-                // 支付成功时关闭当前支付界面
-                mPayConnect.closePayView(payViewContext);
-                // TODO 在客户端处理支付成功的操作
-
-                // 未指定notifyUrl的情况下，交易成功后，必须发送回执
-                mPayConnect.confirm(order_id, payType);
-            }else{// 支付失败
-                ToastManager.showShortMsg(resultString);
-            }
-        }
-    }
 }

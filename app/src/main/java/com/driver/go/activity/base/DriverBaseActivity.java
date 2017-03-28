@@ -22,6 +22,7 @@ import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;
 import com.driver.go.wap.IPayAction;
 import com.driver.go.wap.WapManager;
+import com.wanpu.pay.PayConnect;
 
 /**
  * Created by Administrator on 2016/11/5.
