@@ -1,6 +1,7 @@
 package com.driver.go.activity.subject1;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -60,6 +61,7 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
     private TextView mTextExplain;
     private Button mButtonNext;
 
+    private Activity mActivity;
     private int mCurrentId = 1;
     private QuestionItem mCurrentQuestionItem;
     private boolean mIsChoiceOneAnswer;
@@ -136,7 +138,7 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
 
         mCurrentId = loadOrderQuestionIndex(SUBJECT_TYPE_1);
         mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
-
+        mActivity = PracticeOrderActivity.this;
     }
 
 
@@ -175,7 +177,7 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
                 break;
             case R.id.id_question_title_button_collect:
 //                handleCollectAction();
-                handlePayEvent(new ExamPayAction());
+                handlePayEvent(new ExamPayAction(mActivity));
                 break;
         }
     }

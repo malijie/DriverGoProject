@@ -8,5 +8,5 @@ import android.content.Context;
  */
 
 public interface IPayAction {
-    void pay(Activity activity);
+    void pay();
 }

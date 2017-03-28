@@ -47,5 +47,4 @@ public class Util {
         return DriverGoApplication.sContext.getResources().getColor(resColor);
     }
 
-
 }

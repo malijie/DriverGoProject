@@ -56,7 +56,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     private void initManager() {
         mRetrofitHttpRequest = RetrofitHttpRequest.getInstance();
         mImageLoader = ImageLoader.getInstance();
-        mWapManager = WapManager.getInstance(getApplicationContext());
+        mWapManager = WapManager.getInstance(this);
     }
 
 
@@ -154,7 +154,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     public void handlePayEvent(IPayAction payAction){
         mPayAction = payAction;
         if(mPayAction != null){
-            mPayAction.pay(mActivity);
+            mPayAction.pay();
         }
     }
 
