@@ -19,9 +19,7 @@ import com.driver.go.activity.subject1.PractiseWrongQuestionActivity;
 import com.driver.go.activity.subject1.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
-import com.driver.go.db.SQLiteManager;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 
 
@@ -138,9 +136,11 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
                 IntentManager.startActivity(ExamDataActivity.class);
                 break;
             case R.id.id_bottom_button_feedback:
+                //应用反馈
                 mWapManager.feedbackApp();
                 break;
             case R.id.id_bottom_button_update:
+                //应用升级
                 mWapManager.updateApp();
                 break;
         }
