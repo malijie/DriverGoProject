@@ -128,7 +128,6 @@ public class RecitePracticeOrderActivity extends SubjectFourBaseActivity impleme
 
     public void initData() {
         mCurrentId = loadReciteQuestionIndex(SUBJECT_TYPE_4);
-        mSQLiteManager.setSubjectBehavior(new SubjectFourSQLiteBehavior());
         mCurrentQuestionItem = EntityConvertManager.getQuestionItemEntity(mSQLiteManager.queryOrderQuestionById(mCurrentId));
     }
 

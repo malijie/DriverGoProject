@@ -49,7 +49,7 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
     }
 
     public void initData() {
-        mSQLiteManager.setSubjectBehavior(new SubjectOneSQLiteBehavior());
+        mSQLiteManager.setSubjectBehavior(SubjectOneSQLiteBehavior.getInstance());
     }
 
     private void initViews(View v) {

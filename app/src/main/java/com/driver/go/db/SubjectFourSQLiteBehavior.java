@@ -13,12 +13,25 @@ import com.driver.go.utils.ToastManager;
  */
 
 public class SubjectFourSQLiteBehavior implements ISQLiteBehavior{
+    private static SubjectFourSQLiteBehavior sSubjectFourSQLiteBehavior = null;
     private SQLiteDatabase mDB;
     private Cursor cursor = null;
 
-    public SubjectFourSQLiteBehavior(){
-        mDB = new SQLiteHelper().getWritableDatabase();
+    private SubjectFourSQLiteBehavior(){
+        mDB = SQLiteHelper.getDB();
     }
+
+    public static SubjectFourSQLiteBehavior getInstance(){
+        if(sSubjectFourSQLiteBehavior == null){
+            synchronized (SubjectOneSQLiteBehavior.class){
+                if(sSubjectFourSQLiteBehavior == null){
+                    sSubjectFourSQLiteBehavior = new SubjectFourSQLiteBehavior();
+                }
+            }
+        }
+        return sSubjectFourSQLiteBehavior;
+    }
+
     @Override
     public Cursor queryOrderQuestionById(int id) {
         cursor = mDB.rawQuery(SQLContainer.getSubject4OrderExamItemByIdSQL(id),null);
