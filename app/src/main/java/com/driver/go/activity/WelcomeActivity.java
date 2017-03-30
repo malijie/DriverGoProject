@@ -109,4 +109,9 @@ public class WelcomeActivity extends DriverBaseActivity{
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

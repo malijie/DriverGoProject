@@ -149,6 +149,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         mSQLiteManager.closeDB();
+        mWapManager.close();
     }
 
     private IPayAction mPayAction;
@@ -177,4 +178,5 @@ public abstract class DriverBaseActivity extends FragmentActivity {
             }
         }
     }
+
 }
