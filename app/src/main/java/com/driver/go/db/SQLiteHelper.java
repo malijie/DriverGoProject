@@ -1,5 +1,6 @@
 package com.driver.go.db;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -12,20 +13,18 @@ import com.driver.go.base.DriverGoApplication;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     public SQLiteHelper() {
-        super(DriverGoApplication.sContext,DBConstants.DB_NAME,null, DBConstants.DB_VERSION);
+        super(DriverGoApplication.sContext, DBConstants.DB_NAME, null, DBConstants.DB_VERSION);
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.beginTransaction();
-        db.execSQL(SQLContainer.getCreateSubject1OrderExamTableSQL());
-        db.setTransactionSuccessful();
-        db.endTransaction();
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
     }
 
 }

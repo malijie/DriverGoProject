@@ -88,18 +88,10 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
         switch (view.getId()){
             case R.id.id_main_image_order_practice:
                 //顺序练习
-                if(isDownloadSubject1DB()){
                     IntentManager.startActivity(PracticeOrderActivity.class);
-                }else{
-                    ToastManager.showNoNetworkMsg();
-                }
                 break;
             case R.id.id_main_image_recite_question:
-                if(isDownloadSubject1DB()){
                     IntentManager.startActivity(RecitePracticeOrderActivity.class);
-                }else{
-                    ToastManager.showNoNetworkMsg();
-                }
                 break;
             case R.id.id_main_image_random_question:
                 IntentManager.startActivity(PracticeRandomActivity.class);
@@ -139,10 +131,10 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
                 IntentManager.startActivity(ExamDataActivity.class);
                 break;
             case R.id.id_bottom_button_feedback:
-                mWapManager.feedbackApp();
+//                mWapManager.feedbackApp();
                 break;
             case R.id.id_bottom_button_update:
-                mWapManager.updateApp();
+//                mWapManager.updateApp();
                 break;
         }
     }

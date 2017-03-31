@@ -85,18 +85,11 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
         switch (view.getId()){
             case R.id.id_main_image_order_practice:
                 //顺序练习
-                if(isDownloadSubject1DB()){
-                    IntentManager.startActivity(PracticeOrderActivity.class);
-                }else{
-                    ToastManager.showNoNetworkMsg();
-                }
+                IntentManager.startActivity(PracticeOrderActivity.class);
                 break;
             case R.id.id_main_image_recite_question:
-                if(isDownloadSubject1DB()){
+                //背题模式
                     IntentManager.startActivity(RecitePracticeOrderActivity.class);
-                }else{
-                    ToastManager.showNoNetworkMsg();
-                }
                 break;
             case R.id.id_main_image_random_question:
                 IntentManager.startActivity(PracticeRandomActivity.class);
@@ -137,11 +130,11 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.id_bottom_button_feedback:
                 //应用反馈
-                mWapManager.feedbackApp();
+//                mWapManager.feedbackApp();
                 break;
             case R.id.id_bottom_button_update:
                 //应用升级
-                mWapManager.updateApp();
+//                mWapManager.updateApp();
                 break;
         }
     }
@@ -163,6 +156,6 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mWapManager.close();
+//        mWapManager.close();
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.driver.go.base.DriverGoApplication;
 import com.driver.go.base.Profile;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.wanpu.pay.PayConnect;
 import com.wanpu.pay.PayResultListener;
@@ -22,7 +23,7 @@ public class WapManager {
 
     private WapManager(Context context){
         mContext = context;
-        mAppConnect = mAppConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,mContext);
+        mAppConnect = AppConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,mContext);
         mPayConnect = PayConnect.getInstance(WapProfile.WAP_APP_ID, WapProfile.WAP_APP_PID, context);
 
         mAppConnect.initUninstallAd(mContext);
@@ -45,7 +46,10 @@ public class WapManager {
     }
 
     public void close(){
-        mAppConnect.close();
+//        Logger.mlj("wap close...");
+//        mAppConnect.releaseUninstallAd(mContext);
+//        mPayConnect.close();
+//        mAppConnect.close();
     }
 
     public void feedbackApp(){

@@ -38,7 +38,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     public RetrofitHttpRequest mRetrofitHttpRequest = null;
     public SQLiteManager mSQLiteManager = null;
     public ImageLoader mImageLoader = null;
-    public WapManager mWapManager = null;
+//    public WapManager mWapManager = null;
     protected final String ANSWER_A = "1";
     protected final String ANSWER_B = "2";
     protected final String ANSWER_C = "3";
@@ -57,15 +57,13 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     private void initManager() {
         mRetrofitHttpRequest = RetrofitHttpRequest.getInstance();
         mImageLoader = ImageLoader.getInstance();
-        mWapManager = WapManager.getInstance(this);
+
+
     }
 
 
     private void initDB(){
         mSQLiteManager = SQLiteManager.getInstance();
-        if(!mSQLiteManager.isOrderTableHasData()){
-            mSQLiteManager.createTables();
-        }
     }
 
     public boolean isOrderTableExist(){
@@ -149,7 +147,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         mSQLiteManager.closeDB();
-        mWapManager.close();
+//        mWapManager.close();
     }
 
     private IPayAction mPayAction;

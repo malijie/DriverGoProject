@@ -1,27 +1,23 @@
 package com.driver.go.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
-import com.driver.go.activity.base.DriverBaseActivity;
 import com.driver.go.R;
 import com.driver.go.control.IntentManager;
-import com.driver.go.db.DBConstants;
-import com.driver.go.entity.QuestionItem;
-import com.driver.go.http.SubscriberOnNextListener;
 import com.driver.go.utils.SharePreferenceUtil;
-
-import java.util.List;
+import com.driver.go.utils.Util;
 
 /**
  * Created by Administrator on 2017/3/21.
  */
 
-public class WelcomeActivity extends DriverBaseActivity{
+public class WelcomeActivity extends FragmentActivity{
     private ImageView mImageWelcome = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +25,6 @@ public class WelcomeActivity extends DriverBaseActivity{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//ȫ����ʾ
         super.setContentView(R.layout.welcome_layout);
-
 
         initData();
         initViews();
@@ -62,7 +57,7 @@ public class WelcomeActivity extends DriverBaseActivity{
                     IntentManager.startActivity(MainActivity.class);
                 }
 
-                finishActivity(WelcomeActivity.this);
+                WelcomeActivity.this.finish();
             }
         });
         mImageWelcome.startAnimation(alpha);
@@ -70,45 +65,45 @@ public class WelcomeActivity extends DriverBaseActivity{
 
     public void initData(){
         if(SharePreferenceUtil.loadIsFirstLoaded()){
-            fetchOrderQuestionData2DB();
+            Util.copyDB2Phone();
         }
     }
 
     /**
      * 抓取科目一，科目四顺序练习题目并插入数据库
      */
-    private void fetchOrderQuestionData2DB(){
-        mRetrofitHttpRequest.getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
-            @Override
-            public void onNext(final List<QuestionItem> questionItems) {
-                new Thread( new Runnable() {
-                    @Override
-                    public void run() {
-                        for(QuestionItem item:questionItems){
-                            saveQuestionItem2DB(DBConstants.SUBJECT1_ORDER_PRACTISE_TABLE,item);
-                        }
-
-                    }
-                }).start();
-
-            }
-        });
-
-        mRetrofitHttpRequest.getC1Subject4OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
-            @Override
-            public void onNext(final List<QuestionItem> questionItems) {
-                new Thread( new Runnable() {
-                    @Override
-                    public void run() {
-                        for(QuestionItem item:questionItems){
-                            saveQuestionItem2DB(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,item);
-                        }
-                    }
-                }).start();
-
-            }
-        });
-    }
+//    private void fetchOrderQuestionData2DB(){
+//        mRetrofitHttpRequest.getC1Subject1OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+//            @Override
+//            public void onNext(final List<QuestionItem> questionItems) {
+//                new Thread( new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        for(QuestionItem item:questionItems){
+//                            saveQuestionItem2DB(DBConstants.SUBJECT1_ORDER_PRACTISE_TABLE,item);
+//                        }
+//
+//                    }
+//                }).start();
+//
+//            }
+//        });
+//
+//        mRetrofitHttpRequest.getC1Subject4OrderQuestions(new SubscriberOnNextListener<List<QuestionItem>>(){
+//            @Override
+//            public void onNext(final List<QuestionItem> questionItems) {
+//                new Thread( new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        for(QuestionItem item:questionItems){
+//                            saveQuestionItem2DB(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,item);
+//                        }
+//                    }
+//                }).start();
+//
+//            }
+//        });
+//    }
 
     @Override
     protected void onDestroy() {

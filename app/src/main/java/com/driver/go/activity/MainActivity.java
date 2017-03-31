@@ -1,14 +1,8 @@
 package com.driver.go.activity;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,24 +11,19 @@ import android.widget.TextView;
 
 import com.driver.go.R;
 import com.driver.go.activity.base.DriverBaseActivity;
-import com.driver.go.db.DBConstants;
-import com.driver.go.entity.QuestionItem;
 import com.driver.go.fragments.SubjectFourFragment;
 import com.driver.go.fragments.SubjectOneFragment;
-import com.driver.go.http.SubscriberOnNextListener;
 import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.permission.PermissionController;
 import com.driver.go.wap.WapManager;
 import com.driver.go.widget.ViewPagerIndicator;
-import com.wanpu.pay.PayConnect;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.driver.go.utils.permission.PermissionController.RESULT_CODE;
 
 public class MainActivity extends DriverBaseActivity {
     private TextView mTextTitle;
@@ -46,13 +35,18 @@ public class MainActivity extends DriverBaseActivity {
     private List<android.support.v4.app.Fragment> mContents = new ArrayList<android.support.v4.app.Fragment>();// 装载ViewPager数据的List
     private FragmentPagerAdapter mAdapter;// ViewPager适配器
     private FragmentManager mSupportFragmentManager;
+    private WapManager mWapManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PermissionController.initPermission(this);
+
         initData();
         initView();
+
     }
 
     public void initView() {
@@ -110,52 +104,11 @@ public class MainActivity extends DriverBaseActivity {
     public void initData() {
 
         this.mSupportFragmentManager = getSupportFragmentManager();
-        initPermission();
+
 //        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 //        registerReceiver(receiver,filter);
 
     }
-
-    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-    private void initPermission() {
-        List<String> permissionsNeeded = new ArrayList<String>();
-        final List<String> permissionsList = new ArrayList<String>();
-        if (!addPermission(permissionsList, Manifest.permission.ACCESS_FINE_LOCATION))
-            permissionsNeeded.add("GPS");
-        if (!addPermission(permissionsList, Manifest.permission.READ_PHONE_STATE))
-            permissionsNeeded.add("Read Phone");
-        if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE))
-            permissionsNeeded.add("Write Storage");
-
-        if (permissionsList.size() > 0) {
-            if (permissionsNeeded.size() > 0) {
-                // Need Rationale
-                String message = "You need to grant access to " + permissionsNeeded.get(0);
-                for (int i = 1; i < permissionsNeeded.size(); i++)
-                    message = message + ", " + permissionsNeeded.get(i);
-                ActivityCompat.requestPermissions(this,permissionsList.toArray(new String[permissionsList.size()]),
-                        RESULT_CODE);
-                return;
-            }
-            ActivityCompat.requestPermissions(this,permissionsList.toArray(new String[permissionsList.size()]),
-                    RESULT_CODE);
-            return;
-        }
-
-    }
-
-
-
-    private boolean addPermission(List<String> permissionsList, String permission) {
-        if (ContextCompat.checkSelfPermission(this,permission) != PackageManager.PERMISSION_GRANTED) {
-            permissionsList.add(permission);
-            // Check for Rationale Option
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(this,permission))
-                return false;
-        }
-        return true;
-    }
-
 
 //    public BroadcastReceiver receiver = new BroadcastReceiver() {
 //
@@ -189,9 +142,8 @@ public class MainActivity extends DriverBaseActivity {
 
     @Override
     protected void onDestroy() {
-        Logger.mlj("======onDestroy====");
         super.onDestroy();
-        mWapManager.getPayConnect().close();
+//        mWapManager.close();
 //        unregisterReceiver(receiver);
     }
 

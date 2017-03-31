@@ -7,7 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.driver.go.base.DriverGoApplication;
+import com.driver.go.base.Profile;
+import com.driver.go.db.DBConstants;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -28,6 +35,37 @@ public class Util {
             }
         }
         return false;
+    }
+
+    public static void copyDB2Phone(){
+        String dbFileName = DBConstants.DB_PATH + DBConstants.DB_NAME;
+        File dbFile = new File(dbFileName);
+        InputStream is = null;
+        FileOutputStream os = null;
+        if(!dbFile.exists()){
+            dbFile.getParentFile().mkdirs();
+            try{
+                os = new FileOutputStream(dbFileName);
+                is = DriverGoApplication.sContext.getResources().getAssets().open(DBConstants.DB_NAME);
+                byte[] buffer = new byte[1024];
+                int count = 0;
+                while((count=is.read(buffer))>0){
+                    os.write(buffer, 0, count);
+                    os.flush();
+                }
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally{
+                try {
+                    is.close();
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public static String getResString(int resId){

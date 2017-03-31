@@ -21,7 +21,7 @@ import com.driver.go.wap.WapManager;
 
 public class BaseFragment extends Fragment {
     protected SQLiteManager mSQLiteManager = null;
-    protected WapManager mWapManager = null;
+//    protected WapManager mWapManager = null;
 
     @Nullable
     @Override
@@ -30,20 +30,10 @@ public class BaseFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    public boolean isDownloadSubject1DB(){
-        if(mSQLiteManager != null){
-            return mSQLiteManager.queryOrderQuestionById(1).moveToFirst();
-        }
-        return false;
-    }
 
     private void initData(){
         mSQLiteManager = SQLiteManager.getInstance();
-        mWapManager = WapManager.getInstance(getActivity());
+//        mWapManager = WapManager.getInstance(getActivity());
     }
 
-
-//    public void addOrderQuestionItem(QuestionItem q){
-//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-//    }
 }
