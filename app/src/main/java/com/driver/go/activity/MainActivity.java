@@ -42,7 +42,7 @@ public class MainActivity extends DriverBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PermissionController.initPermission(this);
+        Logger.mlj("MainActivity WapManager.getInstance(this)===" + WapManager.getInstance(this));
 
         initData();
         initView();

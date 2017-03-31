@@ -53,7 +53,8 @@ public class PermissionController {
                     RESULT_CODE);
             return;
         }
-        WapManager.getInstance(activity);
+
+
     }
 
     private static boolean addPermission(Activity activity, List<String> permissionsList, String permission) {

@@ -65,8 +65,6 @@ public class WapManager {
        return mPayConnect.getDeviceId(mContext);
     }
 
-    //PayConnect.getInstance(context).pay(context,
-    //orderId, userId, price, goodsName, goodsDesc, notifyUrl, new MyPayResultListener());
     public void payForExam(float price,String goodsName,String goodsDesc,PayResultListener resultListener){
         ToastManager.showShortMsg("payForExam");
         mPayConnect  = PayConnect.getInstance(WapProfile.WAP_APP_ID, WapProfile.WAP_APP_PID, mContext);

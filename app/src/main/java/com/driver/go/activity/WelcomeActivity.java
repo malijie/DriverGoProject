@@ -12,6 +12,7 @@ import com.driver.go.R;
 import com.driver.go.control.IntentManager;
 import com.driver.go.utils.SharePreferenceUtil;
 import com.driver.go.utils.Util;
+import com.driver.go.utils.permission.PermissionController;
 
 /**
  * Created by Administrator on 2017/3/21.
@@ -23,9 +24,10 @@ public class WelcomeActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//ȫ����ʾ
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.setContentView(R.layout.welcome_layout);
 
+        PermissionController.initPermission(this);
         initData();
         initViews();
     }

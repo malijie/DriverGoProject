@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.permission.PermissionController;
 import com.wanpu.pay.PayConnect;
@@ -24,6 +25,7 @@ public class ExamPayAction extends PayBaseAction implements IPayAction {
     @Override
     public void pay() {
         if(PermissionController.checkPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+Logger.mlj("ExamPayAction WapManager.getInstance(this)===" + WapManager.getInstance(mActivity));
             WapManager.getInstance(mActivity).payForExam(PRICE_EXAM, GOODS_NAME_EXAM, GOODS_DESCR_EXAM, new PayResultListener() {
                 @Override
                 public void onPayFinish(Context payViewContext,String orderId,int resultCode,
