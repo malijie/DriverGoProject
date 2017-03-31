@@ -71,6 +71,6 @@ public class ToastManager {
     }
 
     public static void showAllowPermissionTip() {
-        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.permission_allow_tip),Toast.LENGTH_SHORT);
+        ToastUtil.showMsg(DriverGoApplication.sContext.getString(R.string.permission_allow_tip),Toast.LENGTH_LONG);
     }
 }

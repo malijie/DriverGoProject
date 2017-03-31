@@ -23,7 +23,7 @@ public class SubjectOneBaseActivity extends DriverBaseActivity{
     }
 
     private void initData() {
-        mSQLiteManager.setSubjectBehavior(SubjectOneSQLiteBehavior.getInstance());
+        mSQLiteManager.setSubjectBehavior(new SubjectOneSQLiteBehavior());
     }
 
     public void saveCollectQuestion(QuestionItem q){

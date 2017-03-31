@@ -52,7 +52,7 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
 
     public void initData() {
         mSQLiteManager = SQLiteManager.getInstance();
-        mSQLiteManager.setSubjectBehavior(SubjectFourSQLiteBehavior.getInstance());
+        mSQLiteManager.setSubjectBehavior(new SubjectFourSQLiteBehavior());
     }
 
     private void initViews(View v) {
