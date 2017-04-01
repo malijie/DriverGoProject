@@ -20,8 +20,12 @@ import com.driver.go.activity.subject1.RecitePracticeOrderActivity;
 import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
+import com.driver.go.utils.Logger;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.wap.WapManager;
+import com.driver.go.wap.WapProfile;
+
+import cn.waps.AppConnect;
 
 
 //科目一
@@ -38,6 +42,7 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
     private ImageButton mButtonExam;
     private ImageButton mButtonFeedback;
     private ImageButton mButtonUpdate;
+    private WapManager mWapManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +56,7 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
 
     public void initData() {
         mSQLiteManager.setSubjectBehavior(new SubjectOneSQLiteBehavior());
+        mWapManager = getWapManager();
     }
 
     private void initViews(View v) {
@@ -131,13 +137,11 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.id_bottom_button_feedback:
                 //应用反馈
-                WapManager.getInstance(SubjectOneFragment.this.getContext()).feedbackApp();
-                WapManager.getInstance(SubjectOneFragment.this.getContext()).close();
+                mWapManager.feedbackApp(getContext());
                 break;
             case R.id.id_bottom_button_update:
                 //应用升级
-                WapManager.getInstance(SubjectOneFragment.this.getContext()).updateApp();
-                WapManager.getInstance(SubjectOneFragment.this.getContext()).close();
+                mWapManager.updateApp(getContext());
                 break;
         }
     }

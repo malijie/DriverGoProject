@@ -1,13 +1,8 @@
 package com.driver.go.wap;
 
+import android.app.Activity;
 import android.content.Context;
 
-import com.driver.go.base.DriverGoApplication;
-import com.driver.go.base.Profile;
-import com.driver.go.utils.Logger;
-import com.driver.go.utils.ToastManager;
-import com.wanpu.pay.PayConnect;
-import com.wanpu.pay.PayResultListener;
 
 import cn.waps.AppConnect;
 
@@ -17,13 +12,11 @@ import cn.waps.AppConnect;
 
 public class WapManager {
     public static WapManager sWapManager = null;
-    private Context mContext = null;
     private AppConnect mAppConnect = null;
 
     private WapManager(Context context){
-        mContext = context;
-        mAppConnect = AppConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,mContext);
-        mAppConnect.initUninstallAd(mContext);
+        mAppConnect = AppConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,context);
+        mAppConnect.initUninstallAd(context);
     }
 
     public static WapManager getInstance(Context context){
@@ -39,19 +32,18 @@ public class WapManager {
 
 
 
-    public void close(){
-//        Logger.mlj("wap close...");
-//        mAppConnect.releaseUninstallAd(mContext);
-//        mAppConnect.close();
+    public void close(Context context){
+        mAppConnect.releaseUninstallAd(context);
+        mAppConnect.close();
     }
 
-    public void feedbackApp(){
-        mAppConnect.showFeedback(mContext);
+    public void feedbackApp(Context context){
+        mAppConnect.showFeedback(context);
     }
 
 
-    public void updateApp(){
-        mAppConnect.checkUpdate(mContext);
+    public void updateApp(Context context){
+        mAppConnect.checkUpdate(context);
     }
 
 }

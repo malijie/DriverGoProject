@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
+
 public class MainActivity extends DriverBaseActivity {
     private TextView mTextTitle;
     private ImageButton mButtonBack;
@@ -155,6 +156,7 @@ public class MainActivity extends DriverBaseActivity {
                 ToastManager.showExitTipMsg();
                 touchTime = currentTime;
             }else {
+                WapManager.getInstance(this).close(this);
                 finish();
             }
             return true;
