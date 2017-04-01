@@ -132,10 +132,13 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
                 IntentManager.startActivity(ExamDataActivity.class);
                 break;
             case R.id.id_bottom_button_feedback:
-                WapManager.getInstance(getActivity()).feedbackApp();
+                WapManager.getInstance(SubjectFourFragment.this.getContext()).feedbackApp();
+                WapManager.getInstance(SubjectFourFragment.this.getContext()).close();
                 break;
+
             case R.id.id_bottom_button_update:
-                WapManager.getInstance(getActivity()).updateApp();
+                WapManager.getInstance(SubjectFourFragment.this.getContext()).updateApp();
+                WapManager.getInstance(SubjectFourFragment.this.getContext()).close();
                 break;
         }
     }

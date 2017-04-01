@@ -132,10 +132,12 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
             case R.id.id_bottom_button_feedback:
                 //应用反馈
                 WapManager.getInstance(SubjectOneFragment.this.getContext()).feedbackApp();
+                WapManager.getInstance(SubjectOneFragment.this.getContext()).close();
                 break;
             case R.id.id_bottom_button_update:
                 //应用升级
                 WapManager.getInstance(SubjectOneFragment.this.getContext()).updateApp();
+                WapManager.getInstance(SubjectOneFragment.this.getContext()).close();
                 break;
         }
     }

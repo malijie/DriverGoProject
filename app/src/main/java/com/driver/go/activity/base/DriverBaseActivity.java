@@ -36,7 +36,6 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     public static int sRandomQuestionTotalNum = Profile.RANDOM_TOTAL_ITEM;
     public static final int sExamQuestionTotalNum = Profile.EXAM_TOTAL_ITEM;
     public RetrofitHttpRequest mRetrofitHttpRequest = null;
-    public WapManager mWapManager = null;
     public SQLiteManager mSQLiteManager = null;
     public ImageLoader mImageLoader = null;
 //    public WapManager mWapManager = null;
@@ -58,7 +57,6 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     private void initManager() {
         mRetrofitHttpRequest = RetrofitHttpRequest.getInstance();
         mImageLoader = ImageLoader.getInstance();
-        mWapManager = WapManager.getInstance(this);
 
     }
 

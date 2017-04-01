@@ -21,7 +21,6 @@ import com.driver.go.R;
 import com.driver.go.activity.base.SubjectOneBaseActivity;
 import com.driver.go.base.Profile;
 import com.driver.go.control.EntityConvertManager;
-import com.driver.go.utils.permission.PermissionController;
 import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
