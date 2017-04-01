@@ -27,7 +27,6 @@ public class WelcomeActivity extends FragmentActivity{
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.setContentView(R.layout.welcome_layout);
 
-        PermissionController.initPermission(this);
         initData();
         initViews();
     }

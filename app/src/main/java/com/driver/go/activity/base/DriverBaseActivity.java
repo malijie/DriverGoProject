@@ -36,6 +36,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     public static int sRandomQuestionTotalNum = Profile.RANDOM_TOTAL_ITEM;
     public static final int sExamQuestionTotalNum = Profile.EXAM_TOTAL_ITEM;
     public RetrofitHttpRequest mRetrofitHttpRequest = null;
+    public WapManager mWapManager = null;
     public SQLiteManager mSQLiteManager = null;
     public ImageLoader mImageLoader = null;
 //    public WapManager mWapManager = null;
@@ -57,7 +58,7 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     private void initManager() {
         mRetrofitHttpRequest = RetrofitHttpRequest.getInstance();
         mImageLoader = ImageLoader.getInstance();
-
+        mWapManager = WapManager.getInstance(this);
 
     }
 
@@ -66,29 +67,11 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         mSQLiteManager = SQLiteManager.getInstance();
     }
 
-    public boolean isOrderTableExist(){
-        return mSQLiteManager.isOrderTableHasData();
-    }
-
-//    public void addSubject1OrderQuestionItem(QuestionItem q){
-//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-//    }
-//
-//    public void addSubject4OrderQuestionItem(QuestionItem q){
-//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT4_ORDER_EXAM_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-//    }
 
     public void saveQuestionItem2DB(String tableName, QuestionItem q){
         mSQLiteManager.insertQuestion2Table(tableName,q);
     }
 
-//    protected void saveCollectQuestion(QuestionItem q){
-//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_COLLECT_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-//    }
-
-//    public void addExamWrongQuestionItem(QuestionItem q){
-//        mSQLiteManager.insertQuestion2Table(DBConstants.SUBJECT1_EXAM_WRONG_QUESTION_TABLE,q.getId(),q.getQuestion(),q.getAnswer(),q.getItem1(),q.getItem2(),q.getItem3(),q.getItem4(),q.getExplains(),q.getUrl());
-//    }
 
     public void finishActivity(Activity activity){
         IntentManager.finishActivity(activity);

@@ -23,6 +23,7 @@ import com.driver.go.db.SQLiteManager;
 import com.driver.go.db.SubjectFourSQLiteBehavior;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.wap.WapManager;
 
 
 //科目四
@@ -131,10 +132,10 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
                 IntentManager.startActivity(ExamDataActivity.class);
                 break;
             case R.id.id_bottom_button_feedback:
-//                mWapManager.feedbackApp();
+                WapManager.getInstance(getActivity()).feedbackApp();
                 break;
             case R.id.id_bottom_button_update:
-//                mWapManager.updateApp();
+                WapManager.getInstance(getActivity()).updateApp();
                 break;
         }
     }

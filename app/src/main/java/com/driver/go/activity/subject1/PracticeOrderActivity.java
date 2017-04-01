@@ -177,7 +177,8 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
                 break;
             case R.id.id_question_title_button_collect:
 //                handleCollectAction();
-                handlePayEvent(new ExamPayAction(mActivity));
+                handlePayEvent(new ExamPayAction(this));
+
                 break;
         }
     }

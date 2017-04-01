@@ -19,13 +19,10 @@ public class WapManager {
     public static WapManager sWapManager = null;
     private Context mContext = null;
     private AppConnect mAppConnect = null;
-    private PayConnect mPayConnect = null;
 
     private WapManager(Context context){
         mContext = context;
         mAppConnect = AppConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,mContext);
-        mPayConnect = PayConnect.getInstance(WapProfile.WAP_APP_ID, WapProfile.WAP_APP_PID, context);
-
         mAppConnect.initUninstallAd(mContext);
     }
 
@@ -41,14 +38,10 @@ public class WapManager {
     }
 
 
-    public PayConnect getPayConnect(){
-        return mPayConnect;
-    }
 
     public void close(){
 //        Logger.mlj("wap close...");
 //        mAppConnect.releaseUninstallAd(mContext);
-//        mPayConnect.close();
 //        mAppConnect.close();
     }
 
@@ -59,20 +52,6 @@ public class WapManager {
 
     public void updateApp(){
         mAppConnect.checkUpdate(mContext);
-    }
-
-    public String getUserId(){
-       return mPayConnect.getDeviceId(mContext);
-    }
-
-    public void payForExam(float price,String goodsName,String goodsDesc,PayResultListener resultListener){
-        ToastManager.showShortMsg("payForExam");
-        mPayConnect  = PayConnect.getInstance(WapProfile.WAP_APP_ID, WapProfile.WAP_APP_PID, mContext);
-        mPayConnect.pay(mContext, getOrderId(), DriverGoApplication.mDeviceId, price, goodsName, goodsDesc, "" ,resultListener);
-    }
-
-    private String getOrderId(){
-        return String.valueOf(System.currentTimeMillis() );
     }
 
 }

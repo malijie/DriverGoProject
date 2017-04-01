@@ -16,14 +16,6 @@ public class SQLiteCommon {
     }
 
 
-    public boolean isOrderTableHasData(){
-        cursor = mDB.rawQuery(SQLContainer.getSubject1FirstOrderExamDataSQL(),null);
-        if(cursor.moveToNext()){
-            return true;
-        }
-        return false;
-    }
-
     /**
      * 清空表数据
      * @param tableName

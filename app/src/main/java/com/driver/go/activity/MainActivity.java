@@ -42,8 +42,6 @@ public class MainActivity extends DriverBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Logger.mlj("MainActivity WapManager.getInstance(this)===" + WapManager.getInstance(this));
-
         initData();
         initView();
 
@@ -104,7 +102,7 @@ public class MainActivity extends DriverBaseActivity {
     public void initData() {
 
         this.mSupportFragmentManager = getSupportFragmentManager();
-
+        PermissionController.initPermission(this);
 //        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 //        registerReceiver(receiver,filter);
 

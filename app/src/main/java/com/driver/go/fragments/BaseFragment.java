@@ -21,7 +21,6 @@ import com.driver.go.wap.WapManager;
 
 public class BaseFragment extends Fragment {
     protected SQLiteManager mSQLiteManager = null;
-//    protected WapManager mWapManager = null;
 
     @Nullable
     @Override
@@ -33,7 +32,7 @@ public class BaseFragment extends Fragment {
 
     private void initData(){
         mSQLiteManager = SQLiteManager.getInstance();
-//        mWapManager = WapManager.getInstance(getActivity());
+
     }
 
 }

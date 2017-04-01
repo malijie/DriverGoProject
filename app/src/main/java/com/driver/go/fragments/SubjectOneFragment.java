@@ -21,6 +21,7 @@ import com.driver.go.control.IntentManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.wap.WapManager;
 
 
 //科目一
@@ -130,11 +131,11 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.id_bottom_button_feedback:
                 //应用反馈
-//                mWapManager.feedbackApp();
+                WapManager.getInstance(SubjectOneFragment.this.getContext()).feedbackApp();
                 break;
             case R.id.id_bottom_button_update:
                 //应用升级
-//                mWapManager.updateApp();
+                WapManager.getInstance(SubjectOneFragment.this.getContext()).updateApp();
                 break;
         }
     }
