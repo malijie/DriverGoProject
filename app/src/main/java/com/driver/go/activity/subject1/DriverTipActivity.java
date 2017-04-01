@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.driver.go.R;
 import com.driver.go.activity.base.DriverBaseActivity;
-import com.driver.go.activity.base.SubjectOneBaseActivity;
 import com.driver.go.base.Profile;
 
 /**
@@ -33,7 +32,7 @@ public class DriverTipActivity extends DriverBaseActivity implements View.OnClic
     }
 
     public void initData() {
-        mTextContent.setText(Profile.DRIVER_TIP);
+        mTextContent.setText(Profile.SUBJECT1_DRIVER_TIP);
     }
 
     @Override

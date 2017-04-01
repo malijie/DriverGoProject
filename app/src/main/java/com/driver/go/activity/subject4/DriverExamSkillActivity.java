@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.driver.go.R;
 import com.driver.go.activity.base.DriverBaseActivity;
-import com.driver.go.activity.base.SubjectFourBaseActivity;
 import com.driver.go.base.Profile;
 
 /**
@@ -35,8 +34,8 @@ public class DriverExamSkillActivity extends DriverBaseActivity implements View.
     }
 
     public void initData() {
-
-        mTextContent.setText(Profile.DRIVER_SKILL);
+        mTextTitle.setText("科目四考试技巧记忆口诀");
+        mTextContent.setText(Profile.SUBJECT4_DRIVER_SKILL);
     }
 
     @Override
