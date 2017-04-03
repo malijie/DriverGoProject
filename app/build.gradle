@@ -34,15 +34,14 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile files('src/main/lib/AppOffer_2.4.9.jar')
-    compile files('src/main/lib/alipaysdk.jar')
-    compile files('src/main/lib/alipaysecsdk.jar')
-    compile files('src/main/lib/alipayutdid.jar')
-    compile files('src/main/lib/android-support-v13.jar')
-    compile files('src/main/lib/libammsdk.jar')
-    compile files('src/main/lib/payecopluginjar.jar')
-    compile files('src/main/lib/TenpayServiceSDK_V5.0.jar')
-    compile files('src/main/lib/UPPayPluginExPro.jar')
-    compile files('src/main/lib/UPPayAssistEx.jar')
-    compile files('src/main/lib/WanpuPay_4.2.2.jar')
+    compile files('libs/alipaysdk.jar')
+    compile files('libs/alipaysecsdk.jar')
+    compile files('libs/alipayutdid.jar')
+    compile files('libs/AppOffer_2.4.9.jar')
+    compile files('libs/libammsdk.jar')
+    compile files('libs/payecopluginjar.jar')
+    compile files('libs/TenpayServiceSDK_V5.0.jar')
+    compile files('libs/UPPayAssistEx.jar')
+    compile files('libs/UPPayPluginExPro.jar')
+    compile files('libs/WanpuPay_4.2.2.jar')
 }
