@@ -23,6 +23,7 @@ import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
+import com.driver.go.wap.VipPayAction;
 
 import java.util.Random;
 
@@ -146,7 +147,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
                 handleExcludeAction();
                 break;
             case R.id.id_question_title_button_explain:
-                showExplain();
+                handleExplainEvent(mLayoutDetailExplain,new VipPayAction(this));
                 break;
 
             case R.id.id_order_practice_button_next:
@@ -322,10 +323,6 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
         mLayoutChoiceD.setClickable(true);
     }
 
-    //显示解释
-    private void showExplain() {
-        mLayoutDetailExplain.setVisibility(View.VISIBLE);
-    }
 
     private void hideExplain(){
         mLayoutDetailExplain.setVisibility(View.GONE);

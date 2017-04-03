@@ -17,6 +17,7 @@ import com.driver.go.control.EntityConvertManager;
 import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.wap.VipPayAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,7 +151,8 @@ public class ExamWrongQuestionActivity extends SubjectOneBaseActivity implements
                 break;
 
             case R.id.id_question_title_button_explain:
-                showExplain();
+                handleExplainEvent(mLayoutDetailExplain,new VipPayAction(this));
+
                 break;
 
             case R.id.id_wrong_exam_button_next:
@@ -289,10 +291,6 @@ public class ExamWrongQuestionActivity extends SubjectOneBaseActivity implements
         mLayoutChoiceD.setClickable(true);
     }
 
-    //显示解释
-    private void showExplain() {
-        mLayoutDetailExplain.setVisibility(View.VISIBLE);
-    }
 
     private void hideExplain(){
         mLayoutDetailExplain.setVisibility(View.GONE);

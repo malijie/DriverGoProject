@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.widget.ImageButton;
 
 import com.driver.go.R;
@@ -21,7 +22,10 @@ import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;
 import com.driver.go.wap.IPayAction;
+import com.driver.go.wap.PayBaseAction;
+import com.driver.go.wap.VipPayAction;
 import com.driver.go.wap.WapManager;
+import com.driver.go.widget.dialog.CustomDialog;
 import com.wanpu.pay.PayConnect;
 
 /**
@@ -128,34 +132,63 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         mSQLiteManager.closeDB();
-//        mWapManager.close();
     }
 
     private IPayAction mPayAction;
-    public void handlePayEvent(IPayAction payAction){
-        mPayAction = payAction;
-        if(mPayAction != null){
-            mPayAction.pay();
-        }
+
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        boolean isAllPermissionAllowed = true;
+//        if(requestCode == PermissionController.RESULT_CODE){
+//            for(int i=0;i<grantResults.length;i++){
+//                if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+//                    isAllPermissionAllowed = false;
+//                    break;
+//                }
+//            }
+//            if(isAllPermissionAllowed){
+//                handlePayEvent(mPayAction);
+//            }else{
+//                ToastManager.showAllowPermissionTip();
+//            }
+//        }
+//    }
+
+    public boolean checkPayedStatus(){
+        return SharePreferenceUtil.loadPayedVIPStatus();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        boolean isAllPermissionAllowed = true;
-        if(requestCode == PermissionController.RESULT_CODE){
-            for(int i=0;i<grantResults.length;i++){
-                if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
-                    isAllPermissionAllowed = false;
-                    break;
+
+    public void handleExplainEvent(final View view, final IPayAction payAction){
+        if(checkPayedStatus()){
+            view.setVisibility(View.VISIBLE);
+        }else{
+            view.setVisibility(View.GONE);
+            final CustomDialog customDialog = new CustomDialog(view.getContext(), PayBaseAction.GOODS_DESCR_VIP);
+            customDialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
+                @Override
+                public void onConfirm() {
+                    customDialog.dissmiss();
+                    if(payAction != null){
+                        payAction.pay();
+                    }
                 }
-            }
-            if(isAllPermissionAllowed){
-                handlePayEvent(mPayAction);
-            }else{
-                ToastManager.showAllowPermissionTip();
-            }
+
+                @Override
+                public void onCancel() {
+                    customDialog.dissmiss();
+                }
+            });
+            customDialog.show();
+
         }
+
+
     }
 
+    public void handlePayEvent(){
+
+    }
 }

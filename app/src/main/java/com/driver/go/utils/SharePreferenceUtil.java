@@ -10,6 +10,8 @@ import com.driver.go.base.DriverGoApplication;
 public class SharePreferenceUtil {
     public static final String SP_USER_INFO = "user_info";
     public static final String FIRST_LOADED_KEY = "first_loaded";
+    public static final String PAYED_VIP_KEY = "payed_vip";
+
     public static final String SUBJECT1_ORDER_QUESTION_CURRENT_INDEX_KEY = "subject1_order_question_index";
     public static final String SUBJECT1_RECITE_QUESTION_CURRENT_INDEX_KEY = "subject1_recite_question_index";
     public static final String SUBJECT4_ORDER_QUESTION_CURRENT_INDEX_KEY = "subject4_order_question_index";
@@ -58,6 +60,14 @@ public class SharePreferenceUtil {
         return DriverGoApplication.sContext.getSharedPreferences(SP_USER_INFO, Context.MODE_PRIVATE).getInt(SUBJECT4_RECITE_QUESTION_CURRENT_INDEX_KEY,1);
     }
 
+    public static void savePayedVIPStatus(boolean isPayed){
+        DriverGoApplication.sContext.getSharedPreferences(SP_USER_INFO, Context.MODE_PRIVATE).edit()
+                .putBoolean(PAYED_VIP_KEY,isPayed).commit();
+    }
 
+    public static boolean loadPayedVIPStatus(){
+        return DriverGoApplication.sContext.getSharedPreferences(SP_USER_INFO, Context.MODE_PRIVATE)
+                .getBoolean(PAYED_VIP_KEY,false);
+    }
 
 }

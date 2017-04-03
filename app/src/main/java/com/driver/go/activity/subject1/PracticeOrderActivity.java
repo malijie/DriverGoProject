@@ -1,6 +1,5 @@
 package com.driver.go.activity.subject1;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -25,7 +24,7 @@ import com.driver.go.db.DBConstants;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
-import com.driver.go.wap.ExamPayAction;
+import com.driver.go.wap.VipPayAction;
 
 import java.util.Random;
 
@@ -152,7 +151,7 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
                 handleExcludeAction();
                 break;
             case R.id.id_question_title_button_explain:
-                showExplain();
+                handleExplainEvent(mLayoutDetailExplain,new VipPayAction(this));
                 break;
 
             case R.id.id_order_practice_button_next:
@@ -329,10 +328,6 @@ public class PracticeOrderActivity extends SubjectOneBaseActivity implements Vie
         mLayoutChoiceD.setClickable(true);
     }
 
-    //显示解释
-    private void showExplain() {
-        mLayoutDetailExplain.setVisibility(View.VISIBLE);
-    }
 
     private void hideExplain(){
         mLayoutDetailExplain.setVisibility(View.GONE);
