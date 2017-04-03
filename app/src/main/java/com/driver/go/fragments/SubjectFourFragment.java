@@ -23,6 +23,7 @@ import com.driver.go.db.SQLiteManager;
 import com.driver.go.db.SubjectFourSQLiteBehavior;
 import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.utils.ToastManager;
+import com.driver.go.wap.ExamPayAction;
 import com.driver.go.wap.WapManager;
 
 
@@ -118,7 +119,8 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
                 IntentManager.startActivity(DriverTipActivity.class);
                 break;
             case R.id.id_main_button_exam:
-                IntentManager.startActivity(ExamMainActivity.class);
+//                IntentManager.startActivity(ExamMainActivity.class);
+                handleExamEvent(ExamMainActivity.class,new ExamPayAction(getActivity()));
                 break;
             case R.id.id_main_button_driver_skill:
                 IntentManager.startActivity(DriverExamSkillActivity.class);

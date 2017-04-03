@@ -184,11 +184,6 @@ public abstract class DriverBaseActivity extends FragmentActivity {
             customDialog.show();
 
         }
-
-
     }
 
-    public void handlePayEvent(){
-
-    }
 }
