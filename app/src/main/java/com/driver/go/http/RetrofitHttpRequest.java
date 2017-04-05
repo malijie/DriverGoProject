@@ -45,7 +45,7 @@ public class RetrofitHttpRequest {
     public void getC1Subject1OrderQuestions(Subscriber subscriber){
         Observable observable = sRetrofitService.getQuestions(
                 Profile.DRIVER_SUBJECT_ONE, Profile.DRIVER_MODEL_ONE,
-                Profile.APP_KEY, Profile.TEST_TYPE_ORDER)
+                Profile.HTTP_REQUEST_APP_KEY, Profile.TEST_TYPE_ORDER)
                 .map(new HttpResultFunc<List<QuestionItem>>());
         toSubscribe(observable,subscriber);
     }
@@ -53,7 +53,7 @@ public class RetrofitHttpRequest {
     public void getC1Subject4OrderQuestions(Subscriber subscriber){
         Observable observable = sRetrofitService.getQuestions(
                 Profile.DRIVER_SUBJECT_FOUR, Profile.DRIVER_MODEL_ONE,
-                Profile.APP_KEY, Profile.TEST_TYPE_ORDER)
+                Profile.HTTP_REQUEST_APP_KEY, Profile.TEST_TYPE_ORDER)
                 .map(new HttpResultFunc<List<QuestionItem>>());
         toSubscribe(observable,subscriber);
     }
@@ -61,7 +61,7 @@ public class RetrofitHttpRequest {
     public void getC1Subject1RandomQuestions(Subscriber subscriber){
         Observable observable = sRetrofitService.getQuestions(
                 Profile.DRIVER_SUBJECT_ONE, Profile.DRIVER_MODEL_ONE,
-                Profile.APP_KEY, Profile.TEST_TYPE_RANDOM)
+                Profile.HTTP_REQUEST_APP_KEY, Profile.TEST_TYPE_RANDOM)
                 .map(new HttpResultFunc<List<QuestionItem>>());
         toSubscribe(observable,subscriber);
     }
@@ -69,7 +69,7 @@ public class RetrofitHttpRequest {
     public void getC1Subject4RandomQuestions(Subscriber subscriber){
         Observable observable = sRetrofitService.getQuestions(
                 Profile.DRIVER_SUBJECT_FOUR, Profile.DRIVER_MODEL_ONE,
-                Profile.APP_KEY, Profile.TEST_TYPE_RANDOM)
+                Profile.HTTP_REQUEST_APP_KEY, Profile.TEST_TYPE_RANDOM)
                 .map(new HttpResultFunc<List<QuestionItem>>());
         toSubscribe(observable,subscriber);
     }

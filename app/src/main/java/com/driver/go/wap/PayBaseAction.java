@@ -19,7 +19,7 @@ public class PayBaseAction {
 
     public static final String GOODS_NAME_VIP = "VIP会员";
     public static final String GOODS_DESCR_VIP = "购买VIP会员，享受查看真题解释服务";
-    public static final float PRICE_VIP = 0.1F;
+    public static final float PRICE_VIP = 4.99F;
 
     public PayBaseAction(Activity activity){
         mPayConnect = PayConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,activity);

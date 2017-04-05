@@ -214,10 +214,7 @@ public class PracticeOrderActivity extends SubjectFourBaseActivity implements Vi
 
     //检查答案
     private boolean checkAnswer(String answer) {
-        if(mCurrentQuestionItem.getAnswer().equals(answer)){
-            return true ;
-        }
-        return false;
+        return mCurrentQuestionItem.getAnswer().equals(answer);
     }
 
     private void handleAnswerAction(String answer,ImageView imageView){

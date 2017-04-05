@@ -5,7 +5,7 @@ package com.driver.go.base;
  */
 
 public class Profile {
-    public static final String APP_KEY = "81f85312a3cea93426e336681c734b0f";
+    public static final String HTTP_REQUEST_APP_KEY = "81f85312a3cea93426e336681c734b0f";
     public static final int DRIVER_SUBJECT_ONE = 1;//科目一
     public static final int DRIVER_SUBJECT_FOUR= 4;//科目四
 
