@@ -16,6 +16,7 @@ import com.driver.go.db.SubjectOneSQLiteBehavior;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.utils.Logger;
 import com.driver.go.utils.SharePreferenceUtil;
+import com.driver.go.utils.permission.PermissionController;
 import com.driver.go.wap.IPayAction;
 import com.driver.go.wap.PayBaseAction;
 import com.driver.go.wap.WapManager;
@@ -55,6 +56,9 @@ public class BaseFragment extends Fragment {
         if(checkPayedStatus()){
             IntentManager.startActivity(clazz);
         }else{
+            if(!PermissionController.checkPermission(getActivity())){
+                return;
+            }
             final CustomDialog customDialog = new CustomDialog(getActivity(), PayBaseAction.GOODS_DESCR_EXAM);
             customDialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {
                 @Override
