@@ -165,6 +165,10 @@ public abstract class DriverBaseActivity extends FragmentActivity {
         if(checkPayedStatus()){
             view.setVisibility(View.VISIBLE);
         }else{
+
+            if(!PermissionController.checkPermission(this))
+                return;
+
             view.setVisibility(View.GONE);
             final CustomDialog customDialog = new CustomDialog(view.getContext(), PayBaseAction.GOODS_DESCR_VIP);
             customDialog.setButtonClickListener(new CustomDialog.DialogButtonListener() {

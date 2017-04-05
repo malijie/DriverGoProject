@@ -103,7 +103,7 @@ public class MainActivity extends DriverBaseActivity {
     public void initData() {
 
         this.mSupportFragmentManager = getSupportFragmentManager();
-        PermissionController.initPermission(this);
+        PermissionController.checkPermission(this);
 //        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 //        registerReceiver(receiver,filter);
 

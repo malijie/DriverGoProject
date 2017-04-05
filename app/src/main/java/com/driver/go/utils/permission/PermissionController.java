@@ -29,7 +29,7 @@ public class PermissionController {
         return true;
     }
 
-    public static void initPermission(Activity activity) {
+    public static boolean checkPermission(Activity activity) {
         List<String> permissionsNeeded = new ArrayList<String>();
         final List<String> permissionsList = new ArrayList<String>();
         if (!addPermission(activity,permissionsList, Manifest.permission.ACCESS_FINE_LOCATION))
@@ -47,13 +47,14 @@ public class PermissionController {
                     message = message + ", " + permissionsNeeded.get(i);
                 ActivityCompat.requestPermissions(activity,permissionsList.toArray(new String[permissionsList.size()]),
                         RESULT_CODE);
-                return;
+                return false;
             }
             ActivityCompat.requestPermissions(activity,permissionsList.toArray(new String[permissionsList.size()]),
                     RESULT_CODE);
-            return;
+            return false;
         }
 
+        return true;
 
     }
 
