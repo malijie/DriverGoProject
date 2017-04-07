@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 
 
+import com.driver.go.utils.Logger;
+
 import cn.waps.AppConnect;
 
 /**
@@ -15,7 +17,7 @@ public class WapManager {
     private AppConnect mAppConnect = null;
 
     private WapManager(Context context){
-        mAppConnect = AppConnect.getInstance(WapProfile.WAP_APP_ID,WapProfile.WAP_APP_PID,context);
+        mAppConnect = AppConnect.getInstance(context);
         mAppConnect.initUninstallAd(context);
     }
 

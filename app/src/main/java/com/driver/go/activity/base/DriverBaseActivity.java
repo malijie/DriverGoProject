@@ -16,17 +16,12 @@ import com.driver.go.utils.permission.PermissionController;
 import com.driver.go.db.SQLiteManager;
 import com.driver.go.entity.QuestionItem;
 import com.driver.go.http.RetrofitHttpRequest;
-import com.driver.go.utils.Logger;
 import com.driver.go.utils.SharePreferenceUtil;
-import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.image.ImageLoader;
 import com.driver.go.wap.IPayAction;
 import com.driver.go.wap.PayBaseAction;
-import com.driver.go.wap.VipPayAction;
-import com.driver.go.wap.WapManager;
 import com.driver.go.widget.dialog.CustomDialog;
-import com.wanpu.pay.PayConnect;
 
 /**
  * Created by Administrator on 2016/11/5.
@@ -137,24 +132,6 @@ public abstract class DriverBaseActivity extends FragmentActivity {
     private IPayAction mPayAction;
 
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        boolean isAllPermissionAllowed = true;
-//        if(requestCode == PermissionController.RESULT_CODE){
-//            for(int i=0;i<grantResults.length;i++){
-//                if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
-//                    isAllPermissionAllowed = false;
-//                    break;
-//                }
-//            }
-//            if(isAllPermissionAllowed){
-//                handlePayEvent(mPayAction);
-//            }else{
-//                ToastManager.showAllowPermissionTip();
-//            }
-//        }
-//    }
 
     public boolean checkPayedStatus(){
         return SharePreferenceUtil.loadPayedVIPStatus();
