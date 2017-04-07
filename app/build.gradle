@@ -33,11 +33,16 @@ android {
     }
 
     productFlavors {
-        xiaomi {
-            manifestPlaceholders = [ APP_CHANNEL_VALUE:"xiaomi" ]
+        yingyongbao {
+            manifestPlaceholders = [ APP_CHANNEL_VALUE:"yingyongbao" ]
         }
+
+        qihu360 {
+            manifestPlaceholders = [ APP_CHANNEL_VALUE:"360" ]
+        }
+
         wandoujia {
-            manifestPlaceholders = [ APP_CHANNEL_VALUE:"WANDOUJIA" ]
+            manifestPlaceholders = [ APP_CHANNEL_VALUE:"wandoujia" ]
         }
 
     }
@@ -68,6 +73,5 @@ dependencies {
     compile files('libs/UPPayAssistEx.jar')
     compile files('libs/UPPayPluginExPro.jar')
     compile files('libs/WanpuPay_4.2.2.jar')
-//    compile 'com.umeng.analytics:analytics:latest.integration'
 
 }
