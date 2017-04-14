@@ -41,7 +41,6 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
     private ImageButton mButtonExam;
     private ImageButton mButtonFeedback;
     private ImageButton mButtonUpdate;
-    private WapManager mWapManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +53,6 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
     }
 
     public void initData() {
-        mWapManager = getWapManager();
         mSQLiteManager = SQLiteManager.getInstance();
         mSQLiteManager.setSubjectBehavior(new SubjectFourSQLiteBehavior());
 
@@ -137,11 +135,11 @@ public class SubjectFourFragment extends BaseFragment implements View.OnClickLis
                 IntentManager.startActivity(ExamDataActivity.class);
                 break;
             case R.id.id_bottom_button_feedback:
-                 mWapManager.feedbackApp(getContext());
+                WapManager.getInstance(getActivity()).feedbackApp(getContext());
                 break;
 
             case R.id.id_bottom_button_update:
-                mWapManager.updateApp(getContext());
+                WapManager.getInstance(getActivity()).updateApp(getContext());
                 break;
         }
     }

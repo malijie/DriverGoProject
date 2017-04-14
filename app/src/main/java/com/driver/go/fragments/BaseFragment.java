@@ -28,7 +28,6 @@ import com.driver.go.widget.dialog.CustomDialog;
 
 public class BaseFragment extends Fragment {
     protected SQLiteManager mSQLiteManager = null;
-    private WapManager mWapManager;
 
     @Nullable
     @Override
@@ -37,13 +36,9 @@ public class BaseFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    protected WapManager getWapManager(){
-        return mWapManager;
-    }
 
     private void initData(){
         mSQLiteManager = SQLiteManager.getInstance();
-        mWapManager = WapManager.getInstance(getContext());
 
     }
 

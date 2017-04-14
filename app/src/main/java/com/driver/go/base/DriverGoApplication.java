@@ -10,12 +10,11 @@ import com.wanpu.pay.PayConnect;
  */
 public class DriverGoApplication extends Application{
     public static Context sContext = null;
-    public static String mDeviceId;
 
     @Override
     public void onCreate() {
         super.onCreate();
         sContext = getApplicationContext();
-        mDeviceId = PayConnect.getInstance(sContext).getDeviceId(sContext);
+
     }
 }

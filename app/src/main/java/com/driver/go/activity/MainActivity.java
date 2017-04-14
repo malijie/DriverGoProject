@@ -18,7 +18,9 @@ import com.driver.go.utils.ToastManager;
 import com.driver.go.utils.Util;
 import com.driver.go.utils.permission.PermissionController;
 import com.driver.go.wap.WapManager;
+import com.driver.go.wap.WapProfile;
 import com.driver.go.widget.ViewPagerIndicator;
+import com.wanpu.pay.PayConnect;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,7 +105,10 @@ public class MainActivity extends DriverBaseActivity {
     public void initData() {
 
         this.mSupportFragmentManager = getSupportFragmentManager();
-        PermissionController.checkPermission(this);
+        if(PermissionController.checkPermission(this)){
+            WapManager.getInstance(this);
+            PayConnect.getInstance(this);
+        }
 //        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 //        registerReceiver(receiver,filter);
 

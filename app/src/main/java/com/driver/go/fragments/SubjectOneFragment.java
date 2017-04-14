@@ -43,7 +43,6 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
     private ImageButton mButtonExam;
     private ImageButton mButtonFeedback;
     private ImageButton mButtonUpdate;
-    private WapManager mWapManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +56,6 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
 
     public void initData() {
         mSQLiteManager.setSubjectBehavior(new SubjectOneSQLiteBehavior());
-        mWapManager = getWapManager();
     }
 
     private void initViews(View v) {
@@ -139,11 +137,11 @@ public class SubjectOneFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.id_bottom_button_feedback:
                 //应用反馈
-                mWapManager.feedbackApp(getContext());
+                WapManager.getInstance(getActivity()).feedbackApp(getContext());
                 break;
             case R.id.id_bottom_button_update:
                 //应用升级
-                mWapManager.updateApp(getContext());
+                WapManager.getInstance(getActivity()).updateApp(getContext());
                 break;
         }
     }
